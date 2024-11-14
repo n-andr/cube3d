@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:28 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 15:44:53 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:07:01 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 /*
 Is not too big to play
-Has to be rectangular
 Has to be surrounded by walls
-No empty lines anywhere
-Has to have a valid path to every coin and exit
-No other characters besides 1, 0, C, E, P
-Only one player and exit
-You have to handle the case if the coin is blocked by the exit
+No empty lines anywhere in the map
+No other characters besides 1, 0, W, E, N, S, 
+Only one player 
 Empty map case
-Invalid extension (only .ber allowed)
+Invalid extension (only .cub allowed)
 Map does not exist
 No arguments or to many arguments
 New lines
@@ -78,7 +75,6 @@ void	fill_map(char *map_adress, t_game_info *game)
 	game->map[game->rows] = NULL;
 	close(file);
 	check_map(game);
-	game->moves_count = 0;
 	return ;
 }
 
@@ -97,6 +93,9 @@ int	read_map(char *map_adress, t_game_info *game)
 	}
 	game->rows = 0;
 	line = get_next_line(file);
+	// add function to check textures
+	// change from here to skip empty lines and textures info before map 
+
 	if (line == NULL)
 		handle_error(game, file, "Error\nEmpty map or malloc failed\n");
 	while (line)

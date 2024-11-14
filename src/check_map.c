@@ -6,11 +6,13 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 15:45:18 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:09:36 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
+
+// change to checkingthe border of any shape
 
 void	is_rectangular(t_game_info *game)
 {
@@ -53,6 +55,7 @@ int	check_first_last_row(char *row)
 	return (1);
 }
 
+// chage this function complitly to check the border of any shape
 int	is_closed(t_game_info *game)
 {
 	int	i;
@@ -74,12 +77,10 @@ int	is_closed(t_game_info *game)
 void	check_map(t_game_info *game)
 {
 	is_rectangular(game);
-	if (game->rows > 25 || game->columns > 45)
-	{
-		write(1, "Error\nMap is too big\n", 21);
-		free_map(game);
-		exit(EXIT_FAILURE);
-	}
+
+	// do we need to check the size of the map?
+	// can we handle any size?
+
 	if (is_closed(game) != 1)
 	{
 		write(1, "Error\nMap is not closed\n", 24);
@@ -88,10 +89,4 @@ void	check_map(t_game_info *game)
 	}
 	elements_check(game);
 	characters_check(game);
-	if (has_valid_path(game) != 1)
-	{
-		write(1, "Error\nNo valid path\n", 21);
-		free_map(game);
-		exit(EXIT_FAILURE);
-	}
 }
