@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+         #
+#    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2024/11/14 18:00:06 by nandreev         ###   ########.fr        #
+#    Updated: 2024/11/18 22:28:51 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
+NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c \
