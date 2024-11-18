@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 17:56:58 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:44:50 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	elements_check(t_game_info *game)
 {
 	if (p_check(game) != 1)
 	{
-		write(1, "Error\nThe map must contain 1 player starting position\n", 31);
+		write(1, "Error\nThe map must contain 1 player starting position\n", 54);
 		free_map(game);
 		exit(EXIT_FAILURE);
 	}

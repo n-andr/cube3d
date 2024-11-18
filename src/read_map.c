@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:28 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 18:07:01 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/18 22:53:33 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,13 @@ int	read_map(char *map_adress, t_game_info *game)
 	free(line);
 	close(file);
 	fill_map(map_adress, game);
+
+	// debug
+	printf("final map:\n");
+	for (int i = 0; i < game->rows; i++)
+	{
+		printf("%s\n", game->map[i]);
+	}
+	// end debug
 	return (1);
 }

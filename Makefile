@@ -6,15 +6,14 @@
 #    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2024/11/18 22:28:51 by nandreev         ###   ########.fr        #
+#    Updated: 2024/11/18 22:37:43 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c \
-		src/check_path.c src/check_elements.c\
+SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/check_elements.c\
 		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c
 
 OBJS := $(SOURCES:.c=.o)
