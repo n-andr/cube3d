@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_elements.c                                   :+:      :+:    :+:   */
+/*   characters_and_player_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/18 22:44:50 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/19 02:26:17 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	p_check(t_game_info *game)
 }
 
 
-void	elements_check(t_game_info *game)
+void	player_position_check(t_game_info *game)
 {
 	if (p_check(game) != 1)
 	{
