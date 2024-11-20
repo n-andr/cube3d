@@ -28,6 +28,11 @@ void	is_cub(char *map_adress)
 	}
 }
 
+void	ft_set_values(t_game_info *game)
+{
+	game->colour = 16777215;
+}
+
 int	main(int argc, char **argv)
 {
 	t_game_info	game;
@@ -42,7 +47,9 @@ int	main(int argc, char **argv)
 		write(1, "Error\nProgramm accepts only 1 argument\n", 39);
 		exit(EXIT_FAILURE);
 	}
-	
+	ft_set_values(&game);
+	ft_raycasting(&game);
+	ft_game_draw(&game);
 	return (0);
 }
 

@@ -14,7 +14,8 @@ NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/check_elements.c\
-		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c
+		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c\
+		src/raycasting.c src/draw.c src/window_manage.c
 
 OBJS := $(SOURCES:.c=.o)
 MLX_LIB = mlx/

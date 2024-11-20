@@ -12,16 +12,22 @@
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# define IMG_WIDTH 32
-# define IMG_HEIGHT 32
+// # define IMG_WIDTH 32
+// # define IMG_HEIGHT 32
+# define CELL_SIZE 64
+# define S_W 1280
+# define S_H 720
 
+# include <fcntl.h>
+# include <math.h>
+# include <stdint.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
-# include <stdint.h>
-# include "src/get_next_line/get_next_line.h"
 # include "mlx.h"
-# include <stdio.h>
+# include "src/get_next_line/get_next_line.h"
+# include <X11/Xlib.h>
+# include <X11/keysym.h>
 
 // if complains about include "mlx.h"
 //sudo cp libmlx.a /usr/local/lib/
@@ -46,8 +52,13 @@ typedef struct s_game_info
 	int			columns;
 	int			p_position_row;
 	int			p_position_col;
+	int			p_cell_x;
+	int			p_cell_y;
 	int			img_width;
 	int			img_height;
+	int			colour;
+	float		p_angle;
+	float		first_ray_angle;
 	//int			collectibles;
 	//int			moves_count;
 	//int			c_count;
@@ -56,6 +67,23 @@ typedef struct s_game_info
 	void		*window;
 	t_textures	textures;
 }	t_game_info;
+
+typedef struct s_daa
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
+
+typedef struct s_vars
+{
+	void			*mlx;
+	void			*img;
+	void			*win;
+	t_game_info		*game;
+}				t_vars;
 
 int		read_map(char *map, t_game_info *game);
 void	check_map(t_game_info *game);
@@ -68,7 +96,13 @@ void	characters_check(t_game_info *game);
 void	elements_check(t_game_info *game);
 int		p_check(t_game_info *game);
 
+//math
+void    ft_raycasting(t_game_info	*game);
+
 // graphics
+void	ft_game_draw(t_game_info	*game);
+int	handle_input(int keysym, t_vars *data);
+int	x_close(t_vars *data);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
 

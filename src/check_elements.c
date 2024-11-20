@@ -41,12 +41,23 @@ int	p_check(t_game_info *game)
 				p_count ++;
 				game->p_position_row = row;
 				game->p_position_col = col;
+                if (game->map[row][col] == 'N')
+                  game->p_angle = (3 * M_PI)/2;
+                else if (game->map[row][col] == 'S')
+                  game->p_angle = (3 * M_PI)/2;
+                else if (game->map[row][col] == 'E')
+                  game->p_angle = 0;
+                else if (game->map[row][col] == 'W')
+                  game->p_angle = M_PI;
 			}
 			col++;
 		}
 		col = 0;
 		row ++;
 	}
+    game->first_ray_angle = game->p_angle - M_PI/6;
+    game->p_cell_x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
+    game->p_cell_y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;
 	return (p_count);
 }
 
