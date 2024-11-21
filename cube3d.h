@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 17:55:09 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:59:49 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define CELL_SIZE 64
 # define S_W 1280
 # define S_H 720
+# define M_PI 3.14159265358979323846
 
 # include <fcntl.h>
 # include <math.h>
@@ -42,7 +43,7 @@ typedef struct s_textures
 	void	*west;
 	void	*east;
 	void	*floor;
-	void	*ceiling;	
+	void	*ceiling;
 }	t_textures;
 
 typedef struct s_game_info
@@ -57,6 +58,7 @@ typedef struct s_game_info
 	int			img_width;
 	int			img_height;
 	int			colour;
+	float		delt_angle;
 	float		p_angle;
 	float		first_ray_angle;
 	//int			collectibles;

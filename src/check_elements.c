@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/18 22:44:50 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:58:40 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ Check map contetn to consider map valid
 p_check - returnes the number of N,S,E or W for the player’s start position found in the map (must be 1)
 c_chrck - returnes the numberof C found in the map (must be 1 or more)
 e_check - returnes the numberof E found in the map (must be 1)
-characters_check - checks if there are only C 0 P E 1 characters, 
+characters_check - checks if there are only C 0 P E 1 characters,
 if no exits the program
 elements_check - checks if P C E are a valid number
 */
@@ -35,7 +35,7 @@ int	p_check(t_game_info *game)
 	{
 		while (col < game->columns)
 		{
-			if ((game->map[row][col] == 'N') || (game->map[row][col] == 'S') 
+			if ((game->map[row][col] == 'N') || (game->map[row][col] == 'S')
 				|| (game->map[row][col] == 'E') || (game->map[row][col] == 'W'))
 			{
 				p_count ++;
@@ -55,9 +55,10 @@ int	p_check(t_game_info *game)
 		col = 0;
 		row ++;
 	}
-    game->first_ray_angle = game->p_angle - M_PI/6;
-    game->p_cell_x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
-    game->p_cell_y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;
+    // game->first_ray_angle = game->p_angle - M_PI/6;
+    // game->p_cell_x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
+    // game->p_cell_y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;
+	// game->delt_angle = M_PI / (3 * S_W);
 	return (p_count);
 }
 

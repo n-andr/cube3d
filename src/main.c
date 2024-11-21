@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 16:27:59 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:55:16 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ void	is_cub(char *map_adress)
 void	ft_set_values(t_game_info *game)
 {
 	game->colour = 16777215;
+	game->first_ray_angle = game->p_angle - M_PI/6;
+	game->p_cell_x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
+	game->p_cell_y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;
+	game->delt_angle = M_PI / (3 * S_W);
 }
 
 int	main(int argc, char **argv)
