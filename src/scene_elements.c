@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 17:25:00 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:15:29 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		separate_textures_and_map(t_game_info *game, int file, char *file_adress)
 	}
 	close(file);
 	save_map(game, file_adress);
+	//check_map(game);
 	//get_textures(game, file_adress); //does not work yet
 
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:28 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/20 21:14:14 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:15:30 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ Check every error case with valgrind
 // 	free(line);
 // 	game->map[game->rows] = NULL;
 // 	close(file);
-// 	check_map(game);
 // 	return ;
 // }
 
@@ -91,25 +90,9 @@ int	read_map(char *map_adress, t_game_info *game)
 		exit(EXIT_FAILURE);
 	}
 	separate_textures_and_map(game, file, map_adress);
-
-	// need to reopen file again ???? 
-	//get_textures(game, file); 
 	close(file);
-	// line = get_next_line(file);
-	// // add function to check textures
-	// // change from here to skip empty lines and textures info before map 
 
-	// if (line == NULL)
-	// 	handle_error(game, file, "Error\nEmpty map or malloc failed\n");
-	// while (line)
-	// {
-	// 	free(line);
-	// 	game->rows ++;
-	// 	line = get_next_line (file);
-	// }
-	// free(line);
-	// close(file);
-	// fill_map(map_adress, game);
+	check_map(game);
 
 	// debug
 	printf("final map:\n");

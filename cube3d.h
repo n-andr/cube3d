@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 15:59:49 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:15:42 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ typedef struct s_game_info
 	float		delt_angle;
 	float		p_angle;
 	float		first_ray_angle;
-	//int			collectibles;
-	//int			moves_count;
-	//int			c_count;
-	//int			exit_check;
 	void		*mlx;
 	void		*window;
 	t_textures	textures;
