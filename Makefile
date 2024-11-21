@@ -13,8 +13,14 @@
 NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+<<<<<<< HEAD
 SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/scene_elements.c\
 		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c
+=======
+SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/check_elements.c\
+		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c\
+		src/raycasting.c src/draw.c src/window_manage.c
+>>>>>>> raycasting
 
 OBJS := $(SOURCES:.c=.o)
 MLX_LIB = mlx/
