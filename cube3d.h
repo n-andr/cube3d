@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 15:59:49 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:49:37 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include "src/get_next_line/get_next_line.h"
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
+# include <stdbool.h>
 
 // if complains about include "mlx.h"
 //sudo cp libmlx.a /usr/local/lib/
@@ -89,13 +90,16 @@ typedef struct s_vars
 
 int		read_map(char *map, t_game_info *game);
 void	check_map(t_game_info *game);
+void	separate_textures_and_map(t_game_info *game, int file, char *file_adress);
+void	get_textures(t_game_info *game, char *file_adress);
+
 //int		has_valid_path(t_game_info *game);
 //void	find_p(t_game_info *game, char **map);
 //int		key_pressed(int key, t_game_info *game);
 
 //elements check
 void	characters_check(t_game_info *game);
-void	elements_check(t_game_info *game);
+void	player_position_check(t_game_info *game);
 int		p_check(t_game_info *game);
 
 //math

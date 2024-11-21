@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 18:09:36 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:13:52 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ int	is_closed(t_game_info *game)
 
 void	check_map(t_game_info *game)
 {
-	is_rectangular(game);
+	//is_rectangular(game);
 
 	// do we need to check the size of the map?
 	// can we handle any size?
 
-	if (is_closed(game) != 1)
-	{
-		write(1, "Error\nMap is not closed\n", 24);
-		free_map(game);
-		exit(EXIT_FAILURE);
-	}
-	elements_check(game);
-	characters_check(game);
+	// if (is_closed(game) != 1)
+	// {
+	// 	write(1, "Error\nMap is not closed\n", 24);
+	// 	free_map(game);
+	// 	exit(EXIT_FAILURE);
+	// }
+	player_position_check(game);
+	//characters_check(game);
 }

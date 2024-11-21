@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_elements.c                                   :+:      :+:    :+:   */
+/*   characters_and_player_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 15:58:40 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:10:27 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	p_check(t_game_info *game)
 				p_count ++;
 				game->p_position_row = row;
 				game->p_position_col = col;
-                if (game->map[row][col] == 'N')
-                  game->p_angle = (3 * M_PI)/2;
-                else if (game->map[row][col] == 'S')
-                  game->p_angle = (3 * M_PI)/2;
-                else if (game->map[row][col] == 'E')
-                  game->p_angle = 0;
-                else if (game->map[row][col] == 'W')
-                  game->p_angle = M_PI;
+				if (game->map[row][col] == 'N')
+				game->p_angle = (3 * M_PI)/2;
+				else if (game->map[row][col] == 'S')
+				game->p_angle = (3 * M_PI)/2;
+				else if (game->map[row][col] == 'E')
+				game->p_angle = 0;
+				else if (game->map[row][col] == 'W')
+				game->p_angle = M_PI;
 			}
 			col++;
 		}
@@ -63,7 +63,7 @@ int	p_check(t_game_info *game)
 }
 
 
-void	elements_check(t_game_info *game)
+void	player_position_check(t_game_info *game)
 {
 	if (p_check(game) != 1)
 	{

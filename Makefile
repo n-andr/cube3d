@@ -3,23 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2024/11/18 22:37:43 by nandreev         ###   ########.fr        #
+#    Updated: 2024/11/21 19:48:34 by mkokorev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/check_elements.c\
+
+SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/scene_elements.c\
 		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c\
 		src/raycasting.c src/draw.c src/window_manage.c
 
 OBJS := $(SOURCES:.c=.o)
 MLX_LIB = mlx/
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
 
 all: $(NAME)
 
@@ -36,6 +37,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all 
+re: fclean all
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 17:47:53 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:52:54 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,25 @@ void	is_cub(char *map_adress)
 	}
 }
 
+void	init_game(t_game_info *game)
+{
+	game->map = NULL;
+	game->rows = 0;
+	game->columns = 0;
+	game->p_position_row = 0;
+	game->p_position_col = 0;
+	game->img_width = 500;
+	game->img_height = 338;
+	game->mlx = mlx_init();
+	// game->window = mlx_new_window(game->mlx, 640, 480, "Hello world!");
+	game->textures.north = NULL;
+	game->textures.south = NULL;
+	game->textures.west = NULL;
+	game->textures.east = NULL;
+	game->textures.floor = NULL;
+	game->textures.ceiling = NULL;
+}
+
 void	ft_set_values(t_game_info *game)
 {
 	game->colour = 16777215;
@@ -44,6 +63,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		is_cub(argv[1]);
+		init_game(&game);
 		read_map(argv[1], &game);
 	}
 	else
