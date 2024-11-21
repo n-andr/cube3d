@@ -3,24 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2024/11/20 00:32:05 by nandreev         ###   ########.fr        #
+#    Updated: 2024/11/21 17:25:03 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-<<<<<<< HEAD
+
 SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/scene_elements.c\
-		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c
-=======
-SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/check_elements.c\
 		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c\
 		src/raycasting.c src/draw.c src/window_manage.c
->>>>>>> raycasting
 
 OBJS := $(SOURCES:.c=.o)
 MLX_LIB = mlx/
