@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 17:55:09 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:13:49 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "src/get_next_line/get_next_line.h"
 # include "mlx.h"
 # include <stdio.h>
+# include <stdbool.h>
 
 // if complains about include "mlx.h"
 //sudo cp libmlx.a /usr/local/lib/
@@ -57,15 +58,19 @@ typedef struct s_game_info
 	t_textures	textures;
 }	t_game_info;
 
+//parse
 int		read_map(char *map, t_game_info *game);
 void	check_map(t_game_info *game);
+void	separate_textures_and_map(t_game_info *game, int file, char *file_adress);
+void	get_textures(t_game_info *game, char *file_adress);
+
 //int		has_valid_path(t_game_info *game);
 //void	find_p(t_game_info *game, char **map);
 //int		key_pressed(int key, t_game_info *game);
 
 //elements check
 void	characters_check(t_game_info *game);
-void	elements_check(t_game_info *game);
+void	player_position_check(t_game_info *game);
 int		p_check(t_game_info *game);
 
 // graphics
