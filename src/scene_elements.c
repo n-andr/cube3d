@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/20 00:38:27 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:26:54 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_new_line(t_game_info *game)
 	while (game->map[i])
 	{
 		if (game->map[i][0] == '\n')
-			handle_error(game, -1, "Error\nEmpty line in the map\n");
+			handle_error(game, -1, "Error\nEmpty line in the map\n"); // don't return an error here, do it in the unclosed contour check
 		j = 0;
 		while (game->map[i][j])
 		{
@@ -32,26 +32,38 @@ void	handle_new_line(t_game_info *game)
 	}
 }
 
-void	save_map(t_game_info *game, int file, int map_len, int tex_len, char *file_adress)
+char *skipp_textures(char *line, int file)
 {
-	int		i;
-	char	*line;
-
-	game->map = malloc(sizeof(char *) * (map_len + 1));
-	if (game->map == NULL)
-		handle_error(game, file, "Error\nMemory allocation failed\n");
-	i = 0;
-	file = open(file_adress, O_RDONLY);
-	line = get_next_line(file);
-	while (tex_len > 0)
+	while (line && line[0] && ((line[0] == '\n')
+		|| (line[0] == 'N' && line[1] == 'O')
+		|| (line[0] == 'S' && line[1] == 'O')
+		|| (line[0] == 'W' && line[1] == 'E')
+		|| (line[0] == 'E' && line[1] == 'A')
+		|| (line[0] == 'C' && line[1] == ' ')
+		|| (line[0] == 'F' && line[1] == ' ')))
 	{
-		tex_len--;
 		free(line);
 		line = get_next_line(file);
 	}
+	return (line);
+}
+
+void	save_map(t_game_info *game, char *file_adress)
+{
+	int		i;
+	char	*line;
+	int		file;
+
+	file = open(file_adress, O_RDONLY);
+	game->map = malloc(sizeof(char *) * (game->rows + 1));
+	if (game->map == NULL)
+		handle_error(game, file, "Error\nMemory allocation failed\n");
+	i = 0;
+	line = get_next_line(file);
+	line = skipp_textures(line, file);
 	while (line)
 	{
-		game->map[i] = malloc(sizeof(char) * ft_strlen(line) + 1);
+		game->map[i] = malloc(sizeof(char) * ft_strlen(line) + 1); // use calloc instead of malloc
 		if (game->map[i] == NULL)
 			handle_error(game, file, "Error\nMemory allocation failed\n");
 		ft_strlcpy(game->map[i], line, (ft_strlen(line) + 1));
@@ -63,42 +75,32 @@ void	save_map(t_game_info *game, int file, int map_len, int tex_len, char *file_
 	close(file);
 	handle_new_line(game);
 	// debug
-	printf("save map function:\n");
-	for (int i = 0; i < game->rows; i++)
-	{
-		printf("%s\n", game->map[i]);
-	}
+	// printf("save map function result:\n");
+	// for (int i = 0; i < game->rows; i++)
+	// {
+	// 	printf("%s\n", game->map[i]);
+	// }
 	// end debug
 }
-
 
 void		separate_textures_and_map(t_game_info *game, int file, char *file_adress)
 {
 	char	*line;
-	int		map_len;
-	int		textures_len;
+	//int		textures_len;
 	
-	map_len = 0;
-	textures_len = 0;
+	//textures_len = 0;
 	line = get_next_line(file);
-	while (line && line[0] && ((line[0] == '\n')
-		|| (line[0] == 'N' && line[1] == 'O')
-		|| (line[0] == 'S' && line[1] == 'O')
-		|| (line[0] == 'W' && line[1] == 'E')
-		|| (line[0] == 'E' && line[1] == 'A')
-		|| (line[0] == 'C' && line[1] == ' ')
-		|| (line[0] == 'F' && line[1] == ' ')))
-	{
-		textures_len++;
-		free(line);
-		line = get_next_line(file);
-	}
+	line = skipp_textures(line, file);
 	while (line)
 	{
-		map_len++;
+		game->rows++;
+		if (ft_strlen(line) > game->columns)
+			game->columns = ft_strlen(line);
 		free(line);
 		line = get_next_line(file);
 	}
 	close(file);
-	save_map(game, file, map_len, textures_len, file_adress);
+	save_map(game, file_adress);
+	// get_textures(game, file_adress); does not work yet
+
 }

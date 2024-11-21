@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/20 00:25:41 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:16:49 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,15 @@ void	is_cub(char *map_adress)
 
 void	init_game(t_game_info *game)
 {
-	//t_textures	textures;
-
 	game->map = NULL;
 	game->rows = 0;
 	game->columns = 0;
 	game->p_position_row = 0;
 	game->p_position_col = 0;
-	game->img_width = 0;
-	game->img_height = 0;
+	game->img_width = 500;
+	game->img_height = 338;
 	// game->mlx = mlx_init();
 	// game->window = mlx_new_window(game->mlx, 640, 480, "Hello world!");
-	//game->textures = textures;
 	game->textures.north = NULL;
 	game->textures.south = NULL;
 	game->textures.west = NULL;

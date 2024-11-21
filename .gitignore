@@ -6,3 +6,5 @@ cub3D
 mlx
 
 *.o
+
+assets/.DS_Store

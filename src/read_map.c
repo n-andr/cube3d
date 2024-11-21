@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:28 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/20 00:34:45 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:14:14 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	read_map(char *map_adress, t_game_info *game)
 	separate_textures_and_map(game, file, map_adress);
 
 	// need to reopen file again ???? 
-	get_textures(game, file); 
+	//get_textures(game, file); 
 	close(file);
 	// line = get_next_line(file);
 	// // add function to check textures

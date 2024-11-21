@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/20 00:32:54 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:13:49 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ typedef struct s_game_info
 int		read_map(char *map, t_game_info *game);
 void	check_map(t_game_info *game);
 void	separate_textures_and_map(t_game_info *game, int file, char *file_adress);
-void	get_textures(t_game_info *game, int file);
-
+void	get_textures(t_game_info *game, char *file_adress);
 
 //int		has_valid_path(t_game_info *game);
 //void	find_p(t_game_info *game, char **map);
