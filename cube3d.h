@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 19:49:37 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/22 19:34:27 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_game_info
 	int			p_position_col;
 	int			p_cell_x;
 	int			p_cell_y;
+	float		ray_x;
+	float		ray_y;
 	int			img_width;
 	int			img_height;
 	int			colour;
