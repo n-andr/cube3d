@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/22 19:48:29 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/22 19:53:59 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_game(t_game_info *game)
 void	ft_set_values(t_game_info *game)
 {
 	game->colour = 16777215;
-	//game->first_ray_angle = game->p_angle - M_PI / 6;
+	////game->first_ray_angle = game->p_angle - M_PI / 6;
 	//game->p_angle = M_PI / 4;
 	game->first_ray_angle = game->p_angle - M_PI / 3;
 	game->p_cell_x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
