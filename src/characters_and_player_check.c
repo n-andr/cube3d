@@ -44,7 +44,7 @@ int	p_check(t_game_info *game)
 				if (game->map[row][col] == 'N')
 				game->p_angle = (3 * M_PI)/2;
 				else if (game->map[row][col] == 'S')
-				game->p_angle = (3 * M_PI)/2;
+				game->p_angle = M_PI/2;
 				else if (game->map[row][col] == 'E')
 				game->p_angle = 0;
 				else if (game->map[row][col] == 'W')

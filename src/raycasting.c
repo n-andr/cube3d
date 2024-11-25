@@ -1,39 +1,47 @@
 #include "../cube3d.h"
-#include <math.h>
 
-void  ft_first_step(t_game_info *game)
+void  ft_first_step(t_game_info *game, int ray_x_dir, int ray_y_dir)
 {
    float   x_step;
    float   y_first_bord;
    float   y_first_step;
 
+
+   //look for horisontal intersection:
    y_first_bord = game->p_position_row * CELL_SIZE;
-   y_first_step = y_first_bord - game->p_cell_y;
+   if (ray_y_dir == 1)
+     y_first_bord += CELL_SIZE;
+   y_first_step = fabs(y_first_bord - game->p_cell_y);
    //TODO: change first_ray_angle to the actual ray angle
-   x_step = y_first_step / tan(game->first_ray_angle);
-   game->ray_x = game->ray_x + x_step;
-   game->ray_y = game->ray_y + y_first_step;
+   x_step = fabs(y_first_step / tan(game->first_ray_angle));
+   game->ray_x = game->ray_x + ray_x_dir * x_step;
+   game->ray_y = game->ray_y + ray_y_dir * y_first_step;
+   printf("p_position_raw: %d\n", game->p_position_row);
    printf("y_first_bord %f\n", y_first_bord);
    printf("first_ray_angle %f\n", game->first_ray_angle);
    printf("y_first_step %f\n", y_first_step);
    printf("x_first_step %f\n", x_step);
    printf("ray_x %f\n", game->ray_x);
    printf("ray_y %f\n", game->ray_y);
+   //look for vertical intersection:
+   ray_x_dir = ray_x_dir;
 }
 
-int  ft_check_intersection(t_game_info   *game)
+int  ft_check_intersection(t_game_info   *game, int ray_x_dir, int ray_y_dir)
 {
    //check horisontal intersection:
-   int i;
-   int j;
+   int col;
+   int row;
 
-   j = game->ray_x  / CELL_SIZE;
-   i = (game->ray_y - 2) / CELL_SIZE;
-   printf("game->map[%d][%d]: %d\n", i, j, game->map[i][j]);
-   if (game->map[i][j] == '1')
+   col = game->ray_x  / CELL_SIZE;
+   row = (game->ray_y + ray_y_dir) / CELL_SIZE;
+   printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);
+   if (game->map[row][col] == '1')
       return (1);
    else
       return (0);
+   //check vertical intersection:
+   ray_x_dir = ray_x_dir;
 }
 
 void ft_ray_dir_def(t_game_info *game, int  *ray_x_dir, int  *ray_y_dir)
@@ -46,21 +54,46 @@ void ft_ray_dir_def(t_game_info *game, int  *ray_x_dir, int  *ray_y_dir)
       *ray_x_dir = -1;
    else
       *ray_x_dir = 1;
+   printf("ray_x_dir %d\n", *ray_x_dir);
+   printf("ray_y_dir %d\n", *ray_y_dir);
+}
+
+int   ft_len_def(t_game_info *game)
+{
+  int len;
+  int del_x;
+
+  del_x = fabs(game->ray_x - game->p_cell_x);
+  //TODO: change the first ray angle to current angle
+  len = del_x / cos(game->first_ray_angle);
+  return (len);
 }
 
 void  ft_find_intersections(t_game_info  *game)
 {
    int   hit_wall;
-   int  ray_x_dir;
-   int  ray_y_dir;
+   int   ray_x_dir;
+   int   ray_y_dir;
+   int   steps;
+   int   len;
 
+   //work with horizontal intersections
    hit_wall = 0;
    ft_ray_dir_def(game, &ray_x_dir, &ray_y_dir);
    printf("ray x dir: %d, ray y dir: %d\n", ray_x_dir, ray_y_dir);
-   ft_first_step(game);
-      if (ft_check_intersection(game))
-         hit_wall = 1;
- printf("hit wall: %d\n", hit_wall);
+   printf("hit wall: %d\n", hit_wall);
+   steps = 0;
+   while (!hit_wall)
+     {
+        ft_first_step(game, ray_x_dir, ray_y_dir);
+        steps++;
+        if (ft_check_intersection(game, ray_x_dir, ray_y_dir))
+           hit_wall = 1;
+     }
+   len = ft_len_def(game);
+   printf("hit wall: %d\n", hit_wall);
+   printf("steps: %d\n", steps);
+   printf("len: %d\n", len);
 }
 
 
