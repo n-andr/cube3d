@@ -52,6 +52,7 @@ void	ft_set_values(t_game_info *game)
 	game->colour = 16777215;
 	//game->p_angle = 7 * M_PI / 4;
 	game->first_ray_angle = game->p_angle - M_PI / 6;
+	//game->first_ray_angle = game->p_angle;
 	game->player.x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
 	game->player.y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;
 	game->delt_angle = M_PI / (3 * S_W);

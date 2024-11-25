@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = cub3D
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/scene_elements.c\

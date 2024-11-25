@@ -11,7 +11,7 @@ void  ft_first_step(t_game_info *game, int ray_x_dir, int ray_y_dir)
    y_first_bord = game->p_position_row * CELL_SIZE;
    if (ray_y_dir == 1)
      y_first_bord += CELL_SIZE;
-   y_first_step = fabs(y_first_bord - game->p_cell_y);
+   y_first_step = fabs(y_first_bord - game->player.y);
    //TODO: change first_ray_angle to the actual ray angle
    x_step = fabs(y_first_step / tan(game->first_ray_angle));
    game->ray_x = game->ray_x + ray_x_dir * x_step;
@@ -63,9 +63,9 @@ int   ft_len_def(t_game_info *game)
   int len;
   int del_x;
 
-  del_x = fabs(game->ray_x - game->p_cell_x);
+  del_x = fabs(game->ray_x - game->player.y);
   //TODO: change the first ray angle to current angle
-  len = del_x / cos(game->first_ray_angle);
+  len = fabs(del_x / cos(game->first_ray_angle));
   return (len);
 }
 
@@ -101,7 +101,7 @@ void  ft_find_intersections(t_game_info  *game)
    {
    printf("pi: %f\n", M_PI);
    printf("angle: %f\n",game->p_angle);
-   printf("p_cell_x: %d\n",game->p_cell_x);
-   printf("p_cell_y: %d\n",game->p_cell_y);
+   printf("p_cell_x: %d\n",game->player.x);
+   printf("p_cell_y: %d\n",game->player.y);
    ft_find_intersections(game);
    }
