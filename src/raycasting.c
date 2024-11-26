@@ -60,22 +60,25 @@ void ft_ray_dir_def(t_game_info *game, int  *ray_x_dir, int  *ray_y_dir)
 
 int   ft_len_def(t_game_info *game)
 {
-  int len;
+  int correct_len;
   int del_x;
+  float angle;
+  //int correct_len;
 
-  del_x = fabs(game->ray_x - game->player.y);
+  del_x = fabs(game->ray_x - game->player.x);
+  angle = game->first_ray_angle - game->p_angle;
   //TODO: change the first ray angle to current angle
-  len = fabs(del_x / cos(game->first_ray_angle));
-  return (len);
+  correct_len = fabs(del_x / sin(angle));
+  return (correct_len);
 }
 
-void  ft_find_intersections(t_game_info  *game)
+int   ft_find_intersections(t_game_info  *game)
 {
    int   hit_wall;
    int   ray_x_dir;
    int   ray_y_dir;
    int   steps;
-   int   len;
+   int   correct_len;
 
    //work with horizontal intersections
    hit_wall = 0;
@@ -90,18 +93,19 @@ void  ft_find_intersections(t_game_info  *game)
         if (ft_check_intersection(game, ray_x_dir, ray_y_dir))
            hit_wall = 1;
      }
-   len = ft_len_def(game);
+   correct_len = ft_len_def(game);
    printf("hit wall: %d\n", hit_wall);
    printf("steps: %d\n", steps);
-   printf("len: %d\n", len);
+   printf("correct_len: %d\n", correct_len);
+   return (correct_len);
 }
 
 
    void  ft_raycasting(t_game_info	*game)
-   {
+{
    printf("pi: %f\n", M_PI);
    printf("angle: %f\n",game->p_angle);
    printf("p_cell_x: %d\n",game->player.x);
    printf("p_cell_y: %d\n",game->player.y);
    ft_find_intersections(game);
-   }
+}

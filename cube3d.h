@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/22 19:34:27 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:04:49 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define CELL_SIZE 64
 # define S_W 1280
 # define S_H 720
-# define M_PI 3.14159265358979323846
 
 # include <fcntl.h>
 # include <math.h>

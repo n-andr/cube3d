@@ -6,12 +6,12 @@
 #    By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2024/11/21 19:48:34 by mkokorev         ###   ########.fr        #
+#    Updated: 2024/11/26 15:03:52 by mkokorev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/scene_elements.c\
