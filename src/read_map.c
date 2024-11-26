@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:28 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/20 21:14:14 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:12:59 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 Is not too big to play
 Has to be surrounded by walls
 No empty lines anywhere in the map
-No other characters besides 1, 0, W, E, N, S, 
-Only one player 
+No other characters besides 1, 0, W, E, N, S,
+Only one player
 Empty map case
 Invalid extension (only .cub allowed)
 Map does not exist
@@ -91,26 +91,8 @@ int	read_map(char *map_adress, t_game_info *game)
 		exit(EXIT_FAILURE);
 	}
 	separate_textures_and_map(game, file, map_adress);
-
-	// need to reopen file again ???? 
-	//get_textures(game, file); 
 	close(file);
-	// line = get_next_line(file);
-	// // add function to check textures
-	// // change from here to skip empty lines and textures info before map 
-
-	// if (line == NULL)
-	// 	handle_error(game, file, "Error\nEmpty map or malloc failed\n");
-	// while (line)
-	// {
-	// 	free(line);
-	// 	game->rows ++;
-	// 	line = get_next_line (file);
-	// }
-	// free(line);
-	// close(file);
-	// fill_map(map_adress, game);
-
+	check_map(game);
 	// debug
 	printf("final map:\n");
 	for (int i = 0; i < game->rows; i++)

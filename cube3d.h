@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 15:59:49 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:04:49 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define CELL_SIZE 64
 # define S_W 1280
 # define S_H 720
-# define M_PI 3.14159265358979323846
 
 # include <fcntl.h>
 # include <math.h>
@@ -47,6 +46,19 @@ typedef struct s_textures
 	void	*ceiling;
 }	t_textures;
 
+typedef struct	v_player_coord
+{
+	int			x;
+	int			y;
+}	t_player_coord;
+
+
+typedef struct	s_wall_coord
+{
+	int			x;
+	int			y;
+}	t_wall_coord;
+
 typedef struct s_game_info
 {
 	char		**map;
@@ -54,8 +66,8 @@ typedef struct s_game_info
 	int			columns;
 	int			p_position_row;
 	int			p_position_col;
-	int			p_cell_x;
-	int			p_cell_y;
+	float		ray_x;
+	float		ray_y;
 	int			img_width;
 	int			img_height;
 	int			colour;
@@ -69,6 +81,8 @@ typedef struct s_game_info
 	void		*mlx;
 	void		*window;
 	t_textures	textures;
+    t_player_coord	player;
+    t_wall_coord	wall;
 }	t_game_info;
 
 typedef struct s_daa
@@ -107,8 +121,8 @@ void    ft_raycasting(t_game_info	*game);
 
 // graphics
 void	ft_game_draw(t_game_info	*game);
-int	handle_input(int keysym, t_vars *data);
-int	x_close(t_vars *data);
+int		handle_input(int keysym, t_vars *data);
+int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
 

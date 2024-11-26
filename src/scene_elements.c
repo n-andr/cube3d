@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 17:25:00 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:04:46 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	handle_new_line(t_game_info *game)
 	}
 }
 
-char *skipp_textures(char *line, int file)
+char	*skipp_textures(char *line, int file)
 {
 	while (line && line[0] && ((line[0] == '\n')
 		|| (line[0] == 'N' && line[1] == 'O')
@@ -87,7 +87,7 @@ void		separate_textures_and_map(t_game_info *game, int file, char *file_adress)
 {
 	char	*line;
 	//int		textures_len;
-	
+
 	//textures_len = 0;
 	line = get_next_line(file);
 	line = skipp_textures(line, file);
