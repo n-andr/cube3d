@@ -16,8 +16,8 @@
 Is not too big to play
 Has to be surrounded by walls
 No empty lines anywhere in the map
-No other characters besides 1, 0, W, E, N, S, 
-Only one player 
+No other characters besides 1, 0, W, E, N, S,
+Only one player
 Empty map case
 Invalid extension (only .cub allowed)
 Map does not exist
@@ -91,9 +91,7 @@ int	read_map(char *map_adress, t_game_info *game)
 	}
 	separate_textures_and_map(game, file, map_adress);
 	close(file);
-
 	check_map(game);
-
 	// debug
 	printf("final map:\n");
 	for (int i = 0; i < game->rows; i++)

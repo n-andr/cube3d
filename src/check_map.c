@@ -76,7 +76,7 @@ int	is_closed(t_game_info *game)
 
 void	check_map(t_game_info *game)
 {
-	//is_rectangular(game); fix this function
+	//is_rectangular(game);
 
 	// do we need to check the size of the map?
 	// can we handle any size?
@@ -88,5 +88,5 @@ void	check_map(t_game_info *game)
 	// 	exit(EXIT_FAILURE);
 	// }
 	player_position_check(game);
-	characters_check(game);
+	//characters_check(game);
 }

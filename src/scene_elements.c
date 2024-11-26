@@ -32,7 +32,7 @@ void	handle_new_line(t_game_info *game)
 	}
 }
 
-char *skipp_textures(char *line, int file)
+char	*skipp_textures(char *line, int file)
 {
 	while (line && line[0] && ((line[0] == '\n')
 		|| (line[0] == 'N' && line[1] == 'O')
@@ -87,7 +87,7 @@ void		separate_textures_and_map(t_game_info *game, int file, char *file_adress)
 {
 	char	*line;
 	//int		textures_len;
-	
+
 	//textures_len = 0;
 	line = get_next_line(file);
 	line = skipp_textures(line, file);

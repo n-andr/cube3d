@@ -21,7 +21,7 @@ SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_an
 OBJS := $(SOURCES:.c=.o)
 LIBFT_LIB = src/libft/
 MLX_LIB = mlx/
-MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11 -lm
 
 all: $(NAME)
 
@@ -41,6 +41,6 @@ fclean: clean
 	make fclean -C ./src/libft
 	rm -f $(NAME)
 
-re: fclean all 
+re: fclean all
 
 .PHONY: all clean fclean re
