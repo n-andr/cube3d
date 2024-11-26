@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   characters_and_player_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 18:20:26 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:20:15 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	p_check(t_game_info *game)
 				else if (game->map[row][col] == 'S')
 				game->p_angle = M_PI/2;
 				else if (game->map[row][col] == 'E')
-				game->p_angle = 0;
+				game->p_angle = 2 * M_PI;
 				else if (game->map[row][col] == 'W')
 				game->p_angle = M_PI;
 			}
