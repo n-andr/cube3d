@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 18:04:46 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:10:55 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		separate_textures_and_map(t_game_info *game, int file, char *file_adress)
 	}
 	close(file);
 	save_map(game, file_adress);
-	//get_textures(game, file_adress); //does not work yet
+	//check_map(game);
+	get_textures(game, file_adress); //does not work yet
 
 }

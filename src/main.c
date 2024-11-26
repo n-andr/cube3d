@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/22 19:53:59 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/26 00:26:22 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	init_game(t_game_info *game)
 	game->textures.south = NULL;
 	game->textures.west = NULL;
 	game->textures.east = NULL;
-	game->textures.floor = NULL;
-	game->textures.ceiling = NULL;
+	game->textures.floor = -1;
+	game->textures.ceiling = -1;
 }
 
 void	ft_set_values(t_game_info *game)

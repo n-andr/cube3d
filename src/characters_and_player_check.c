@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   characters_and_player_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/22 17:25:21 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:20:26 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,12 @@ void	characters_check(t_game_info *game)
 				&& game->map[row][col] != 'S'
 				&& game->map[row][col] != 'W'
 				&& game->map[row][col] != '1'
+				&& game->map[row][col] != ' '
 				&& game->map[row][col] != '0')
 			{
 				write(1, "Error\nForbiden character\n", 25);
+				//debug
+				printf("row = %d, col = %d, char = %c\n", row, col, game->map[row][col]);
 				free_map(game);
 				exit(EXIT_FAILURE);
 			}

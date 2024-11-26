@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 15:04:49 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:23:02 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "mlx.h"
+# include "mlx/mlx.h"
 # include "src/get_next_line/get_next_line.h"
+# include "src/libft/libft.h"
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
@@ -42,8 +44,8 @@ typedef struct s_textures
 	void	*south;
 	void	*west;
 	void	*east;
-	void	*floor;
-	void	*ceiling;
+	int		floor;
+	int		ceiling;
 }	t_textures;
 
 typedef struct	v_player_coord
@@ -74,10 +76,6 @@ typedef struct s_game_info
 	float		delt_angle;
 	float		p_angle;
 	float		first_ray_angle;
-	//int			collectibles;
-	//int			moves_count;
-	//int			c_count;
-	//int			exit_check;
 	void		*mlx;
 	void		*window;
 	t_textures	textures;

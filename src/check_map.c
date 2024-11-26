@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 18:13:52 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:15:22 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	check_map(t_game_info *game)
 	// do we need to check the size of the map?
 	// can we handle any size?
 
-	// if (is_closed(game) != 1)
+	// if (is_closed(game) != 1) fix this function
 	// {
 	// 	write(1, "Error\nMap is not closed\n", 24);
 	// 	free_map(game);
