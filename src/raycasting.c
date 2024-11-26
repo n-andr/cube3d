@@ -60,16 +60,22 @@ void ft_ray_dir_def(t_game_info *game, int  *ray_x_dir, int  *ray_y_dir)
 
 int   ft_len_def(t_game_info *game)
 {
-  int correct_len;
-  int del_x;
+  float correct_len;
+  float len;
+  float del_x;
+  float del_y;
   float angle;
   //int correct_len;
 
-  del_x = fabs(game->ray_x - game->player.x);
-  angle = game->first_ray_angle - game->p_angle;
+   del_x = fabs(game->ray_x - game->player.x);
+   del_y = fabs(game->ray_y - game->player.y);
+   angle = game->p_angle - game->first_ray_angle;
+   len = sqrt(del_x * del_x + del_y * del_y);
   //TODO: change the first ray angle to current angle
-  correct_len = fabs(del_x / sin(angle));
-  return (correct_len);
+   correct_len = fabs(len * cos(angle));
+   printf("del_x: %f, del_y: %f, angle: %f\n", del_x, del_y, angle);
+   printf("len: %f\n", len);
+   return (correct_len);
 }
 
 int   ft_find_intersections(t_game_info  *game)
