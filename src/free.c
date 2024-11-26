@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/14 15:49:19 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:06:19 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,15 @@ void	free_check_map(char **map)
 	free (map);
 }
 
+void	free_array(char **array)
+{
+	int i;
+
+	i = 0;
+	while (array[i])
+	{
+		free (array[i]);
+		i ++;
+	}
+	free (array);
+}

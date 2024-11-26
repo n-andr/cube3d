@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 01:23:02 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:21:01 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int		x_close(t_vars *data);
 void	handle_error(t_game_info *game, int file, char *message);
 void	free_map(t_game_info *game);
 void	free_check_map(char **map);
+void	free_array(char **array);
 //int		close_game(t_game_info *game);
 
 //libft

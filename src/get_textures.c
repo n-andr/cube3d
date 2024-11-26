@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 02:00:49 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:07:52 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,23 @@ int	rgb_to_int(int r, int g, int b)
 	t = 255;
 	return (t << 24 | r << 16 | g << 8 | b);
 }
-int	colour_to_int(char *line)
+
+bool 	digits_only_str(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isdigit((int)str[i]) != 0)
+			i ++;
+		else
+			return(false);
+	}
+	return (true);
+}
+
+int	colour_to_int(char *line, t_game_info *game, int file)
 {
 	int r;
 	int g;
@@ -83,18 +99,18 @@ int	colour_to_int(char *line)
 		line[ft_strlen(line) - 1] = '\0';
 	printf("line: %s\n", line); //delete
 	rgb = ft_split(line, ',');
-	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL || rgb[3] != NULL)
+	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL || rgb[3] != NULL
+		|| digits_only_str(rgb[0]) == false || digits_only_str(rgb[1]) == false
+		|| digits_only_str(rgb[2]) == false)
 	{
-		free(rgb);
+		free_array(rgb);
+		handle_error(game, file, "Wrong colour format");
 		return (-1);
 	}
-	//check here if rgb[0] is a number
-	//check here if rgb[1] is a number
-	//check here if rgb[2] is a number
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
-	free(rgb);
+	free_array(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (-1);
 	return (rgb_to_int(r, g, b));
@@ -113,7 +129,7 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 	line = line + i;
 	if (*colour != -1)
 		handle_error(game, file, "Error\nSame colour listed more than once\n");
-	rgb = colour_to_int(line);
+	rgb = colour_to_int(line, game, file);
 	*colour = rgb;
 	printf("colour: %d\n", *colour); //delete
 	printf("colour hex: %x\n", *colour); //delete
