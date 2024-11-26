@@ -1,16 +1,16 @@
 
 
-NO ../assets/wall-texture.png
-SO ./path_to_the_south_texture
+NO ./assets/wall-texture.xpm
+SO ./assets/wall-texture.xpm
 
 
 
 
-WE           ./path_to_the_west_texture
+WE           ./assets/wall-texture.xpm
 
 
 
-EA ./path_to_the_east_texture
+EA ./assets/wall-texture.xpm
 F           220,100,9
 C 225,30,0
 
