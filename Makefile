@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+         #
+#    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2024/11/21 17:25:03 by nandreev         ###   ########.fr        #
+#    Updated: 2024/11/26 01:56:15 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_an
 		src/raycasting.c src/draw.c src/window_manage.c
 
 OBJS := $(SOURCES:.c=.o)
+LIBFT_LIB = src/libft/
 MLX_LIB = mlx/
 MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
 
@@ -29,12 +30,15 @@ $(NAME): $(OBJS)
 	git clone https://github.com/42Paris/minilibx-linux.git mlx; \
 	fi
 	@make -C $(MLX_LIB)
-	$(CC) $(CFLAGS) $(OBJS) $(GETNEXTLINE) $(MLX_FLAGS) -o $(NAME)
+	make -C $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(OBJS) -L./src/libft  -lft $(MLX_FLAGS) -o $(NAME)	
 
 clean:
+	make clean -C ./src/libft
 	rm -f $(OBJS)
 
 fclean: clean
+	make fclean -C ./src/libft
 	rm -f $(NAME)
 
 re: fclean all 

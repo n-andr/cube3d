@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 00:26:08 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:23:02 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "mlx.h"
 # include "mlx/mlx.h"
 # include "src/get_next_line/get_next_line.h"
+# include "src/libft/libft.h"
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
