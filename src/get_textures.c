@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 02:00:49 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:51:26 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void assign_texture(t_game_info *game, char *line, void **texture, int file)
 		handle_error(game, file, "Error\nWrong texture format\n");
 }
 
-//The resulting integer's binary representation is 0xTTRRGGBB, 
-//where TT is the transparency, RR is the red channel, 
+//The resulting integer's binary representation is 0xTTRRGGBB,
+//where TT is the transparency, RR is the red channel,
 //GG is the green channel, and BB is the blue channel.
 //TTTTTTTT RRRRRRRR GGGGGGGG BBBBBBBB
 
@@ -118,7 +118,7 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 	printf("colour: %d\n", *colour); //delete
 	printf("colour hex: %x\n", *colour); //delete
 	// should colour be assigned using mlx function or int value is enough?
-	//colour = mlx_get_color_value(game->mlx, rgb); 
+	//colour = mlx_get_color_value(game->mlx, rgb);
 	}
 
 void	get_textures(t_game_info *game, char *file_adress)

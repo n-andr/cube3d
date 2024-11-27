@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 00:26:22 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:57:50 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	init_game(t_game_info *game)
 	game->map = NULL;
 	game->rows = 0;
 	game->columns = 0;
-	game->p_position_row = 0;
-	game->p_position_col = 0;
+	game->player.p_position_row = 0;
+	game->player.p_position_col = 0;
 	game->img_width = 500;
 	game->img_height = 338;
 	game->mlx = mlx_init();
@@ -51,12 +51,10 @@ void	ft_set_values(t_game_info *game)
 {
 	game->colour = 16777215;
 	//game->p_angle = 7 * M_PI / 4;
-	game->first_ray_angle = game->p_angle - M_PI / 6;
-	game->player.x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
-	game->player.y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;
+	game->first_ray_angle = game->player.p_angle - M_PI / 6;
+	game->player.x = CELL_SIZE * game->player.p_position_col + CELL_SIZE / 2;
+	game->player.y = CELL_SIZE * game->player.p_position_row + CELL_SIZE / 2;
 	game->delt_angle = M_PI / (3 * S_W);
-	game->ray_x = game->player.x;
-	game->ray_y = game->player.y;
 }
 
 int	main(int argc, char **argv)
