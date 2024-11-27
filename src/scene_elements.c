@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/25 18:10:55 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:49:56 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_new_line(t_game_info *game)
 	while (game->map[i])
 	{
 		if (game->map[i][0] == '\n')
-			handle_error(game, -1, "Error\nEmpty line in the map\n"); // don't return an error here, do it in the unclosed contour check
+			handle_error(game, -1, "Error\nEmpty line in the map\n", NULL); // don't return an error here, do it in the unclosed contour check
 		j = 0;
 		while (game->map[i][j])
 		{
@@ -57,7 +57,7 @@ void	save_map(t_game_info *game, char *file_adress)
 	file = open(file_adress, O_RDONLY);
 	game->map = malloc(sizeof(char *) * (game->rows + 1));
 	if (game->map == NULL)
-		handle_error(game, file, "Error\nMemory allocation failed\n");
+		handle_error(game, file, "Error\nMemory allocation failed\n", NULL);
 	i = 0;
 	line = get_next_line(file);
 	line = skipp_textures(line, file);
@@ -65,7 +65,7 @@ void	save_map(t_game_info *game, char *file_adress)
 	{
 		game->map[i] = malloc(sizeof(char) * ft_strlen(line) + 1); // use calloc instead of malloc
 		if (game->map[i] == NULL)
-			handle_error(game, file, "Error\nMemory allocation failed\n");
+			handle_error(game, file, "Error\nMemory allocation failed\n", line);
 		ft_strlcpy(game->map[i], line, (ft_strlen(line) + 1));
 		free(line);
 		i++;

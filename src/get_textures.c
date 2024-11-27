@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 18:07:52 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:51:44 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 bool	check_texture(t_game_info *game, int file)
 {
 	if (game->textures.north == NULL)
-		handle_error(game, file, "Error\nNo north texture\n");
+		handle_error(game, file, "Error\nNo north texture\n", NULL);
 	if (game->textures.south == NULL)
-		handle_error(game, file, "Error\nNo south texture\n");
+		handle_error(game, file, "Error\nNo south texture\n", NULL);
 	if (game->textures.west == NULL)
-		handle_error(game, file, "Error\nNo west texture\n");
+		handle_error(game, file, "Error\nNo west texture\n", NULL);
 	if (game->textures.east == NULL)
-		handle_error(game, file, "Error\nNo east texture\n");
+		handle_error(game, file, "Error\nNo east texture\n", NULL);
 	if (game->textures.floor == -1)
-		handle_error(game, file, "Error\nNo floor colour\n");
+		handle_error(game, file, "Error\nNo floor colour\n", NULL);
 	if (game->textures.ceiling == -1)
-		handle_error(game, file, "Error\nNo ceiling colour\n");
+		handle_error(game, file, "Error\nNo ceiling colour\n", NULL);
 	return (true);
 }
 
@@ -50,11 +50,11 @@ void assign_texture(t_game_info *game, char *line, void **texture, int file)
 		line[ft_strlen(line) - 1] = '\0';
 	printf("line: %s\n", line); //delete
 	if (*texture != NULL)
-		handle_error(game, file, "Error\nSame texture listed more than once\n");
+		handle_error(game, file, "Error\nSame texture listed more than once\n", line);
 	if (is_xmp(line) == true)
 			*texture = mlx_xpm_file_to_image(game->mlx, line, &game->img_width, &game->img_height); // check if it is correct way to assign texture
 	else
-		handle_error(game, file, "Error\nWrong texture format\n");
+		handle_error(game, file, "Error\nWrong texture format\n", line);
 }
 
 //The resulting integer's binary representation is 0xTTRRGGBB, 
@@ -104,7 +104,7 @@ int	colour_to_int(char *line, t_game_info *game, int file)
 		|| digits_only_str(rgb[2]) == false)
 	{
 		free_array(rgb);
-		handle_error(game, file, "Wrong colour format");
+		handle_error(game, file, "Wrong colour format", line);
 		return (-1);
 	}
 	r = ft_atoi(rgb[0]);
@@ -128,7 +128,7 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 	}
 	line = line + i;
 	if (*colour != -1)
-		handle_error(game, file, "Error\nSame colour listed more than once\n");
+		handle_error(game, file, "Error\nSame colour listed more than once\n", line);
 	rgb = colour_to_int(line, game, file);
 	*colour = rgb;
 	printf("colour: %d\n", *colour); //delete
@@ -151,7 +151,7 @@ void	get_textures(t_game_info *game, char *file_adress)
 	}
 	line = get_next_line(file);
 	if (line == NULL)
-		handle_error(game, file, "Error\nEmpty file\n");
+		handle_error(game, file, "Error\nEmpty file\n", line);
 	while (line)
 	{
 		if (line[0] == 'N' && line[1] == 'O')

@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 18:21:01 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:46:24 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		x_close(t_vars *data);
 // void	count_moves(t_game_info *game);
 
 //free
-void	handle_error(t_game_info *game, int file, char *message);
+void	handle_error(t_game_info *game, int file, char *message, char *str);
 void	free_map(t_game_info *game);
 void	free_check_map(char **map);
 void	free_array(char **array);
