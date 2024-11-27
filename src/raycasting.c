@@ -3,26 +3,35 @@
 void  ft_first_hor_step(t_game_info *game, int ray_x_dir, int ray_y_dir)
 {
    float   x_step;
-   float   y_first_bord;
-   float   y_first_step;
+   int   y_next_bord;
+   float   y_step;
+   int   y_col;
 
 
    //look for horisontal intersection:
-   y_first_bord = game->p_position_row * CELL_SIZE;
-   if (ray_y_dir == 1)
-     y_first_bord += CELL_SIZE;
-   y_first_step = fabs(y_first_bord - game->player.y);
+   y_col = game->ray_y / CELL_SIZE;
+   if (ray_x_dir == 1)
+     y_col += 1;
+   else
+      y_col += 1;
+   y_next_bord = y_col * CELL_SIZE;
+   y_step = fabsf(y_next_bord - game->ray_y);
    //TODO: change first_ray_angle to the actual ray angle
-   x_step = fabs(y_first_step / tan(game->first_ray_angle));
+   x_step = fabs(y_step / tan(game->first_ray_angle));
+   game->ray_y = game->ray_y + ray_y_dir * y_step;
    game->ray_x = game->ray_x + ray_x_dir * x_step;
-   game->ray_y = game->ray_y + ray_y_dir * y_first_step;
+   printf("y_next_bord %d\n", y_next_bord);
+   //printf("p_position_raw: %d\n", game->p_position_row);
+   printf("first_ray_angle %f\n", game->first_ray_angle);
+   printf("x_step %f\n", x_step);
+   printf("y_step %f\n", y_step);
 }
 
 void  ft_first_vert_step(t_game_info *game, int ray_x_dir, int ray_y_dir)
 {
    float   y_step;
    int   x_next_bord;
-   float   x_first_step;
+   float   x_step;
    int   x_col;
 
 
@@ -30,17 +39,14 @@ void  ft_first_vert_step(t_game_info *game, int ray_x_dir, int ray_y_dir)
    x_col = game->ray_x / CELL_SIZE;
    if (ray_x_dir == 1)
      x_col += 1;
+   else
+      x_col += 1;
    x_next_bord = x_col * CELL_SIZE;
-   x_first_step = fabsf(x_next_bord - game->ray_x);
+   x_step = fabsf(x_next_bord - game->ray_x);
    //TODO: change first_ray_angle to the actual ray angle
-   y_step = fabs(x_first_step * tan(game->first_ray_angle));
-   game->ray_x = game->ray_x + ray_x_dir * x_first_step;
+   y_step = fabs(x_step * tan(game->first_ray_angle));
+   game->ray_x = game->ray_x + ray_x_dir * x_step;
    game->ray_y = game->ray_y + ray_y_dir * y_step;
-   printf("x_first_bord %d\n", x_next_bord);
-   printf("p_position_raw: %d\n", game->p_position_row);
-   printf("first_ray_angle %f\n", game->first_ray_angle);
-   printf("x_step %f\n", x_first_step);
-   printf("y_step %f\n", y_step);
 }
 
 int  ft_check_hor_intersection(t_game_info   *game, int ray_y_dir)
@@ -60,7 +66,7 @@ int  ft_check_hor_intersection(t_game_info   *game, int ray_y_dir)
 
 int  ft_check_vert_intersection(t_game_info   *game, int ray_x_dir)
 {
-   //check horisontal intersection:
+   //check vetical intersection:
    int col;
    int row;
 
@@ -127,12 +133,12 @@ int   ft_find_intersections(t_game_info  *game)
    while (!hit_wall)
      {
       write(1, "__________\n", 11);
-      //   ft_first_hor_step(game, ray_x_dir, ray_y_dir);
-         ft_first_vert_step(game, ray_x_dir, ray_y_dir);
-      //   if (ft_check_hor_intersection(game, ray_y_dir))
-      //      hit_wall = 1;
-          if (ft_check_vert_intersection(game, ray_x_dir))
-            hit_wall = 1;
+         ft_first_hor_step(game, ray_x_dir, ray_y_dir);
+//         ft_first_vert_step(game, ray_x_dir, ray_y_dir);
+        if (ft_check_hor_intersection(game, ray_y_dir))
+           hit_wall = 1;
+         //  if (ft_check_vert_intersection(game, ray_x_dir))
+         //    hit_wall = 1;
       write(1, "__________\n", 11);
      }
    correct_len = ft_len_def(game);
