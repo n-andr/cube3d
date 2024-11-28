@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 18:20:26 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:23:38 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	player_position_check(t_game_info *game)
 	if (p_check(game) != 1)
 	{
 		write(1, "Error\nThe map must contain 1 player starting position\n", 54);
-		free_map(game);
+		free_array(game->map);
 		exit(EXIT_FAILURE);
 	}
 	return ;
@@ -96,7 +96,7 @@ void	characters_check(t_game_info *game)
 				write(1, "Error\nForbiden character\n", 25);
 				//debug
 				printf("row = %d, col = %d, char = %c\n", row, col, game->map[row][col]);
-				free_map(game);
+				free_array(game->map);
 				exit(EXIT_FAILURE);
 			}
 			col++;

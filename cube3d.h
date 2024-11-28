@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/27 16:46:24 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:23:20 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,12 @@ int		x_close(t_vars *data);
 
 //free
 void	handle_error(t_game_info *game, int file, char *message, char *str);
-void	free_map(t_game_info *game);
-void	free_check_map(char **map);
+// void	free_map(t_game_info *game);
+// void	free_check_map(char **map);
 void	free_array(char **array);
-//int		close_game(t_game_info *game);
+void	free_textures(t_game_info *game);
+int	close_game(t_game_info *game);
+
 
 //libft
 char	*ft_itoa(int n);

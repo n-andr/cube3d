@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 18:15:22 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:18:32 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	is_rectangular(t_game_info *game)
 	if (game->map[0] == NULL)
 	{
 		write(1, "Error\nEmpty map\n", 16);
-		free_map(game);
+		free_array(game->map);
 		exit(EXIT_FAILURE);
 	}
 	while (game->map[i])
@@ -34,7 +34,7 @@ void	is_rectangular(t_game_info *game)
 		else
 		{
 			write(1, "Error\nMap is not rectangular\n", 29);
-			free_map(game);
+			free_array(game->map);
 			exit(EXIT_FAILURE);
 		}
 		game->columns = ft_strlen(game->map[0]);
@@ -84,7 +84,7 @@ void	check_map(t_game_info *game)
 	// if (is_closed(game) != 1) fix this function
 	// {
 	// 	write(1, "Error\nMap is not closed\n", 24);
-	// 	free_map(game);
+	// 	free_array(game->map);
 	// 	exit(EXIT_FAILURE);
 	// }
 	player_position_check(game);
