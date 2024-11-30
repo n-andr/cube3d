@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/27 19:48:07 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:35:19 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <fcntl.h>
 # include <math.h>
+#include <limits.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -55,6 +56,7 @@ typedef struct	s_player
 	int			p_position_row;
 	int			p_position_col;
 	float		p_angle;
+	float		fov_angle;
 }	t_player;
 
 typedef struct	s_ray
@@ -65,7 +67,8 @@ typedef struct	s_ray
 	int		ray_y_dir;
 	float	ray_x;
 	float	ray_y;
-	float	len;
+	int		len;
+	float	angle;
 }	t_ray;
 
 typedef struct s_game_info
@@ -78,10 +81,11 @@ typedef struct s_game_info
 	int			colour;
 	float		delt_angle;
 	float		first_ray_angle;
+	float		epsilon;
 	void		*mlx;
 	void		*window;
 	t_textures	textures;
-    t_player	player;
+	t_player	player;
 }	t_game_info;
 
 typedef struct s_daa

@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/27 19:57:50 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:35:10 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ft_set_values(t_game_info *game)
 	game->player.x = CELL_SIZE * game->player.p_position_col + CELL_SIZE / 2;
 	game->player.y = CELL_SIZE * game->player.p_position_row + CELL_SIZE / 2;
 	game->delt_angle = M_PI / (3 * S_W);
+	game->player.fov_angle = M_PI / 3;
+	game->epsilon = 0.00001;
 }
 
 int	main(int argc, char **argv)
@@ -74,7 +76,7 @@ int	main(int argc, char **argv)
 	}
 	ft_set_values(&game);
 	ft_raycasting(&game);
-	ft_game_draw(&game);
+	//ft_game_draw(&game);
 	return (0);
 }
 
