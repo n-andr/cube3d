@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/28 17:18:32 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/02 03:01:36 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,6 @@ int	check_first_last_row(char *row)
 	return (1);
 }
 
-// chage this function complitly to check the border of any shape
-int	is_closed(t_game_info *game)
-{
-	int	i;
-
-	if (!check_first_last_row(game->map[0])
-		|| !check_first_last_row(game->map[game->rows - 1]))
-		return (0);
-	i = 1;
-	while (i < game->rows - 1)
-	{
-		if (game->map[i][0] != '1' ||
-			game->map[i][game->columns - 1] != '1')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 void	check_map(t_game_info *game)
 {
@@ -81,12 +63,20 @@ void	check_map(t_game_info *game)
 	// do we need to check the size of the map?
 	// can we handle any size?
 
-	// if (is_closed(game) != 1) fix this function
-	// {
-	// 	write(1, "Error\nMap is not closed\n", 24);
-	// 	free_array(game->map);
-	// 	exit(EXIT_FAILURE);
-	// }
+
+	
 	player_position_check(game);
-	//characters_check(game);
+	characters_check(game);
+	if (map_is_one_piece(game) == false)
+	{
+		write(1, "Error\nMap is fragmented\n", 24);
+		close_game(game);
+		exit(EXIT_FAILURE);
+	}
+	if (is_closed(game) == false)
+	{
+		write(1, "Error\nMap is not closed\n", 24);
+		close_game(game);
+		exit(EXIT_FAILURE);
+	}
 }

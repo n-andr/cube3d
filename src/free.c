@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/28 17:23:12 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/02 03:20:04 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ int	close_game(t_game_info *game)
 {
 	free_array(game->map); //free map array
 	free_textures(game); //free images
-	mlx_destroy_window(game->mlx, game->window);
-	mlx_destroy_display(game->mlx);
+	if (game->mlx != NULL && game->window != NULL)
+		mlx_destroy_window(game->mlx, game->window);
+	if (game->mlx != NULL)
+		mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	exit(0);
 	return (0);
