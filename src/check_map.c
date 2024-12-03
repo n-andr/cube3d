@@ -3,64 +3,137 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 02:19:23 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:41:26 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
 
-// checking the border of any shape
-bool	check_eight_neighbours(char **map,int i, int j)
+
+/**
+ * check_eight_neighbours - Validates the neighbors of a cell in a 2D map.
+ *
+ * @map: A pointer to the 2D character array representing the map.
+ * @i: The row index of the cell being checked.
+ * @j: The column index of the cell being checked.
+ *
+ * Description:
+ * This function checks if a specific cell at position (i, j) in a 2D map is 
+ * surrounded by any invalid neighbors ('0'). It handles boundary conditions:
+ * - If the cell is in the first row (i == 0), it checks relevant neighbors below
+ *   and to the sides.
+ * - If the cell is in the last row (map[i + 1] == NULL), it checks neighbors 
+ *   above and to the sides.
+ * - For cells not on the boundary, it checks all 8 surrounding neighbors 
+ *   (above, below, left, right, and diagonals).
+ *
+ * Return:
+ * - false: If any neighbor is invalid ('0').
+ * - true: If all neighbors are valid.
+ */
+
+bool	check_eight_neighbours(char **map, int i, int j)
 {
-	if (i == 0 && j == 0 )
+	if (i == 0)
 	{
+		if (j != 0)
+		{
+			if (map[i + 1][j - 1]  == '0'
+				|| map[i][j - 1]  == '0')	
+				return (false);
+		}
 		if (map[i + 1][j]  == '0'
 			|| map[i + 1][j + 1]  == '0'
-			|| map[i][j + 1]  == '0')
-			return (false);
-	}
-	else if (i == 0)
-	{
-		if (map[i + 1][j]  == '0'
-			|| map[i + 1][j - 1]  == '0'
-			|| map[i + 1][j + 1]  == '0'
-			|| map[i][j - 1]  == '0'
-			|| map[i][j + 1]  == '0')	
-			return (false);
-	}
-	else if (map[i + 1] == NULL && j == 0)
-	{
-		if (map[i - 1][j]  == '0'
-			|| map[i - 1][j + 1]  == '0'
 			|| map[i][j + 1]  == '0')
 			return (false);
 	}
 	else if (map[i + 1] == NULL)
 	{
+		if (j != 0)
+		{
+			if (map[i - 1][j - 1]  == '0'
+				|| map[i][j - 1]  == '0')
+				return (false);
+		}
 		if (map[i - 1][j]  == '0'
-			|| map[i - 1][j - 1]  == '0'
 			|| map[i - 1][j + 1]  == '0'
-			|| map[i][j - 1]  == '0'
 			|| map[i][j + 1]  == '0')
 			return (false);
 	}
 	else 
 	{
+		if (j != 0)
+		{
+			if(map[i - 1][j - 1]  == '0'
+				|| map[i + 1][j - 1]  == '0'
+				|| map[i][j - 1]  == '0')
+				return (false);
+		}
 		if (map[i - 1][j]  == '0'
-			|| map[i - 1][j - 1]  == '0'
 			|| map[i - 1][j + 1]  == '0'
 			|| map[i + 1][j]  == '0'
-			|| map[i + 1][j - 1]  == '0'
 			|| map[i + 1][j + 1]  == '0'
-			|| map[i][j - 1]  == '0'
 			|| map[i][j + 1]  == '0')
-			return (false);s
+			return (false);
 	}
 	return (true);
 }
+
+
+
+
+// checking the border of any shape
+// bool	check_eight_neighbours(char **map,int i, int j)
+// {
+// 	if (i == 0 && j == 0 )
+// 	{
+// 		if (map[i + 1][j]  == '0'
+// 			|| map[i + 1][j + 1]  == '0'
+// 			|| map[i][j + 1]  == '0')
+// 			return (false);
+// 	}
+// 	else if (i == 0)
+// 	{
+// 		if (map[i + 1][j]  == '0'
+// 			|| map[i + 1][j - 1]  == '0'
+// 			|| map[i + 1][j + 1]  == '0'
+// 			|| map[i][j - 1]  == '0'
+// 			|| map[i][j + 1]  == '0')	
+// 			return (false);
+// 	}
+// 	else if (map[i + 1] == NULL && j == 0)
+// 	{
+// 		if (map[i - 1][j]  == '0'
+// 			|| map[i - 1][j + 1]  == '0'
+// 			|| map[i][j + 1]  == '0')
+// 			return (false);
+// 	}
+// 	else if (map[i + 1] == NULL)
+// 	{
+// 		if (map[i - 1][j]  == '0'
+// 			|| map[i - 1][j - 1]  == '0'
+// 			|| map[i - 1][j + 1]  == '0'
+// 			|| map[i][j - 1]  == '0'
+// 			|| map[i][j + 1]  == '0')
+// 			return (false);
+// 	}
+// 	else 
+// 	{
+// 		if (map[i - 1][j]  == '0'
+// 			|| map[i - 1][j - 1]  == '0'
+// 			|| map[i - 1][j + 1]  == '0'
+// 			|| map[i + 1][j]  == '0'
+// 			|| map[i + 1][j - 1]  == '0'
+// 			|| map[i + 1][j + 1]  == '0'
+// 			|| map[i][j - 1]  == '0'
+// 			|| map[i][j + 1]  == '0')
+// 			return (false);
+// 	}
+// 	return (true);
+// }
 
 
 bool	first_last_row_col(char **map)
