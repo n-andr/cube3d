@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 16:57:07 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/02 03:22:51 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:05:00 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,77 +73,4 @@ bool	map_is_one_piece(t_game_info *game)
 	}
 	free_array(map);
 	return (true);
-}
-
-bool	check_eight_neighbours(char **map,int i, int j)
-{
-	if (map[i - 1][j] == '0' 
-		|| map[i - 1][j - 1]  == '0'
-		|| map[i - 1][j + 1]  == '0'
-		|| map[i + 1][j]  == '0'
-		|| map[i + 1][j - 1]  == '0'
-		|| map[i + 1][j + 1]  == '0'
-		|| map[i][j - 1]  == '0'
-		|| map[i][j + 1]  == '0')
-		return (false);
-	return (true);
-
-}
-bool	first_last_row_col(char **map)
-{
-	int i;
-
-	i = 0;
-	while (map[i])
-	{
-		if (map[i][0] == '0' || map[i][ft_strlen(map[i])] == '0')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-bool	is_closed(t_game_info *game)
-{
-	int i;
-	int j;
-	char **map;
-
-	i = 0;
-	map = malloc(sizeof(char *) * (game->rows + 1));
-	if (map == NULL)
-		return (false); // do malloc error handling
-	while (i < game->rows)
-	{
-		map[i] = ft_calloc(game->columns + 1, sizeof(char)); // use calloc instead of malloc
-		if (map[i] == NULL)
-			return (false); // do malloc error handling
-		ft_strlcpy(map[i], game->map[i], (ft_strlen(game->map[i]) + 1));
-		i ++;
-	}
-	map[i] = NULL;
-	i = 0;
-	map[game->p_position_row][game->p_position_col] = '0';
-
-	if (first_last_row_col(map) == false)
-	{
-		free_array(map);
-		return (false);
-	}
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == ' ' && check_eight_neighbours(map, i, j) == false)
-			{
-				free_array(map);
-				return (false);
-			}
-			j++;
-		}
-		i++;
-	}
-	free_array(map);
-	return (true);
-	
 }
