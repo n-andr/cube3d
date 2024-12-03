@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:28 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/21 18:15:30 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:13:01 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,8 @@ int	read_map(char *map_adress, t_game_info *game)
 	file = open(map_adress, O_RDONLY);
 	if (file == -1)
 	{
-		write(1, "Error\nFile does not exist\n", 26);
 		close(file);
-		exit(EXIT_FAILURE);
+		handle_error(game, file, "Error\nFile does not exist\n", NULL);
 	}
 	separate_textures_and_map(game, file, map_adress);
 	close(file);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/02 02:56:06 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:18:01 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_new_line(t_game_info *game)
 	while (game->map[i])
 	{
 		if (game->map[i][0] == '\n')
-			handle_error(game, -1, "Error\nEmpty line in the map\n", NULL); // don't return an error here, do it in the unclosed contour check
+			handle_error(game, -1, "Error\nEmpty line in of after the map\n", NULL); // don't return an error here, do it in the unclosed contour check
 		j = 0;
 		while (game->map[i][j])
 		{
@@ -104,6 +104,6 @@ void		separate_textures_and_map(t_game_info *game, int file, char *file_adress)
 	close(file);
 	save_map(game, file_adress);
 	//check_map(game);
-	get_textures(game, file_adress); //does not work yet
+	get_textures(game, file_adress);
 
 }

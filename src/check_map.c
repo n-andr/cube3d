@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 16:41:26 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:30:05 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,25 +212,20 @@ bool	is_closed(t_game_info *game)
 
 void	check_map(t_game_info *game)
 {
-	//is_rectangular(game);
-
 	// do we need to check the size of the map?
 	// can we handle any size?
-
-
 	
-	player_position_check(game);
 	characters_check(game);
+	player_position_check(game);
+
 	if (map_is_one_piece(game) == false)
 	{
 		write(1, "Error\nMap is fragmented\n", 24);
-		close_game(game);
-		exit(EXIT_FAILURE);
+		close_game(game, EXIT_FAILURE);
 	}
 	if (is_closed(game) == false)
 	{
 		write(1, "Error\nMap is not closed\n", 24);
-		close_game(game);
-		exit(EXIT_FAILURE);
+		close_game(game, EXIT_FAILURE);
 	}
 }

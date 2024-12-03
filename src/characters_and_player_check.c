@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   characters_and_player_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/02 01:45:06 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:32:48 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void	player_position_check(t_game_info *game)
 	if (p_check(game) != 1)
 	{
 		write(1, "Error\nThe map must contain 1 player starting position\n", 54);
-		free_array(game->map);
-		exit(EXIT_FAILURE);
+		close_game(game, EXIT_FAILURE);
 	}
 	return ;
 }
@@ -91,12 +90,8 @@ void	characters_check(t_game_info *game)
 				&& game->map[row][col] != ' '
 				&& game->map[row][col] != '0')
 			{
-				write(1, "Error\nForbiden character\n", 25);
-				//debug
-				printf("row = %d, col = %d, char = %c (ascii: %d)\n", row, col, game->map[row][col], game->map[row][col]); //delete
-				//end debug
-				free_array(game->map);
-				exit(EXIT_FAILURE);
+				write(1, "Error\nForbiden character in the map or textures are after the map\n", 66);
+				close_game(game, EXIT_FAILURE);
 			}
 			col++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/02 03:20:04 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/03 20:10:07 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,13 @@
 void	handle_error(t_game_info *game, int file, char *message, char *str)
 {
 	write(1, message, ft_strlen(message));
+	if (str)
+		free(str);
 	if (file != -1)
 	{
 		close(file);
 	}
-	if (str)
-		free(str);
-	if (game->map)
-	{
-		free_array(game->map);
-	}
-	//mlx_destroy_window(game->mlx, game->window);
-	//free(game->mlx);
-	if (game->mlx != NULL)
-		{
-			mlx_destroy_display(game->mlx);
-			free(game->mlx);
-		}
-	exit(EXIT_FAILURE);
+	close_game(game, EXIT_FAILURE);
 }
 
 // void	free_map(t_game_info *game)
@@ -64,13 +53,17 @@ void	free_array(char **array)
 
 void	free_textures(t_game_info *game)
 {
-	mlx_destroy_image(game->mlx, game->textures.north);
-	mlx_destroy_image(game->mlx, game->textures.south);
-	mlx_destroy_image(game->mlx, game->textures.east);
-	mlx_destroy_image(game->mlx, game->textures.west);
+	if (game->textures.north)
+		mlx_destroy_image(game->mlx, game->textures.north);
+	if (game->textures.south)
+		mlx_destroy_image(game->mlx, game->textures.south);
+	if (game->textures.east)
+		mlx_destroy_image(game->mlx, game->textures.east);
+	if (game->textures.west)
+		mlx_destroy_image(game->mlx, game->textures.west);
 }
 
-int	close_game(t_game_info *game)
+int	close_game(t_game_info *game, int exit_status)
 {
 	free_array(game->map); //free map array
 	free_textures(game); //free images
@@ -79,6 +72,6 @@ int	close_game(t_game_info *game)
 	if (game->mlx != NULL)
 		mlx_destroy_display(game->mlx);
 	free(game->mlx);
-	exit(0);
+	exit(exit_status);
 	return (0);
 }
