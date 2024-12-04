@@ -17,9 +17,14 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
    hor->y_step = fabsf(y_next_bord - hor->ray_y);
    final_angle = fabsf(hor->angle - game->player.p_angle);
    printf("FINAL ANGLE %f\n", final_angle);
-   hor->x_step = hor->y_step / tan(fabs(hor->angle - game->player.p_angle));
+   if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
+      || (game->player.p_angle > 5 * M_PI / 4 && game->player.p_angle < 7 * M_PI / 4))
+      hor->x_step = hor->y_step * tan(final_angle);
+   else
+      hor->x_step = hor->y_step / tan(final_angle);
    hor->ray_y = hor->ray_y + hor->ray_y_dir * hor->y_step;
-   hor->ray_x = hor->ray_x + hor->ray_x_dir * hor->x_step;
+   if (!final_angle)
+      hor->ray_x = hor->ray_x + hor->ray_x_dir * hor->x_step;
    hor_len = sqrt(hor->x_step * hor->x_step + hor->y_step * hor->y_step);
    printf("y_next_bord %d\n", y_next_bord);
    //printf("p_position_raw: %d\n", game->p_position_row);
@@ -48,12 +53,20 @@ float  ft_vert_step(t_game_info *game, t_ray *vert)
    //TODO: change first_ray_angle to the actual ray angle
    printf("vert: ray angle: %f\n", vert->angle);
    printf("player angle: %f\n", game->player.p_angle);
-   final_angle = fabsf(vert->angle - game->player.p_angle);
-
-   vert->y_step = vert->x_step * tan(final_angle);
+   //if (vert->ray_x_dir == )
+   // if (game->player.p_angle)
+   //    final_angle = fabsf(vert->angle - game->player.p_angle);
+   // else
+      final_angle = fabsf(vert->angle - game->player.p_angle);
+   if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
+      || (game->player.p_angle > 5 * M_PI / 4 && game->player.p_angle < 7 * M_PI / 4))
+      vert->y_step = vert->x_step / tan(final_angle);
+   else
+      vert->y_step = vert->x_step * tan(final_angle);
    printf("final angle: %f\n", final_angle);
    vert->ray_x = vert->ray_x + vert->ray_x_dir * vert->x_step;
-   vert->ray_y = vert->ray_y + vert->ray_y_dir * vert->y_step;
+   if (final_angle)
+      vert->ray_y = vert->ray_y + vert->ray_y_dir * vert->y_step;
    printf("vert x_step: %f\n", vert->x_step);
    printf("vert y_step: %f\n", vert->y_step);
    vert_len = sqrt(vert->x_step * vert->x_step + vert->y_step * vert->y_step);
@@ -71,7 +84,6 @@ int  ft_check_hor_intersection(t_game_info   *game, t_ray *hor)
    write(1, "lol\n", 4);
    col = hor->ray_x / CELL_SIZE;
    row = (hor->ray_y + hor->ray_y_dir) / CELL_SIZE;
-   printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);
    printf("ray_x %f\n", hor->ray_x);
    printf("ray_y %f\n", hor->ray_y);
    printf("col: %d\n", col);
@@ -80,11 +92,13 @@ int  ft_check_hor_intersection(t_game_info   *game, t_ray *hor)
    printf("game->player.p_angle %f\n", game->player.p_angle);
    printf("fabs(hor->angle - game->player.p_angle) %f\n", fabs(hor->angle - game->player.p_angle));
    printf("game->epsilon: %f\n", game->epsilon);
-   if (col >= game->columns || row >= game->rows || fabs(hor->angle - game->player.p_angle) < game->epsilon || (col < 0 || row < 0))
+   if (col >= game->columns || row >= game->rows || (col < 0 || row < 0))
+      //|| hor->angle == 0 || hor->angle == M_PI)
    {
       write (1, "caught\n", 7);
       return (-1);
    }
+   printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);
    if (game->map[row][col] == '1')
       return (1);
    else
@@ -101,12 +115,12 @@ int  ft_check_vert_intersection(t_game_info   *game, t_ray *vert)
    row = vert->ray_y / CELL_SIZE;
    printf("col: %d\n", col);
    printf("row: %d\n", row);
-   //printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);
    printf("vert: ray_x %f\n", vert->ray_x);
    printf("vert: ray_y %f\n", vert->ray_y);
    printf("rows: %d\n", game->rows);
     if ((col >= game->columns || row >= game->rows) || (col < 0 || row < 0))
        return (-1);
+   printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);
    if (game->map[row][col] == '1')
    {
       write(1, "pup\n", 4);
@@ -255,11 +269,11 @@ void  ft_print_int_arr(int *arr, int num)
    printf("p_cell_x: %d\n",game->player.x);
    printf("p_cell_y: %d\n",game->player.y);
 
-    i = 0;
-   // while (i < S_W)
-   // {
-      ray_len[i] = ft_find_intersections(game, 260);
-   //    i++;
-   // }
-   //ft_print_int_arr(ray_len, S_W);
+     i = 0;
+   while (i < S_W)
+   {
+      ray_len[i] = ft_find_intersections(game, i);
+      i++;
+   }
+   ft_print_int_arr(ray_len, S_W / 1);
 }
