@@ -23,7 +23,7 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
    else
       hor->x_step = hor->y_step / tan(final_angle);
    hor->ray_y = hor->ray_y + hor->ray_y_dir * hor->y_step;
-   if (!final_angle)
+   if (final_angle)
       hor->ray_x = hor->ray_x + hor->ray_x_dir * hor->x_step;
    hor_len = sqrt(hor->x_step * hor->x_step + hor->y_step * hor->y_step);
    printf("y_next_bord %d\n", y_next_bord);
@@ -53,11 +53,7 @@ float  ft_vert_step(t_game_info *game, t_ray *vert)
    //TODO: change first_ray_angle to the actual ray angle
    printf("vert: ray angle: %f\n", vert->angle);
    printf("player angle: %f\n", game->player.p_angle);
-   //if (vert->ray_x_dir == )
-   // if (game->player.p_angle)
-   //    final_angle = fabsf(vert->angle - game->player.p_angle);
-   // else
-      final_angle = fabsf(vert->angle - game->player.p_angle);
+   final_angle = fabsf(vert->angle - game->player.p_angle);
    if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
       || (game->player.p_angle > 5 * M_PI / 4 && game->player.p_angle < 7 * M_PI / 4))
       vert->y_step = vert->x_step / tan(final_angle);
@@ -131,7 +127,7 @@ int  ft_check_vert_intersection(t_game_info   *game, t_ray *vert)
 
 void ft_ray_dir_def(t_ray  *hor, t_ray *vert)
 {
-   if (hor->angle > 0 && hor->angle < M_PI)
+   if ((hor->angle > 0 && hor->angle < M_PI) || hor->angle > 2 * M_PI)
    {
       hor->ray_y_dir = 1;
       vert->ray_y_dir = 1;
@@ -164,6 +160,8 @@ int   ft_len_def(t_game_info *game, t_ray *ray)
   float angle;
 
    del_x = fabs(ray->ray_x - game->player.x);
+   printf("ray_x ff: %f\n", ray->ray_x);
+   printf("player ff: %d\n", game->player.x);
    del_y = fabs(ray->ray_y - game->player.y);
    angle = game->player.p_angle - ray->angle;
    len = sqrt(del_x * del_x + del_y * del_y);
@@ -184,7 +182,7 @@ int   ft_find_intersections(t_game_info  *game, int i)
 
    delta_angle = (game->player.fov_angle * i) / S_W;
    hor.angle = game->first_ray_angle + delta_angle;
-   vert.angle = game->first_ray_angle + delta_angle;
+   vert.angle = hor.angle;
    vert.len = 0;
    hor.len = 0;
    hor.ray_x = game->player.x;
@@ -210,7 +208,7 @@ int   ft_find_intersections(t_game_info  *game, int i)
         }
 
      }
-     if (intersection == -1)
+     if (intersection == -1 || vert.len < 0)
          vert.len = INT_MAX;
    while (1)
       {
@@ -225,7 +223,7 @@ int   ft_find_intersections(t_game_info  *game, int i)
             break ;
          }
       }
-   if (intersection == -1)
+   if (intersection == -1 || hor.len < 0)
          hor.len = INT_MAX;
    printf("hor.len: %d\n", hor.len);
    printf("vert.len: %d\n", vert.len);
@@ -275,5 +273,5 @@ void  ft_print_int_arr(int *arr, int num)
       ray_len[i] = ft_find_intersections(game, i);
       i++;
    }
-   ft_print_int_arr(ray_len, S_W / 1);
+   ft_print_int_arr(ray_len, S_W / 1.3);
 }
