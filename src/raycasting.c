@@ -24,7 +24,11 @@ void  ft_first_step(t_game_info *game, int ray_x_dir, int ray_y_dir)
    printf("ray_x %f\n", game->ray_x);
    printf("ray_y %f\n", game->ray_y);
    //look for vertical intersection:
-   ray_x_dir = ray_x_dir;
+
+   //Nata's changes:
+   //i comented that line out because of compilation error
+   //ray_x_dir = ray_x_dir; 
+   //end Nata's changes
 }
 
 int  ft_check_intersection(t_game_info   *game, int ray_x_dir, int ray_y_dir)
@@ -41,7 +45,12 @@ int  ft_check_intersection(t_game_info   *game, int ray_x_dir, int ray_y_dir)
    else
       return (0);
    //check vertical intersection:
-   ray_x_dir = ray_x_dir;
+
+   //Nata's changes:
+   //i comented that line out because of compilation error
+   //ray_x_dir = ray_x_dir;
+   printf("ray_x_dir %d\n", ray_x_dir); //delete
+   //end Nata's changes
 }
 
 void ft_ray_dir_def(t_game_info *game, int  *ray_x_dir, int  *ray_y_dir)

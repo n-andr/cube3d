@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/26 00:26:22 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:51:48 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_game(t_game_info *game)
 	game->img_width = 500;
 	game->img_height = 338;
 	game->mlx = mlx_init();
+	game->window = NULL;
 	// game->window = mlx_new_window(game->mlx, 640, 480, "Hello world!");
 	game->textures.north = NULL;
 	game->textures.south = NULL;

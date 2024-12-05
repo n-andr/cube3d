@@ -12,3 +12,7 @@ assets/.DS_Store
 .vscode/
 
 src/.DS_Store
+
+*.a
+
+.DS_Store
