@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   scene_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/25 18:10:55 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:18:01 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
+
 void	handle_new_line(t_game_info *game)
 {
 	int	i;
@@ -20,7 +21,7 @@ void	handle_new_line(t_game_info *game)
 	while (game->map[i])
 	{
 		if (game->map[i][0] == '\n')
-			handle_error(game, -1, "Error\nEmpty line in the map\n"); // don't return an error here, do it in the unclosed contour check
+			handle_error(game, -1, "Error\nEmpty line in of after the map\n", NULL); // don't return an error here, do it in the unclosed contour check
 		j = 0;
 		while (game->map[i][j])
 		{
@@ -57,16 +58,17 @@ void	save_map(t_game_info *game, char *file_adress)
 	file = open(file_adress, O_RDONLY);
 	game->map = malloc(sizeof(char *) * (game->rows + 1));
 	if (game->map == NULL)
-		handle_error(game, file, "Error\nMemory allocation failed\n");
+		handle_error(game, file, "Error\nMemory allocation failed\n", NULL);
 	i = 0;
 	line = get_next_line(file);
 	line = skipp_textures(line, file);
 	while (line)
 	{
-		game->map[i] = malloc(sizeof(char) * ft_strlen(line) + 1); // use calloc instead of malloc
+		game->map[i] = ft_calloc(game->columns + 1, sizeof(char)); // use calloc instead of malloc
 		if (game->map[i] == NULL)
-			handle_error(game, file, "Error\nMemory allocation failed\n");
+			handle_error(game, file, "Error\nMemory allocation failed\n", line);
 		ft_strlcpy(game->map[i], line, (ft_strlen(line) + 1));
+		ft_memset(game->map[i] + ft_strlen(line), ' ', game->columns - ft_strlen(line));
 		free(line);
 		i++;
 		line = get_next_line(file);
@@ -75,11 +77,11 @@ void	save_map(t_game_info *game, char *file_adress)
 	close(file);
 	handle_new_line(game);
 	// debug
-	// printf("save map function result:\n");
-	// for (int i = 0; i < game->rows; i++)
-	// {
-	// 	printf("%s\n", game->map[i]);
-	// }
+	printf("save map function result:\n");
+	for (int i = 0; i < game->rows; i++)
+	{
+		printf("%s\n", game->map[i]);
+	}
 	// end debug
 }
 
@@ -102,6 +104,6 @@ void		separate_textures_and_map(t_game_info *game, int file, char *file_adress)
 	close(file);
 	save_map(game, file_adress);
 	//check_map(game);
-	get_textures(game, file_adress); //does not work yet
+	get_textures(game, file_adress);
 
 }

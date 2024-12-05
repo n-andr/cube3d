@@ -38,6 +38,7 @@ void	init_game(t_game_info *game)
 	game->img_width = 500;
 	game->img_height = 338;
 	game->mlx = mlx_init();
+	game->window = NULL;
 	// game->window = mlx_new_window(game->mlx, 640, 480, "Hello world!");
 	game->textures.north = NULL;
 	game->textures.south = NULL;

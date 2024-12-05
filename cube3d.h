@@ -118,6 +118,8 @@ void	get_textures(t_game_info *game, char *file_adress);
 void	characters_check(t_game_info *game);
 void	player_position_check(t_game_info *game);
 int		p_check(t_game_info *game);
+bool	map_is_one_piece(t_game_info *game);
+bool	is_closed(t_game_info *game);
 
 //math
 void    ft_raycasting(t_game_info	*game);
@@ -134,12 +136,12 @@ int		x_close(t_vars *data);
 // void	count_moves(t_game_info *game);
 
 //free
-void	handle_error(t_game_info *game, int file, char *message);
-void	free_map(t_game_info *game);
-void	free_check_map(char **map);
-//int		close_game(t_game_info *game);
+void	handle_error(t_game_info *game, int file, char *message, char *str);
+// void	free_map(t_game_info *game);
+// void	free_check_map(char **map);
+void	free_array(char **array);
+void	free_textures(t_game_info *game);
+int	close_game(t_game_info *game, int exit_status);
 
-//libft
-char	*ft_itoa(int n);
 
 #endif

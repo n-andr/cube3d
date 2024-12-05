@@ -14,12 +14,10 @@
 Check map contetn to consider map valid
 
 p_check - returnes the number of N,S,E or W for the player’s start position found in the map (must be 1)
-c_chrck - returnes the numberof C found in the map (must be 1 or more)
-e_check - returnes the numberof E found in the map (must be 1)
-characters_check - checks if there are only C 0 P E 1 characters,
+characters_check - checks if there are only 0, ,1,N,S,E or W characters,
 if no exits the program
-elements_check - checks if P C E are a valid number
 */
+
 #include "../cube3d.h"
 
 int	p_check(t_game_info *game)
@@ -68,8 +66,7 @@ void	player_position_check(t_game_info *game)
 	if (p_check(game) != 1)
 	{
 		write(1, "Error\nThe map must contain 1 player starting position\n", 54);
-		free_map(game);
-		exit(EXIT_FAILURE);
+		close_game(game, EXIT_FAILURE);
 	}
 	return ;
 }
@@ -83,7 +80,7 @@ void	characters_check(t_game_info *game)
 	while (row < game->rows)
 	{
 		col = 0;
-		while (col < game->columns)
+		while (game->map[row][col] != '\0')
 		{
 			if (game->map[row][col] != 'N'
 				&& game->map[row][col] != 'E'
@@ -93,11 +90,8 @@ void	characters_check(t_game_info *game)
 				&& game->map[row][col] != ' '
 				&& game->map[row][col] != '0')
 			{
-				write(1, "Error\nForbiden character\n", 25);
-				//debug
-				printf("row = %d, col = %d, char = %c\n", row, col, game->map[row][col]);
-				free_map(game);
-				exit(EXIT_FAILURE);
+				write(1, "Error\nForbiden character in the map or textures are after the map\n", 66);
+				close_game(game, EXIT_FAILURE);
 			}
 			col++;
 		}
