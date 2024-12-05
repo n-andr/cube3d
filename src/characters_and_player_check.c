@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   characters_and_player_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 19:32:48 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:49:33 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ int	p_check(t_game_info *game)
 				|| (game->map[row][col] == 'E') || (game->map[row][col] == 'W'))
 			{
 				p_count ++;
-				game->p_position_row = row;
-				game->p_position_col = col;
+				game->player.p_position_row = row;
+				game->player.p_position_col = col;
 				if (game->map[row][col] == 'N')
-				game->p_angle = (3 * M_PI)/2;
+				game->player.p_angle = (3 * M_PI)/2;
 				else if (game->map[row][col] == 'S')
-				game->p_angle = M_PI/2;
+				game->player.p_angle = M_PI/2;
 				else if (game->map[row][col] == 'E')
-				game->p_angle = 0;
+				game->player.p_angle = 2 * M_PI;
 				else if (game->map[row][col] == 'W')
-				game->p_angle = M_PI;
+				game->player.p_angle = M_PI;
 			}
 			col++;
 		}

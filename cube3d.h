@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 20:10:23 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:35:19 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # include <fcntl.h>
 # include <math.h>
+#include <limits.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -48,39 +49,43 @@ typedef struct s_textures
 	int		ceiling;
 }	t_textures;
 
-typedef struct	v_player_coord
+typedef struct	s_player
 {
 	int			x;
 	int			y;
-}	t_player_coord;
+	int			p_position_row;
+	int			p_position_col;
+	float		p_angle;
+	float		fov_angle;
+}	t_player;
 
-
-typedef struct	s_wall_coord
+typedef struct	s_ray
 {
-	int			x;
-	int			y;
-}	t_wall_coord;
+	float	x_step;
+	float	y_step;
+	int		ray_x_dir;
+	int		ray_y_dir;
+	float	ray_x;
+	float	ray_y;
+	int		len;
+	float	angle;
+}	t_ray;
 
 typedef struct s_game_info
 {
 	char		**map;
 	int			rows;
 	int			columns;
-	int			p_position_row;
-	int			p_position_col;
-	float		ray_x;
-	float		ray_y;
 	int			img_width;
 	int			img_height;
 	int			colour;
 	float		delt_angle;
-	float		p_angle;
 	float		first_ray_angle;
+	float		epsilon;
 	void		*mlx;
 	void		*window;
 	t_textures	textures;
-    t_player_coord	player;
-    t_wall_coord	wall;
+	t_player	player;
 }	t_game_info;
 
 typedef struct s_daa
