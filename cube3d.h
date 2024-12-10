@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/30 20:35:19 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:55:16 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef CUBE3D_H
+# define CUBE3D_H
 // # define IMG_WIDTH 32
 // # define IMG_HEIGHT 32
 # define CELL_SIZE 64
@@ -88,7 +88,7 @@ typedef struct s_game_info
 	t_player	player;
 }	t_game_info;
 
-typedef struct s_daa
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;

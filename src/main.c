@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/30 20:35:10 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:11:58 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 	}
 	ft_set_values(&game);
 	ft_raycasting(&game);
-	//ft_game_draw(&game);
+	ft_game_draw(&game);
 	return (0);
 }
 
