@@ -244,14 +244,19 @@ int   ft_find_intersections(t_game_info  *game, int i)
 }
 
 
-void  ft_print_int_arr(int *arr, int num)
+void  ft_print_lines_data(t_line *lines, int num)
 {
    int i;
 
    i = 0;
    while (i < num)
    {
-      printf("cor_len[%d] : %d\n", i, arr[i]);
+      //printf("hight[%d]: %d\n", i, lines[i].high);
+      printf("x[%d]: %d\n", i, lines[i].x);
+      printf("y1[%d]: %d\n", i, lines[i].y1);
+      printf("y2[%d]: %d\n", i, lines[i].y2);
+      printf("hight[%d]: %d\n", i, lines[i].high);
+      printf("correct_len[%d]: %d\n", i, lines[i].correct_len);
       i++;
    }
 }
@@ -259,9 +264,10 @@ void  ft_print_int_arr(int *arr, int num)
    void  ft_raycasting(t_game_info	*game)
 {
    int   i;
-   int *ray_len;
+   t_line *lines;
 
-   ray_len = (int *)malloc(S_W * sizeof(int));
+
+   lines = (t_line *)malloc(S_W * sizeof(t_line));
    printf("pi: %f\n", M_PI);
    printf("angle: %f\n",game->player.p_angle);
    printf("p_cell_x: %d\n",game->player.x);
@@ -270,8 +276,20 @@ void  ft_print_int_arr(int *arr, int num)
      i = 0;
    while (i < S_W)
    {
-      ray_len[i] = ft_find_intersections(game, i);
+      lines[i].correct_len = ft_find_intersections(game, i);
+      //printf("cor len: %d\n", correct_len);
+      lines[i].high = ((S_H / 2) * CELL_SIZE) / lines[i].correct_len;
+      lines[i].x = i;
+      lines[i].y1 = (S_H - lines[i].high) / 2;
+      if (lines[i].y1 < 0)
+           lines[i].y1 = 0;
+      lines[i].y2 = S_H - lines[i].y1;
+      if (lines[i].y2 > S_H)
+           lines[i].y2 = S_H;
+      lines[i].color = 16744703;
+      //printf("high: %d\n", high);
       i++;
    }
-   ft_print_int_arr(ray_len, S_W / 1.3);
+   ft_print_lines_data(lines, S_W / 2);
+   ft_game_draw(game, lines);
 }

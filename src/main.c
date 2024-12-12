@@ -77,7 +77,6 @@ int	main(int argc, char **argv)
 	}
 	ft_set_values(&game);
 	ft_raycasting(&game);
-	//ft_game_draw(&game);
 	return (0);
 }
 

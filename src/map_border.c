@@ -65,7 +65,7 @@ bool	map_is_one_piece(t_game_info *game)
 		i ++;
 	}
 	map[i] = NULL;
-	flood_fill(map, game->p_position_row, game->p_position_col, game);
+	flood_fill(map, game->player.p_position_row, game->player.p_position_col, game);
 	if ( one_fragment(map) == false)
 	{
 		free_array(map);

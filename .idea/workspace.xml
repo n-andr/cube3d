@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppFormatterOtherPage" type="string" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="Finished with finding the first wall horizontal intersection, counted the length of the ray, created structures for player and the intersection coordinates for properly drawing">
+      <change beforePath="$PROJECT_DIR$/cube3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cube3d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/kek.cub" beforeDir="false" afterPath="$PROJECT_DIR$/map/kek.cub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/check_map.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/check_map.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/draw.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/draw.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libft/libft.a" beforeDir="false" afterPath="$PROJECT_DIR$/src/libft/libft.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map_border.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/map_border.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/raycasting.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/raycasting.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tghnx1&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/n-andr/cube3d.git&quot;,
+    &quot;accountId&quot;: &quot;1f4a532e-dcb3-4b3b-a24f-4b60d6253226&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2p5Q23WnTwRdl3tnc0leJddNNuv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.Makefile.executor&quot;: &quot;Debug&quot;,
+    &quot;C/C++ File.cub3D.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.main.c.executor&quot;: &quot;Debug&quot;,
+    &quot;Makefile Target.all.executor&quot;: &quot;Run&quot;,
+    &quot;Makefile Target.fclean.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;raycasting&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tghnx1/Desktop/42/cube3d/build/cub3D&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="C/C++ File.main.c">
+    <configuration name="cub3D" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" nameIsGenerated="true" PROGRAM_PARAMS="kek.cub" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$/src" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cube3d" TARGET_NAME="cub3D" CONFIG_NAME="cub3D">
+      <option name="sourceFile" value="$PROJECT_DIR$/build/cub3D" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main.c" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cube3d" TARGET_NAME="main.c" CONFIG_NAME="main.c">
+      <option name="sourceFile" value="src/main.c" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="all" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <configuration name="fclean" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="fclean" workingDirectory="" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="C/C++ File.cub3D" />
+      <item itemvalue="C/C++ File.main.c" />
+      <item itemvalue="Makefile Target.all" />
+      <item itemvalue="Makefile Target.fclean" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="C/C++ File.main.c" />
+        <item itemvalue="Makefile Target.all" />
+        <item itemvalue="Makefile Target.fclean" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23726.102" />
+        <option value="bundled-python-sdk-5e1850174b45-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23726.102" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="" />
+      <created>1732053248916</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732053248916</updated>
+      <workItem from="1732053251157" duration="451000" />
+      <workItem from="1732102970627" duration="4302000" />
+      <workItem from="1732113300627" duration="139000" />
+      <workItem from="1732113455688" duration="460000" />
+      <workItem from="1732113936178" duration="526000" />
+      <workItem from="1732544801332" duration="19737000" />
+      <workItem from="1733842059374" duration="2252000" />
+      <workItem from="1733844525904" duration="14489000" />
+    </task>
+    <task id="LOCAL-00001" summary="Finished with finding the first wall horizontal intersection, counted the length of the ray, created structures for player and the intersection coordinates for properly drawing">
+      <option name="closed" value="true" />
+      <created>1732559318135</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732559318135</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Finished with finding the first wall horizontal intersection, counted the length of the ray, created structures for player and the intersection coordinates for properly drawing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished with finding the first wall horizontal intersection, counted the length of the ray, created structures for player and the intersection coordinates for properly drawing" />
+  </component>
+</project>

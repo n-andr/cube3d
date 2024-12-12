@@ -184,7 +184,7 @@ bool	is_closed(t_game_info *game)
 	}
 	map[i] = NULL;
 	i = 0;
-	map[game->p_position_row][game->p_position_col] = '0';
+	map[game->player.p_position_row][game->player.p_position_col] = '0';
 
 	if (first_last_row_col(map) == false)
 	{

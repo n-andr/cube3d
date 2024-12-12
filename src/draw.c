@@ -1,60 +1,34 @@
 #include "../cube3d.h"
 
-void	ft_dot_draw(t_data *data, t_game_info	*game)
+void	ft_dot_draw(t_data *data, t_line lines)
 {
     char	*dst;
 
-    dst = data->addr + (game->player.x * data->line_length
-            + game->player.y * (data->bits_per_pixel / 8));
-    *(unsigned int *)dst = game->colour;
+    	printf("x: %d, y1: %d\n", lines.x, lines.y1);
+    dst = data->addr + (lines.x * data->line_length
+            + lines.y1 * (data->bits_per_pixel / 8));
+    *(unsigned int *)dst = lines.color;
 }
 
-//void	line_draw(t_data *img, int mat1, int mat2, t_game_info *game)
-//{
-//	int				k;
-//	int				i;
-//	t_coordinate	xy;
-//	int				y_comp;
-//
-//	if (mat1.x > mat2.x)
-//		return (matrix_line_draw(&(*img), mat2, mat1, colour));
-//	if (mat1.x == mat2.x)
-//		return (draw_vertikal(&(*img), mat1, mat2.y, colour));
-//	i = 1;
-//	xy.y = mat1.y;
-//	xy.x = mat1.x;
-//	k = (100 * (mat2.y - mat1.y) / (mat2.x - mat1.x));
-//	while (abs(xy.x - mat2.x) > 0)
-//	{
-//		y_comp = 2 * xy.y + 1;
-//		if (y_comp - xy.y > 0)
-//			draw_vertikal(&(*img), xy, (100 * mat1.y + k * i) / 100, colour);
-//		xy.y = (100 * mat1.y + k * i++) / 100;
-//		xy.x++;
-//	}
-//	my_mlx_pixel_put(&(*img), xy, colour);
-//	return ;
-//}
-//
-//void	draw_vertikal(t_data *img, t_coordinate xy, int y2, int colour)
-//{
-//	while (abs(xy.y - y2) > 0)
-//	{
-//		my_mlx_pixel_put(&(*img), xy, colour);
-//		if (xy.y < y2)
-//			xy.y++;
-//		else
-//			xy.y--;
-//	}
-//	my_mlx_pixel_put(&(*img), xy, colour);
-//	return ;
-//}
+void	ft_draw_vertikal(t_data *img, t_line lines)
+{
 
-void	ft_game_draw(t_game_info	*game)
+	while (abs(lines.y1 - lines.y2) > 0)
+	{
+        if (lines.high < S_H)
+			ft_dot_draw(&(*img), lines);
+		lines.y1 = lines.y1 + 1;
+	}
+	ft_dot_draw(&(*img), lines);
+	return ;
+}
+
+void	ft_game_draw(t_game_info	*game, t_line *lines)
 {
     void			*mlx_win;
     t_data			img;
     t_vars			data;
+    int				i;
 
     data.game = game;
     mlx_win = mlx_new_window(game->mlx, S_W,
@@ -62,8 +36,13 @@ void	ft_game_draw(t_game_info	*game)
     img.img = mlx_new_image(game->mlx, S_W, S_H);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
             &img.line_length, &img.endian);
-    ft_dot_draw(&img, game);
-    //ft_line_draw(&img, game);
+    //ft_dot_draw(&img, game);
+    i = 0;
+    while (i < S_W)
+      {
+    	ft_draw_vertikal(&img, lines[i]);
+        i++;
+      }
     mlx_put_image_to_window(game->mlx, mlx_win, img.img, 0, 0);
     data.mlx = game->mlx;
     data.win = mlx_win;
