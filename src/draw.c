@@ -125,6 +125,20 @@ void	render_map(t_game_info *game)
 
 // top-down view
 
+int	key_pressed(int key, t_game_info *game)
+{
+	if (key == 119 || key == 115 \
+	|| key == 100 || key == 97)
+	{
+		move_p(game, key);
+	}
+	else if (key == 65307)
+	{
+		close_game(game, 0);
+	}
+	return (0);
+}
+
 void	ft_game_draw(t_game_info *game)
 {
 
@@ -137,7 +151,7 @@ void	ft_game_draw(t_game_info *game)
 
 	// mlx_put_image_to_window(game->mlx, mlx_win, img.img, 0, 0);
 
-	mlx_key_hook(game->window, handle_input, &game);
+	mlx_key_hook(game->window, key_pressed, &game);
 	mlx_hook(game->window, 17, 1L << 17, x_close, &game);
 	mlx_loop(game->mlx);
 }

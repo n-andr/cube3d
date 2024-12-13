@@ -273,5 +273,5 @@ void  ft_print_int_arr(int *arr, int num)
       ray_len[i] = ft_find_intersections(game, i);
       i++;
    }
-   ft_print_int_arr(ray_len, S_W / 1.3);
+   //ft_print_int_arr(ray_len, S_W / 1.3);
 }

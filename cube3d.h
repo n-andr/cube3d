@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/10 19:55:16 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/13 00:52:52 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,11 @@ int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
+void	render_map(t_game_info *game);
+
 
 // //moves
-// void	move_p(t_game_info *game, int keycode);
+void	move_p(t_game_info *game, int key);
 // void	count_moves(t_game_info *game);
 
 //free

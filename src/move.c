@@ -6,12 +6,11 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/11 00:53:50 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/13 01:02:14 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
-
 
 
 // move on button press
@@ -43,8 +42,6 @@ void	move_up(t_game_info *game, int row, int col)
 	}
 	else if (game->map[row - 1][col] == '1')
 		return ;
-
-	//load_graphics(game); // update visuals and minimap
 }
 
 void	move_down(t_game_info *game, int row, int col)
@@ -56,8 +53,6 @@ void	move_down(t_game_info *game, int row, int col)
 	}
 	else if (game->map[row + 1][col] == '1')
 		return ;
-
-	//load_graphics(game); // update visuals and minimap
 }
 
 void	move_left(t_game_info *game, int row, int col)
@@ -69,7 +64,6 @@ void	move_left(t_game_info *game, int row, int col)
 	}
 	else if (game->map[row][col - 1] == '1')
 		return ;
-	//load_graphics(game); // update visuals and minimap
 }
 
 void	move_right(t_game_info *game, int row, int col)
@@ -82,12 +76,14 @@ void	move_right(t_game_info *game, int row, int col)
 	}
 	else if (game->map[row][col + 1] == '1')
 		return ;
-	//load_graphics(game); // update visuals and minimap
 }
 
 void	move_p(t_game_info *game, int key)
 {
 	// find_p(game, game->map);
+	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col);
+	printf("x: %d, y: %d \n", game->player.x,  game->player.y);
+	printf("angle: %f \n", game->player.p_angle);
 	if (key == 119)
 	{
 		move_up(game, game->player.p_position_row, game->player.p_position_col);
@@ -104,6 +100,8 @@ void	move_p(t_game_info *game, int key)
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
+	render_map(game); // update visuals and minimap
+
 }
 
 
