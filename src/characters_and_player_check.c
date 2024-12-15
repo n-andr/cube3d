@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   characters_and_player_check.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/27 19:49:33 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/12/16 00:12:42 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int	p_check(t_game_info *game)
 		col = 0;
 		row ++;
 	}
+	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("angle: %f \n", game->player.p_angle); //debug
     // game->first_ray_angle = game->p_angle - M_PI/6;
     // game->p_cell_x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
     // game->p_cell_y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;

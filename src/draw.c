@@ -115,7 +115,7 @@ void	render_map(t_game_info *game)
 				draw_cell(x, y, 0x696969, game); // gray for walls
 			else if (game->map[y][x] == '0')
 				draw_cell(x, y, 0xFFFFFF, game); // White for empty spaces
-			else if (game->map[y][x] == 'N')
+			else if (game->map[y][x] == 'N' || game->map[y][x] == 'S' || game->map[y][x] == 'E' || game->map[y][x] == 'W')
 				draw_cell(x, y, 0x00FF00, game); // Green for player
 			x++;
 		}
@@ -141,17 +141,19 @@ int	key_pressed(int key, t_game_info *game)
 
 void	ft_game_draw(t_game_info *game)
 {
-
+	
     game->window = mlx_new_window(game->mlx, game->columns * (CELL_SIZE / 2), game->rows * (CELL_SIZE / 2), "Cube3D");
 	// img.img = mlx_new_image(game->mlx, game.columns * CELL_SIZE, game.rows * CELL_SIZE);
 	// //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 	// 		&img.line_length, &img.endian);
 
 	render_map(game);
-
+	printf("(before move) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("(before move) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("(before move) angle: %f \n", game->player.p_angle); //debug
 	// mlx_put_image_to_window(game->mlx, mlx_win, img.img, 0, 0);
 
-	mlx_key_hook(game->window, key_pressed, &game);
+	mlx_key_hook(game->window, key_pressed, game);
 	mlx_hook(game->window, 17, 1L << 17, x_close, &game);
 	mlx_loop(game->mlx);
 }

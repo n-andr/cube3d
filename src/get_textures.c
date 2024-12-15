@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/27 19:51:26 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/12/16 00:04:45 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void assign_texture(t_game_info *game, char *line, void **texture, int file)
 	line = line + i;
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
-	printf("line: %s\n", line); //delete
+	//printf("line: %s\n", line); //delete
 	if (*texture != NULL)
 		handle_error(game, file, "Error\nSame texture listed more than once\n", line);
 	if (is_xmp(line) == true)
@@ -97,7 +97,7 @@ int	colour_to_int(char *line, t_game_info *game, int file)
 	b = 0;
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
-	printf("line: %s\n", line); //delete
+	//printf("line: %s\n", line); //delete
 	rgb = ft_split(line, ',');
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL || rgb[3] != NULL
 		|| digits_only_str(rgb[0]) == false || digits_only_str(rgb[1]) == false
@@ -131,8 +131,8 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 		handle_error(game, file, "Error\nSame colour listed more than once\n", line);
 	rgb = colour_to_int(line, game, file);
 	*colour = rgb;
-	printf("colour: %d\n", *colour); //delete
-	printf("colour hex: %x\n", *colour); //delete
+	//printf("colour: %d\n", *colour); //delete
+	//printf("colour hex: %x\n", *colour); //delete
 	// should colour be assigned using mlx function or int value is enough?
 	//colour = mlx_get_color_value(game->mlx, rgb);
 	}

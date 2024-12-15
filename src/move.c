@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/13 01:02:14 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/16 00:26:17 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	move_up(t_game_info *game, int row, int col)
 	{
 		game->map[row][col] = '0';
 		game->map[row - 1][col] = 'N'; //do i need to update the player position on the map?
+		game->player.p_position_row = row - 1;
+		game->player.p_position_col = col;
 	}
 	else if (game->map[row - 1][col] == '1')
 		return ;
@@ -50,6 +52,8 @@ void	move_down(t_game_info *game, int row, int col)
 	{
 		game->map[row][col] = '0';
 		game->map[row + 1][col] = 'N'; //do i need to update the player position on the map?
+		game->player.p_position_row = row + 1;
+		game->player.p_position_col = col;
 	}
 	else if (game->map[row + 1][col] == '1')
 		return ;
@@ -61,6 +65,8 @@ void	move_left(t_game_info *game, int row, int col)
 	{
 		game->map[row][col] = '0';
 		game->map[row][col - 1] = 'N'; //do i need to update the player position on the map?
+		game->player.p_position_row = row;
+		game->player.p_position_col = col - 1;
 	}
 	else if (game->map[row][col - 1] == '1')
 		return ;
@@ -72,6 +78,8 @@ void	move_right(t_game_info *game, int row, int col)
 	{
 		game->map[row][col] = '0';
 		game->map[row][col + 1] = 'N'; //do i need to update the player position on the map?
+		game->player.p_position_row = row;
+		game->player.p_position_col = col + 1;
 	
 	}
 	else if (game->map[row][col + 1] == '1')
@@ -81,9 +89,7 @@ void	move_right(t_game_info *game, int row, int col)
 void	move_p(t_game_info *game, int key)
 {
 	// find_p(game, game->map);
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col);
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y);
-	printf("angle: %f \n", game->player.p_angle);
+	
 	if (key == 119)
 	{
 		move_up(game, game->player.p_position_row, game->player.p_position_col);
@@ -100,6 +106,9 @@ void	move_p(t_game_info *game, int key)
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
+	printf("(after) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("(after) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("(after) angle: %f \n", game->player.p_angle); //debug
 	render_map(game); // update visuals and minimap
 
 }
