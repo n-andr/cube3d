@@ -165,7 +165,7 @@ int   ft_len_def(t_game_info *game, t_ray *ray)
    del_y = fabs(ray->ray_y - game->player.y);
    angle = game->player.p_angle - ray->angle;
    len = sqrt(del_x * del_x + del_y * del_y);
-   correct_len = fabs(len * cos(angle));
+   correct_len = round(fabs(len * cos(angle)));
    printf("del_x: %f, del_y: %f, angle: %f\n", del_x, del_y, angle);
    printf("len: %f\n", len);
    return (correct_len);
@@ -252,10 +252,10 @@ void  ft_print_lines_data(t_line *lines, int num)
    while (i < num)
    {
       //printf("hight[%d]: %d\n", i, lines[i].high);
-      printf("x[%d]: %d\n", i, lines[i].x);
-      printf("y1[%d]: %d\n", i, lines[i].y1);
-      printf("y2[%d]: %d\n", i, lines[i].y2);
-      printf("hight[%d]: %d\n", i, lines[i].high);
+      //printf("x[%d]: %d\n", i, lines[i].x);
+      //printf("y1[%d]: %d\n", i, lines[i].y1);
+      //printf("y2[%d]: %d\n", i, lines[i].y2);
+      //printf("hight[%d]: %d\n", i, lines[i].high);
       printf("correct_len[%d]: %d\n", i, lines[i].correct_len);
       i++;
    }
