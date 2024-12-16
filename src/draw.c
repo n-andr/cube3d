@@ -4,7 +4,7 @@ void	ft_dot_draw(t_data *data, t_line lines)
 {
     char	*dst;
 
-    	printf("x: %d, y1: %d\n", lines.x, lines.y1);
+    	//printf("x: %d, y1: %d\n", lines.x, lines.y1);
     dst = data->addr + (lines.y1 * data->line_length
             + lines.x * (data->bits_per_pixel / 8));
     *(unsigned int *)dst = lines.color;
@@ -36,7 +36,6 @@ void	ft_game_draw(t_game_info	*game, t_line *lines)
     img.img = mlx_new_image(game->mlx, S_W, S_H);
     img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
             &img.line_length, &img.endian);
-    //ft_dot_draw(&img, game);
     i = 0;
     while (i < S_W)
       {
