@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/16 01:39:22 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:13:54 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	move_up(t_game_info *game, int p_row, int p_col)
 		game->map[p_row][p_col] = '0';
 		game->map[new_row][p_col] = 'N'; //do i need to update the player position on the map?
 		game->player.p_position_row = new_row;
+		game->player.y = new_y;
 	}
 	else if (game->map[new_row][p_col] != '1')
 		game->player.y = new_y;
@@ -62,6 +63,7 @@ void	move_down(t_game_info *game, int p_row, int p_col)
 		game->map[p_row][p_col] = '0';
 		game->map[new_row][p_col] = 'N'; //do i need to update the player position on the map?
 		game->player.p_position_row = new_row;
+		game->player.y = new_y;
 	}
 	else if (game->map[new_row][p_col] != '1')
 		game->player.y = new_y;
@@ -79,6 +81,7 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 		game->map[p_row][p_col] = '0';
 		game->map[p_row][new_col] = 'N'; //do i need to update the player position on the map?
 		game->player.p_position_col = new_col;
+		game->player.x = new_x;
 	}
 	else if (game->map[p_row][new_col] != '1')
 		game->player.x = new_x;
@@ -96,6 +99,7 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 		game->map[p_row][p_col] = '0';
 		game->map[p_row][new_col] = 'N'; //do i need to update the player position on the map?
 		game->player.p_position_col = new_col;
+		game->player.x = new_x;
 	}
 	else if (game->map[p_row][new_col] != '1')
 		game->player.x = new_x;

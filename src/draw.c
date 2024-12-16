@@ -83,19 +83,43 @@ void	draw_cell(int x, int y, int color, t_game_info *game)
 	int	start_x;
 	int	start_y;
 
-	start_x = x * (CELL_SIZE / 2);
-	start_y = y * (CELL_SIZE / 2);
+	start_x = x * MINI_CELL_SIZE;
+	start_y = y * MINI_CELL_SIZE;
 	i = 0;
-	while (i < (CELL_SIZE / 2))
+	while (i < MINI_CELL_SIZE)
 	{
 		j = 0;
-		while (j < (CELL_SIZE / 2))
+		while (j < MINI_CELL_SIZE)
 		{
 			mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
 			j++;
 		}
 		i++;
 	}
+}
+
+void	draw_player(t_game_info *game, int color)
+{
+	int	i;
+	int	j;
+	int	start_x;
+	int	start_y;
+
+	start_x = (game->player.x / (CELL_SIZE / MINI_CELL_SIZE)) - (PLAYER_SIZE / 2);
+	start_y = (game->player.y / (CELL_SIZE / MINI_CELL_SIZE)) - (PLAYER_SIZE / 2);
+	i = 0;
+	while (i < PLAYER_SIZE)
+	{
+		j = 0;
+		while (j < PLAYER_SIZE)
+		{
+			mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
+			j++;
+		}
+		i++;
+	}
+	//printf("mini: start x: %d, start y: %d\n", start_x, start_y);
+	//printf("mini: player center x: %d, player center y: %d\n", (game->player.x / (CELL_SIZE / MINI_CELL_SIZE)), (game->player.y / (CELL_SIZE / MINI_CELL_SIZE)));
 }
 
 void	render_map(t_game_info *game)
@@ -116,15 +140,28 @@ void	render_map(t_game_info *game)
 			else if (game->map[y][x] == '0')
 				draw_cell(x, y, 0xFFFFFF, game); // White for empty spaces
 			else if (game->map[y][x] == 'N' || game->map[y][x] == 'S' || game->map[y][x] == 'E' || game->map[y][x] == 'W')
-				draw_cell(x, y, 0x00FF00, game); // Green for player
+				//draw_cell(x, y, 0x00FF00, game); // Green for player
+				draw_cell(x, y, 0xFFFFFF, game); // White for players cell
 			x++;
 		}
 		y++;
 	}
+	draw_player(game, 0x0000FF); // blue for player position
 }
 
 // top-down view
 
+/*
+119 - W
+115 - S
+100 - D
+97 - A
+
+65361 - left arrow
+65363 - right arrow
+
+65307 - esc
+*/
 int	key_pressed(int key, t_game_info *game)
 {
 	if (key == 119 || key == 115 \
@@ -132,6 +169,10 @@ int	key_pressed(int key, t_game_info *game)
 	{
 		move_p(game, key);
 	}
+	// else if (key == 65361 || key == 65363)
+	// {
+	// 	turn_p(game, key);
+	// }
 	else if (key == 65307)
 	{
 		close_game(game, 0);
@@ -142,7 +183,7 @@ int	key_pressed(int key, t_game_info *game)
 void	ft_game_draw(t_game_info *game)
 {
 	
-    game->window = mlx_new_window(game->mlx, game->columns * (CELL_SIZE / 2), game->rows * (CELL_SIZE / 2), "Cube3D");
+    game->window = mlx_new_window(game->mlx, game->columns * MINI_CELL_SIZE, game->rows * MINI_CELL_SIZE, "Cube3D");
 	// img.img = mlx_new_image(game->mlx, game.columns * CELL_SIZE, game.rows * CELL_SIZE);
 	// //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 	// 		&img.line_length, &img.endian);
