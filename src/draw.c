@@ -5,8 +5,8 @@ void	ft_dot_draw(t_data *data, t_line lines)
     char	*dst;
 
     	printf("x: %d, y1: %d\n", lines.x, lines.y1);
-    dst = data->addr + (lines.x * data->line_length
-            + lines.y1 * (data->bits_per_pixel / 8));
+    dst = data->addr + (lines.y1 * data->line_length
+            + lines.x * (data->bits_per_pixel / 8));
     *(unsigned int *)dst = lines.color;
 }
 

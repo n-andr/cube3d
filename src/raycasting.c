@@ -278,7 +278,8 @@ void  ft_print_lines_data(t_line *lines, int num)
    {
       lines[i].correct_len = ft_find_intersections(game, i);
       //printf("cor len: %d\n", correct_len);
-      lines[i].high = ((S_H / 2) * CELL_SIZE) / lines[i].correct_len;
+      //lines[i].high = ((S_H / 2) * CELL_SIZE) / lines[i].correct_len;
+      lines[i].high = S_H * CELL_SIZE / lines[i].correct_len;
       lines[i].x = i;
       lines[i].y1 = (S_H - lines[i].high) / 2;
       if (lines[i].y1 < 0)
@@ -290,6 +291,6 @@ void  ft_print_lines_data(t_line *lines, int num)
       //printf("high: %d\n", high);
       i++;
    }
-   ft_print_lines_data(lines, S_W / 2);
+   ft_print_lines_data(lines, 100);
    ft_game_draw(game, lines);
 }
