@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/13 00:52:52 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/16 01:45:29 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // # define IMG_WIDTH 32
 // # define IMG_HEIGHT 32
 # define CELL_SIZE 64
+# define STEP_SIZE 16
 # define S_W 1280
 # define S_H 720
 
@@ -135,7 +136,8 @@ void	render_map(t_game_info *game);
 
 // //moves
 void	move_p(t_game_info *game, int key);
-// void	count_moves(t_game_info *game);
+void	turn_p(t_game_info *game, int key)
+
 
 //free
 void	handle_error(t_game_info *game, int file, char *message, char *str);
