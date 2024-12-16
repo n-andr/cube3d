@@ -169,10 +169,10 @@ int	key_pressed(int key, t_game_info *game)
 	{
 		move_p(game, key);
 	}
-	// else if (key == 65361 || key == 65363)
-	// {
-	// 	turn_p(game, key);
-	// }
+	else if (key == 65361 || key == 65363)
+	{
+		turn_p(game, key);
+	}
 	else if (key == 65307)
 	{
 		close_game(game, 0);

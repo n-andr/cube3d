@@ -91,7 +91,7 @@ int  ft_check_hor_intersection(t_game_info   *game, t_ray *hor)
    if (col >= game->columns || row >= game->rows || (col < 0 || row < 0))
       //|| hor->angle == 0 || hor->angle == M_PI)
    {
-      write (1, "caught\n", 7);
+     // write (1, "caught\n", 7);
       return (-1);
    }
 //    printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);

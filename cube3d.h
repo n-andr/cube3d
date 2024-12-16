@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/16 20:34:07 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/16 23:07:00 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define CELL_SIZE 64
 # define MINI_CELL_SIZE 16
 # define STEP_SIZE 16
+# define TURN_ANGLE (2 * M_PI / 24)
+// TURN_ANGLE = 15 degrees
 # define PLAYER_SIZE (MINI_CELL_SIZE / 2)
 # define S_W 1280
 # define S_H 720
