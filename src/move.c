@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/17 01:28:52 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/17 21:02:39 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 
 // move on button press
-// rotate on button press
 // check if the new position is valid
 // if valid update the player position coordinates and the map
 // if not valid do nothing
@@ -141,9 +140,9 @@ void	move_p(t_game_info *game, int key)
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	printf("(after) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("(after) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("(after) angle: %f \n", game->player.p_angle); //debug
+	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("angle: %f \n", game->player.p_angle); //debug
 	render_map(game); // update visuals and minimap
 
 }
