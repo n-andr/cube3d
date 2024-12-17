@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/16 20:13:54 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/17 01:28:52 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,76 +33,92 @@ key == 97 - A
 based on ASCII lowercase
 */
 
-void	move_up(t_game_info *game, int p_row, int p_col)
+void	move_forward(t_game_info *game, int p_row, int p_col)
 {
+	int	new_x;
 	int	new_y;
+	int	new_col;
 	int	new_row;
 
-	new_y = game->player.y - STEP_SIZE;
+	new_x = game->player.x + cos(game->player.p_angle) * STEP_SIZE;
+	new_y = game->player.y + sin(game->player.p_angle) * STEP_SIZE;
 	new_row = new_y / CELL_SIZE;
-	if (new_row < p_row && game->map[new_row][p_col] == '0')
+	new_col = new_x / CELL_SIZE;
+	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
-		game->map[new_row][p_col] = 'N'; //do i need to update the player position on the map?
+		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
+		game->player.x = new_x;
+		game->player.y = new_y;
 		game->player.p_position_row = new_row;
-		game->player.y = new_y;
+		game->player.p_position_col = new_col;
 	}
-	else if (game->map[new_row][p_col] != '1')
-		game->player.y = new_y;
 }
 
-void	move_down(t_game_info *game, int p_row, int p_col)
+void	move_back(t_game_info *game, int p_row, int p_col)
 {
+	int	new_x;
 	int	new_y;
+	int	new_col;
 	int	new_row;
 
-	new_y = game->player.y + STEP_SIZE;
+	new_x = game->player.x - cos(game->player.p_angle) * STEP_SIZE;
+	new_y = game->player.y - sin(game->player.p_angle) * STEP_SIZE;
 	new_row = new_y / CELL_SIZE;
-	if (new_row > p_row && game->map[new_row][p_col] == '0')
+	new_col = new_x / CELL_SIZE;
+	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
-		game->map[new_row][p_col] = 'N'; //do i need to update the player position on the map?
+		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
+		game->player.x = new_x;
+		game->player.y = new_y;
 		game->player.p_position_row = new_row;
-		game->player.y = new_y;
+		game->player.p_position_col = new_col;
 	}
-	else if (game->map[new_row][p_col] != '1')
-		game->player.y = new_y;
 }
 
 void	move_left(t_game_info *game, int p_row, int p_col)
 {
 	int	new_x;
+	int	new_y;
 	int	new_col;
+	int	new_row;
 
-	new_x = game->player.x - STEP_SIZE;
+	new_x = game->player.x + sin(game->player.p_angle) * STEP_SIZE;
+	new_y = game->player.y - cos(game->player.p_angle) * STEP_SIZE;
+	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
-	if (new_col < p_col && game->map[p_row][new_col] == '0')
+	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
-		game->map[p_row][new_col] = 'N'; //do i need to update the player position on the map?
+		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
+		game->player.x = new_x;
+		game->player.y = new_y;
+		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
-		game->player.x = new_x;
 	}
-	else if (game->map[p_row][new_col] != '1')
-		game->player.x = new_x;
 }
 
 void	move_right(t_game_info *game, int p_row, int p_col)
 {
 	int	new_x;
+	int	new_y;
 	int	new_col;
+	int	new_row;
 
-	new_x = game->player.x + STEP_SIZE;
+	new_x = game->player.x - sin(game->player.p_angle) * STEP_SIZE;
+	new_y = game->player.y + cos(game->player.p_angle) * STEP_SIZE;
+	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
-	if (new_col > p_col && game->map[p_row][new_col] == '0')
+	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
-		game->map[p_row][new_col] = 'N'; //do i need to update the player position on the map?
+		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
+		game->player.x = new_x;
+		game->player.y = new_y;
+		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
-		game->player.x = new_x;
 	}
-	else if (game->map[p_row][new_col] != '1')
-		game->player.x = new_x;
 }
 
 void	move_p(t_game_info *game, int key)
@@ -111,11 +127,11 @@ void	move_p(t_game_info *game, int key)
 	
 	if (key == 119)
 	{
-		move_up(game, game->player.p_position_row, game->player.p_position_col);
+		move_forward(game, game->player.p_position_row, game->player.p_position_col);
 	}
 	else if (key == 115)
 	{
-		move_down(game, game->player.p_position_row, game->player.p_position_col);
+		move_back(game, game->player.p_position_row, game->player.p_position_col);
 	}
 	else if (key == 100)
 	{
