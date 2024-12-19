@@ -313,8 +313,8 @@ void  ft_print_lines_data(t_line *lines, int num)
       if (hit_hor_wall)
          lines[i].color -= 10000;
       printf("hit hor: %d\n", hit_hor_wall);
-      if (i == 1034)
-         break;
+    //   if (i == 1034)
+    //      break;
       i++;
    }
    //ft_print_lines_data(lines, 129);
