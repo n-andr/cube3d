@@ -76,6 +76,16 @@ typedef struct	s_ray
 	float	angle;
 }	t_ray;
 
+typedef struct	s_line
+{
+	int	x;
+	int y1;
+	int y2;
+	int color;
+	int	high;
+	int	correct_len;
+}	t_line;
+
 typedef struct s_game_info
 {
 	char		**map;
@@ -130,7 +140,7 @@ bool	is_closed(t_game_info *game);
 void    ft_raycasting(t_game_info	*game);
 
 // graphics
-void	ft_game_draw(t_game_info	*game);
+void	ft_game_draw(t_game_info	*game, t_line *lines);
 int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
