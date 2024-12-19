@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/30 20:35:19 by mkokorev         ###   ########.fr       */
+/*   Updated: 2024/12/17 01:27:20 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef CUBE3D_H
+# define CUBE3D_H
 // # define IMG_WIDTH 32
 // # define IMG_HEIGHT 32
 # define CELL_SIZE 64
+# define MINI_CELL_SIZE 16
+# define STEP_SIZE 16
+# define TURN_ANGLE (2 * M_PI / 24)
+// TURN_ANGLE = 15 degrees
+# define PLAYER_SIZE (MINI_CELL_SIZE / 2)
 # define S_W 1280
 # define S_H 720
 
@@ -88,7 +93,7 @@ typedef struct s_game_info
 	t_player	player;
 }	t_game_info;
 
-typedef struct s_daa
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
@@ -130,10 +135,15 @@ int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
+void	render_map(t_game_info *game);
+void	draw_cell(int x, int y, int color, t_game_info *game);
+void	draw_player(t_game_info *game, int color);
+
 
 // //moves
-// void	move_p(t_game_info *game, int keycode);
-// void	count_moves(t_game_info *game);
+void	move_p(t_game_info *game, int key);
+void	turn_p(t_game_info *game, int key);
+
 
 //free
 void	handle_error(t_game_info *game, int file, char *message, char *str);

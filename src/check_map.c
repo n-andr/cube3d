@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 19:30:05 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:47:38 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,59 +83,6 @@ bool	check_eight_neighbours(char **map, int i, int j)
 }
 
 
-
-
-// checking the border of any shape
-// bool	check_eight_neighbours(char **map,int i, int j)
-// {
-// 	if (i == 0 && j == 0 )
-// 	{
-// 		if (map[i + 1][j]  == '0'
-// 			|| map[i + 1][j + 1]  == '0'
-// 			|| map[i][j + 1]  == '0')
-// 			return (false);
-// 	}
-// 	else if (i == 0)
-// 	{
-// 		if (map[i + 1][j]  == '0'
-// 			|| map[i + 1][j - 1]  == '0'
-// 			|| map[i + 1][j + 1]  == '0'
-// 			|| map[i][j - 1]  == '0'
-// 			|| map[i][j + 1]  == '0')	
-// 			return (false);
-// 	}
-// 	else if (map[i + 1] == NULL && j == 0)
-// 	{
-// 		if (map[i - 1][j]  == '0'
-// 			|| map[i - 1][j + 1]  == '0'
-// 			|| map[i][j + 1]  == '0')
-// 			return (false);
-// 	}
-// 	else if (map[i + 1] == NULL)
-// 	{
-// 		if (map[i - 1][j]  == '0'
-// 			|| map[i - 1][j - 1]  == '0'
-// 			|| map[i - 1][j + 1]  == '0'
-// 			|| map[i][j - 1]  == '0'
-// 			|| map[i][j + 1]  == '0')
-// 			return (false);
-// 	}
-// 	else 
-// 	{
-// 		if (map[i - 1][j]  == '0'
-// 			|| map[i - 1][j - 1]  == '0'
-// 			|| map[i - 1][j + 1]  == '0'
-// 			|| map[i + 1][j]  == '0'
-// 			|| map[i + 1][j - 1]  == '0'
-// 			|| map[i + 1][j + 1]  == '0'
-// 			|| map[i][j - 1]  == '0'
-// 			|| map[i][j + 1]  == '0')
-// 			return (false);
-// 	}
-// 	return (true);
-// }
-
-
 bool	first_last_row_col(char **map)
 {
 	int i;
@@ -164,6 +111,7 @@ bool	first_last_row_col(char **map)
 	}
 	return (true);
 }
+
 bool	is_closed(t_game_info *game)
 {
 	int i;
@@ -184,7 +132,7 @@ bool	is_closed(t_game_info *game)
 	}
 	map[i] = NULL;
 	i = 0;
-	map[game->p_position_row][game->p_position_col] = '0';
+	map[game->player.p_position_row][game->player.p_position_col] = '0';
 
 	if (first_last_row_col(map) == false)
 	{
