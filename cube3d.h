@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/17 01:27:20 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:28:29 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ typedef struct	s_line
 	int	correct_len;
 }	t_line;
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
+
 typedef struct s_game_info
 {
 	char		**map;
@@ -99,18 +108,11 @@ typedef struct s_game_info
 	float		epsilon;
 	void		*mlx;
 	void		*window;
+	t_data		drawing_data;
 	t_textures	textures;
 	t_player	player;
+	t_line		*lines;
 }	t_game_info;
-
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
 
 typedef struct s_vars
 {
@@ -140,7 +142,7 @@ bool	is_closed(t_game_info *game);
 void    ft_raycasting(t_game_info	*game);
 
 // graphics
-void	ft_game_draw(t_game_info	*game, t_line *lines);
+void	ft_game_draw(t_game_info	*game);
 int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
@@ -148,6 +150,7 @@ int		x_close(t_vars *data);
 void	render_map(t_game_info *game);
 void	draw_cell(int x, int y, int color, t_game_info *game);
 void	draw_player(t_game_info *game, int color);
+void	ft_draw_vertikal(t_data *img, t_line lines);
 
 
 // //moves

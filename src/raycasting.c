@@ -317,6 +317,7 @@ void  ft_print_lines_data(t_line *lines, int num)
     //      break;
       i++;
    }
+   game->lines = lines;
    //ft_print_lines_data(lines, 129);
-   ft_game_draw(game, lines);
+   //ft_game_draw(game); //Max
 }
