@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/19 18:38:23 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:53:46 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,7 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 void	move_p(t_game_info *game, int key)
 {
 	// find_p(game, game->map);
-	int i;
-	
+
 	if (key == 119)
 	{
 		move_forward(game, game->player.p_position_row, game->player.p_position_col);
@@ -141,17 +140,9 @@ void	move_p(t_game_info *game, int key)
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	ft_raycasting(game);
-	    i = 0;
-    while (i < S_W)
-      {
-    	ft_draw_vertikal(&game->drawing_data, game->lines[i]);
-        i++;
-      }
 	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
 	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
 	printf("angle: %f \n", game->player.p_angle); //debug
-	render_map(game); // update visuals and minimap
 
 }
 

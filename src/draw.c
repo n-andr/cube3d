@@ -139,6 +139,8 @@ void	render_map(t_game_info *game)
 */
 int	key_pressed(int key, t_game_info *game)
 {
+	int	i;
+
 	if (key == 119 || key == 115 \
 	|| key == 100 || key == 97)
 	{
@@ -152,6 +154,16 @@ int	key_pressed(int key, t_game_info *game)
 	{
 		close_game(game, 0);
 	}
+		ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
+	ft_raycasting(game);
+   	i = 0;
+    while (i < S_W)
+      {
+    	ft_draw_vertikal(&game->drawing_data, game->lines[i]);
+        i++;
+      }
+	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+	render_map(game); // update visuals and minimap
 	return (0);
 }
 
@@ -174,15 +186,15 @@ void	ft_game_draw(t_game_info *game)
     	ft_draw_vertikal(&game->drawing_data, game->lines[i]);
         i++;
       }
-    mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
     // data.mlx = game->mlx;
     // data.win = game->window;
     //data.img = game->drawing_data.img;
     //mlx_key_hook(mlx_win, handle_input, &data);
    // mlx_hook(mlx_win, 17, 1L << 17, x_close, &data);
    // mlx_loop(game->mlx);
-	
-    game->window = mlx_new_window(game->mlx, game->columns * MINI_CELL_SIZE, game->rows * MINI_CELL_SIZE, "Cube3D");
+
+    //game->window = mlx_new_window(game->mlx, game->columns * MINI_CELL_SIZE, game->rows * MINI_CELL_SIZE, "Cube3D");
 	// img.img = mlx_new_image(game->mlx, game.columns * CELL_SIZE, game.rows * CELL_SIZE);
 	// //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 	// 		&img.line_length, &img.endian);
