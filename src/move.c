@@ -39,8 +39,8 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x + cos(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y + sin(game->player.p_angle) * STEP_SIZE;
+	new_x = game->player.x + round(cos(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y + round(sin(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
@@ -61,8 +61,8 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x - cos(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y - sin(game->player.p_angle) * STEP_SIZE;
+	new_x = game->player.x - round(cos(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y - round(sin(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
@@ -83,8 +83,8 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x + sin(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y - cos(game->player.p_angle) * STEP_SIZE;
+	new_x = game->player.x + round(sin(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y - round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
@@ -105,8 +105,8 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x - sin(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y + cos(game->player.p_angle) * STEP_SIZE;
+	new_x = game->player.x - round(sin(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y + round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')

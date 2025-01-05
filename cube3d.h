@@ -30,7 +30,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "mlx.h"
+# include "./mlx/mlx.h"
 # include "mlx/mlx.h"
 # include "src/get_next_line/get_next_line.h"
 # include "src/libft/libft.h"
@@ -84,6 +84,7 @@ typedef struct	s_line
 	int color;
 	int	high;
 	int	correct_len;
+	int	hit_hor_wall;
 }	t_line;
 
 typedef struct s_data
@@ -149,8 +150,7 @@ int		x_close(t_vars *data);
 // void	load_map_graphics(t_game_info *game);
 void	render_map(t_game_info *game);
 void	draw_cell(int x, int y, int color, t_game_info *game);
-void	draw_player(t_game_info *game, int color);
-void	ft_draw_vertikal(t_data *img, t_line lines);
+void	ft_draw_vertikal(t_game_info *game, t_line lines);
 
 
 // //moves
