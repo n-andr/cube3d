@@ -41,7 +41,7 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 
 	new_x = game->player.x + round(cos(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y + round(sin(game->player.p_angle) * STEP_SIZE);
-	new_row = new_y / CELL_SIZE;
+	new_row = (new_y - 1) / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
 	{
@@ -86,7 +86,7 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 	new_x = game->player.x + round(sin(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y - round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
-	new_col = new_x / CELL_SIZE;
+	new_col = (new_x - 1) / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
@@ -140,9 +140,9 @@ void	move_p(t_game_info *game, int key)
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
+	//printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	//printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	//printf("angle: %f \n", game->player.p_angle); //debug
 
 }
 

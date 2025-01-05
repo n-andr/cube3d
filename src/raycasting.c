@@ -74,16 +74,16 @@ int  ft_check_hor_intersection(t_game_info   *game, t_ray *hor)
    int col;
    int row;
 
-   printf("hor_len %d\n", hor->len);
+   //printf("hor_len %d\n", hor->len);
   // write(1, "lol\n", 4);
   // printf("diff angle: %f\n", fabs(hor->angle - game->player.p_angle));
   // write(1, "lol\n", 4);
    col = hor->ray_x / CELL_SIZE;
    row = (hor->ray_y + hor->ray_y_dir) / CELL_SIZE;
-   printf("ray_x %f\n", hor->ray_x);
-   printf("ray_y %f\n", hor->ray_y);
-   printf("col: %d\n", col);
-    printf("row: %d\n", row);
+   //printf("ray_x %f\n", hor->ray_x);
+   //printf("ray_y %f\n", hor->ray_y);
+   //printf("col: %d\n", col);
+    //printf("row: %d\n", row);
    // printf("hor angle: %f\n", hor->angle);
    // printf("game->player.p_angle %f\n", game->player.p_angle);
    // printf("fabs(hor->angle - game->player.p_angle) %f\n", fabs(hor->angle - game->player.p_angle));
@@ -229,10 +229,12 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
          vert.len = INT_MAX;
    lines[i].hit_hor_wall = 0;
    printf("i: %d\n", i);
-   printf("player.x_pos: %d", game->player.x);
-   printf("player.y_pos: %d", game->player.y);
+   printf("player.x_pos: %d\n", game->player.x);
+   printf("player.y_pos: %d\n", game->player.y);
    printf("ver.ray_x %f\n", vert.ray_x);
    printf("ver.ray_y %f\n", vert.ray_y);
+   printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+   printf("x: %d, y: %d \n", game->player.x,  game->player.y);
    if (vert.len < hor.len)
    {
       printf("vert intersection chosen: %d\n", vert.len);
@@ -287,6 +289,7 @@ void  ft_print_lines_data(t_line *lines, int num)
    // printf("p_cell_y: %d\n",game->player.y);
 
      i = 0;
+   //game->player.x -= 16; // move player for debugging
    while (i < S_W)
    {
       lines[i].correct_len = ft_find_intersections(game, i, lines);
@@ -310,5 +313,4 @@ void  ft_print_lines_data(t_line *lines, int num)
    }
    game->lines = lines;
    //ft_print_lines_data(lines, 129);
-   //ft_game_draw(game); //Max
 }
