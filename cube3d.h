@@ -66,12 +66,14 @@ typedef struct	s_player
 
 typedef struct	s_ray
 {
-	float	x_step;
-	float	y_step;
+	float		x_step;
+	float		y_step;
 	int		ray_x_dir;
 	int		ray_y_dir;
-	float	ray_x;
-	float	ray_y;
+	float		ray_x;
+	float		ray_y;
+    int		row;
+    int		col;
 	int		len;
 	float	angle;
 }	t_ray;

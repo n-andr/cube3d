@@ -3,18 +3,23 @@
 float  ft_hor_step(t_game_info *game, t_ray  *hor)
 {
    int   y_next_bord;
-   int   y_col;
    float hor_len;
    float final_angle;
 
    //look for horisontal intersection:
-   y_col = hor->ray_y / CELL_SIZE;
-   if (hor->ray_x_dir == 1)
-     y_col += 1;
+   printf("current hor->row = %d\n", hor->row);
+   hor->row = hor->row + hor->ray_y_dir;
+   if (hor->ray_y_dir == 1)
+   		y_next_bord = hor->row * CELL_SIZE;
    else
-      y_col += 1;
-   y_next_bord = y_col * CELL_SIZE;
-   hor->y_step = fabsf(y_next_bord - hor->ray_y);
+     	y_next_bord = (hor->row + 1) * CELL_SIZE;
+   printf("hor->ray_y_dir = %d\n", hor->ray_y_dir);
+   printf("next hor->row = %d\n", hor->row);
+   printf("player.y = %d\n", game->player.y);
+   printf("hor->ray_y = %f\n", hor->ray_y);
+   printf("y_next_bord = %d\n", y_next_bord);
+   hor->y_step = fabs(y_next_bord - hor->ray_y);
+   printf("hor_y_step = %f\n", hor->y_step);
    final_angle = fabsf(hor->angle - game->player.p_angle);
   //printf("FINAL ANGLE %f\n", final_angle);
    if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
@@ -22,10 +27,14 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
       hor->x_step = hor->y_step * tan(final_angle);
    else
       hor->x_step = hor->y_step / tan(final_angle);
-   hor->ray_y = hor->ray_y + hor->ray_y_dir * hor->y_step;
+   printf("hor_x_step = %f\n", hor->x_step);
+   hor->ray_y = y_next_bord;
    if (final_angle)
       hor->ray_x = hor->ray_x + hor->ray_x_dir * hor->x_step;
+   hor->col = ((hor->ray_x + hor->ray_x_dir) / CELL_SIZE);
    hor_len = sqrt(hor->x_step * hor->x_step + hor->y_step * hor->y_step);
+   printf("next hor->ray_x = %f\n", hor->ray_x);
+   printf("next hor->ray_y = %f\n", hor->ray_y);
   // printf("y_next_bord %d\n", y_next_bord);
    //printf("p_position_raw: %d\n", game->p_position_row);
   // printf("ray_angle %f\n", hor->angle);
@@ -37,91 +46,55 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
 
 float  ft_vert_step(t_game_info *game, t_ray *vert)
 {
-   int   x_next_bord;
-   int   x_col;
    float vert_len;
    float final_angle;
+   int   x_next_bord;
 
    //look for horisontal intersection:
-   x_col = vert->ray_x / CELL_SIZE;
+   vert->col = vert->col + vert->ray_x_dir;
    if (vert->ray_x_dir == 1)
-     x_col += 1;
+   		x_next_bord = vert->col * CELL_SIZE;
    else
-      x_col += 1;
-   x_next_bord = x_col * CELL_SIZE;
+     	x_next_bord = (vert->col + 1) * CELL_SIZE;
    vert->x_step = fabsf(x_next_bord - vert->ray_x);
-   //TODO: change first_ray_angle to the actual ray angle
+   printf("player.x = %d\n", game->player.x);
+   printf("vert->ray_x = %f\n", vert->ray_x);
+   printf("x_next_bord = %d\n", x_next_bord);
+   printf("vert_x_step = %f\n", vert->x_step);
    //printf("vert: ray angle: %f\n", vert->angle);
    //printf("player angle: %f\n", game->player.p_angle);
-   final_angle = fabsf(vert->angle - game->player.p_angle);
+   final_angle = fabs(vert->angle - game->player.p_angle);
    if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
       || (game->player.p_angle > 5 * M_PI / 4 && game->player.p_angle < 7 * M_PI / 4))
       vert->y_step = vert->x_step / tan(final_angle);
    else
       vert->y_step = vert->x_step * tan(final_angle);
+   printf("y_step = %f\n", vert->y_step);
   // printf("final angle: %f\n", final_angle);
-   vert->ray_x = vert->ray_x + vert->ray_x_dir * vert->x_step;
+   vert->ray_x = x_next_bord;
+   printf("next vert->ray_x = %f\n", vert->ray_x);
    if (final_angle)
       vert->ray_y = vert->ray_y + vert->ray_y_dir * vert->y_step;
+   vert->row = ((vert->ray_y + vert->ray_y_dir) / CELL_SIZE);
+  printf("next vert->ray_y = %f\n", vert->ray_y);
   // printf("vert y_step: %f\n", vert->y_step);
   // printf("vert x_step: %f\n", vert->x_step);
    vert_len = sqrt(vert->x_step * vert->x_step + vert->y_step * vert->y_step);
    return (vert_len);
 }
 
-int  ft_check_hor_intersection(t_game_info   *game, t_ray *hor)
+int  ft_check_intersection(t_game_info   *game, t_ray *ray)
 {
-   int col;
-   int row;
-
-   //printf("hor_len %d\n", hor->len);
-  // write(1, "lol\n", 4);
-  // printf("diff angle: %f\n", fabs(hor->angle - game->player.p_angle));
-  // write(1, "lol\n", 4);
-   col = hor->ray_x / CELL_SIZE;
-   row = (hor->ray_y + hor->ray_y_dir) / CELL_SIZE;
-   //printf("ray_x %f\n", hor->ray_x);
-   //printf("ray_y %f\n", hor->ray_y);
-   //printf("col: %d\n", col);
-    //printf("row: %d\n", row);
-   // printf("hor angle: %f\n", hor->angle);
-   // printf("game->player.p_angle %f\n", game->player.p_angle);
-   // printf("fabs(hor->angle - game->player.p_angle) %f\n", fabs(hor->angle - game->player.p_angle));
-   // printf("game->epsilon: %f\n", game->epsilon);
-   if (col >= game->columns || row >= game->rows || (col < 0 || row < 0))
-      //|| hor->angle == 0 || hor->angle == M_PI)
-   {
-    //  write (1, "caught\n", 7);
-      return (-1);
-   }
- //  printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);
-   if (game->map[row][col] == '1')
-      return (1);
-   else
-      return (0);
-}
-
-int  ft_check_vert_intersection(t_game_info   *game, t_ray *vert)
-{
-   //check vetical intersection:
-   int col;
-   int row;
-
-   col = (vert->ray_x + vert->ray_x_dir) / CELL_SIZE;
-   row = vert->ray_y / CELL_SIZE;
-   // printf("col: %d\n", col);
-   // printf("row: %d\n", row);
-   // printf("vert: ray_x %f\n", vert->ray_x);
-   // printf("vert: ray_y %f\n", vert->ray_y);
+    printf("ray_x %f\n", ray->ray_x);
+    printf("ray_y %f\n", ray->ray_y);
+    printf("col: %d\n", ray->col);
+    printf("row: %d\n", ray->row);
    // printf("rows: %d\n", game->rows);
-    if ((col >= game->columns || row >= game->rows) || (col < 0 || row < 0))
+    if ((ray->col >= game->columns || ray->row >= game->rows) || (ray->col < 0 || ray->row < 0))
        return (-1);
-   //printf("game->map[%d][%d]: %d\n", col, row, game->map[row][col]);
-   if (game->map[row][col] == '1')
-   {
-      //write(1, "pup\n", 4);
+   printf("game->map[%d][%d]: %d\n", ray->col, ray->row, game->map[ray->row][ray->col]);
+   if (game->map[ray->row][ray->col] == '1')
       return (1);
-   }
    return (0);
 }
 
@@ -179,7 +152,6 @@ void   ft_hor_vert_intersec_def(t_line *lines, int i)
 
 int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 {
-
    float   correct_len;
    t_ray   hor;
    t_ray   vert;
@@ -195,19 +167,25 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
    hor.ray_y = game->player.y;
    vert.ray_x = game->player.x;
    vert.ray_y = game->player.y;
+   vert.col = game->player.p_position_col;
+   vert.row = game->player.p_position_row;
+   hor.col = game->player.p_position_col;
+   hor.row = game->player.p_position_row;
    ft_ray_dir_def(&hor, &vert);
+   printf("game->player.p_position_row = %d\n", game->player.p_position_row);
+   printf("game->player.p_position_col = %d\n", game->player.p_position_col);
   // printf("fov angle: %f\n", game->player.fov_angle);
   // printf("delta angle: %f\n", delta_angle);
    //printf("current angle: %f\n", hor.angle);
    while (1)
       {
          hor.len += round(ft_hor_step(game, &hor));
-         intersection = ft_check_hor_intersection(game, &hor);
+         intersection = ft_check_intersection(game, &hor);
          if (intersection)
          {
-         //write(1, "_______________\n", 16);
-         //printf("hor intersection: %d\n", hor.len);
-        //write(1, "_______________\n", 16);
+         write(1, "_______________\n", 16);
+         printf("hor intersection: %d\n", hor.len);
+        write(1, "_______________\n", 16);
             break ;
          }
       }
@@ -216,12 +194,13 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
    while (1)
      {
       vert.len += round(ft_vert_step(game, &vert));
-      intersection = ft_check_vert_intersection(game, &vert);
+      printf("i: %d\n", i);
+      intersection = ft_check_intersection(game, &vert);
         if (intersection)
         {
-        //write(1, "_______________\n", 16);
-         //printf("vert intersection: %d\n", vert.len);
-         //write(1, "_______________\n", 16);
+        write(1, "_______________\n", 16);
+         printf("vert intersection: %d\n", vert.len);
+         write(1, "_______________\n", 16);
             break ;
         }
      }
@@ -231,8 +210,6 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
    printf("i: %d\n", i);
    printf("player.x_pos: %d\n", game->player.x);
    printf("player.y_pos: %d\n", game->player.y);
-   printf("ver.ray_x %f\n", vert.ray_x);
-   printf("ver.ray_y %f\n", vert.ray_y);
    printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
    printf("x: %d, y: %d \n", game->player.x,  game->player.y);
    if (vert.len < hor.len)
@@ -289,7 +266,8 @@ void  ft_print_lines_data(t_line *lines, int num)
    // printf("p_cell_y: %d\n",game->player.y);
 
      i = 0;
-   //game->player.x -= 16; // move player for debugging
+     //i = 640;
+   //game->player.x = game->player.x - 16; // move player for debugging
    while (i < S_W)
    {
       lines[i].correct_len = ft_find_intersections(game, i, lines);
