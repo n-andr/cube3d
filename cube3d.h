@@ -68,14 +68,14 @@ typedef struct	s_ray
 {
 	float		x_step;
 	float		y_step;
-	int		ray_x_dir;
-	int		ray_y_dir;
+	int			ray_x_dir;
+	int			ray_y_dir;
 	float		ray_x;
 	float		ray_y;
-    int		row;
-    int		col;
-	int		len;
-	float	angle;
+    int			row;
+    int			col;
+	float		len;
+	float		angle;
 }	t_ray;
 
 typedef struct	s_line
