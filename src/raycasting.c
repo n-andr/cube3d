@@ -3,8 +3,8 @@
 float  ft_hor_step(t_game_info *game, t_ray  *hor)
 {
    float   y_next_bord;
-   float hor_len;
-   float final_angle;
+   int     hor_len;
+   float   final_angle;
 
    //look for horisontal intersection:
    printf("current hor->row = %d\n", hor->row);
@@ -32,7 +32,7 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
    if (final_angle)
       hor->ray_x = hor->ray_x + hor->ray_x_dir * hor->x_step;
    hor->col = (hor->ray_x + hor->ray_x_dir) / CELL_SIZE;
-   hor_len = sqrt(hor->x_step * hor->x_step + hor->y_step * hor->y_step);
+   hor_len = round(sqrt(hor->x_step * hor->x_step + hor->y_step * hor->y_step));
    printf("next hor->ray_x = %f\n", hor->ray_x);
    printf("next hor->ray_y = %f\n", hor->ray_y);
   // printf("y_next_bord %d\n", y_next_bord);
@@ -46,7 +46,7 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
 
 float  ft_vert_step(t_game_info *game, t_ray *vert)
 {
-   float vert_len;
+   int vert_len;
    float final_angle;
    float   x_next_bord;
 
@@ -79,7 +79,7 @@ float  ft_vert_step(t_game_info *game, t_ray *vert)
   printf("next vert->ray_y = %f\n", vert->ray_y);
   // printf("vert y_step: %f\n", vert->y_step);
   // printf("vert x_step: %f\n", vert->x_step);
-   vert_len = sqrt(vert->x_step * vert->x_step + vert->y_step * vert->y_step);
+   vert_len = round(sqrt(vert->x_step * vert->x_step + vert->y_step * vert->y_step));
    return (vert_len);
 }
 

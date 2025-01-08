@@ -74,7 +74,7 @@ typedef struct	s_ray
 	float		ray_y;
     int			row;
     int			col;
-	float		len;
+	int			len;
 	float		angle;
 }	t_ray;
 
