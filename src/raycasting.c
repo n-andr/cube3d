@@ -152,7 +152,7 @@ void   ft_hor_vert_intersec_def(t_line *lines, int i)
 
 int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 {
-   float   correct_len;
+   int   correct_len;
    t_ray   hor;
    t_ray   vert;
    float   delta_angle;
@@ -184,7 +184,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
          if (intersection)
          {
          write(1, "_______________\n", 16);
-         printf("hor intersection: %d\n", hor.len);
+         printf("hor intersection: %f\n", hor.len);
         write(1, "_______________\n", 16);
             break ;
          }
@@ -199,7 +199,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
         if (intersection)
         {
         write(1, "_______________\n", 16);
-         printf("vert intersection: %d\n", vert.len);
+         printf("vert intersection: %f\n", vert.len);
          write(1, "_______________\n", 16);
             break ;
         }
@@ -214,7 +214,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
    printf("x: %d, y: %d \n", game->player.x,  game->player.y);
    if (vert.len < hor.len)
    {
-      printf("vert intersection chosen: %d\n", vert.len);
+      printf("vert intersection chosen: %f\n", vert.len);
       printf("hor.len: %f\n", hor.len);
       correct_len = ft_len_def(game, &vert);
    }
