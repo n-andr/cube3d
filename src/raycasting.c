@@ -31,7 +31,7 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
    hor->ray_y = y_next_bord;
    if (final_angle)
       hor->ray_x = hor->ray_x + hor->ray_x_dir * hor->x_step;
-   hor->col = (hor->ray_x + hor->ray_x_dir) / CELL_SIZE;
+   hor->col = (hor->ray_x + 0.1 * hor->ray_x_dir) / CELL_SIZE;
    hor_len = round(sqrt(hor->x_step * hor->x_step + hor->y_step * hor->y_step));
    printf("next hor->ray_x = %f\n", hor->ray_x);
    printf("next hor->ray_y = %f\n", hor->ray_y);
@@ -75,7 +75,7 @@ float  ft_vert_step(t_game_info *game, t_ray *vert)
    printf("next vert->ray_x = %f\n", vert->ray_x);
    if (final_angle)
       vert->ray_y = vert->ray_y + vert->ray_y_dir * vert->y_step;
-   vert->row = ((vert->ray_y + vert->ray_y_dir) / CELL_SIZE);
+   vert->row = ((vert->ray_y + 0.1 * vert->ray_y_dir) / CELL_SIZE);
   printf("next vert->ray_y = %f\n", vert->ray_y);
   // printf("vert y_step: %f\n", vert->y_step);
   // printf("vert x_step: %f\n", vert->x_step);
@@ -184,7 +184,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
          if (intersection)
          {
          write(1, "_______________\n", 16);
-         printf("hor intersection: %f\n", hor.len);
+         printf("hor intersection: %d\n", hor.len);
         write(1, "_______________\n", 16);
             break ;
          }
@@ -199,7 +199,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
         if (intersection)
         {
         write(1, "_______________\n", 16);
-         printf("vert intersection: %f\n", vert.len);
+         printf("vert intersection: %d\n", vert.len);
          write(1, "_______________\n", 16);
             break ;
         }
@@ -214,14 +214,14 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
    printf("x: %d, y: %d \n", game->player.x,  game->player.y);
    if (vert.len < hor.len)
    {
-      printf("vert intersection chosen: %f\n", vert.len);
-      printf("hor.len: %f\n", hor.len);
+      printf("vert intersection chosen: %d\n", vert.len);
+      printf("hor.len: %d\n", hor.len);
       correct_len = ft_len_def(game, &vert);
    }
    else if (vert.len > hor.len)
    {
-      printf("hor intersection chosen: %f\n", hor.len);
-      printf("vert.len: %f\n", vert.len);
+      printf("hor intersection chosen: %d\n", hor.len);
+      printf("vert.len: %d\n", vert.len);
       correct_len = ft_len_def(game, &hor);
       lines[i].hit_hor_wall = 1;
    }
