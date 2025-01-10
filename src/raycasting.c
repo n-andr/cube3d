@@ -20,8 +20,11 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
    printf("y_next_bord = %f\n", y_next_bord);
    hor->y_step = fabs(y_next_bord - hor->ray_y);
    printf("hor_y_step = %f\n", hor->y_step);
-   final_angle = fabsf(hor->angle - game->player.p_angle);
-  //printf("FINAL ANGLE %f\n", final_angle);
+   printf("hor->angle %f\n", hor->angle);
+   printf("game->player.p_angle %f\n", game->player.p_angle);
+   //final_angle = fabsf(hor->angle - game->player.p_angle);
+   final_angle = fabsf(game->first_ray_angle + game->delt_angle);
+  printf("FINAL ANGLE %f\n", final_angle);
    if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
       || (game->player.p_angle > 5 * M_PI / 4 && game->player.p_angle < 7 * M_PI / 4))
       hor->x_step = hor->y_step * tan(final_angle);
@@ -160,6 +163,8 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 
    delta_angle = (game->player.fov_angle * i) / S_W;
    hor.angle = game->first_ray_angle + delta_angle;
+   printf("i: %d\n", i);
+   printf("delta_angle: %f\n", delta_angle);
    vert.angle = hor.angle;
    vert.len = 0;
    hor.len = 0;
@@ -266,10 +271,10 @@ void  ft_print_lines_data(t_line *lines, int num)
    // printf("p_cell_y: %d\n",game->player.y);
 
      i = 0;
-     //i = 640;
+     i = 640;
    //game->player.x = game->player.x - 16; // move player for debugging
-   while (i < S_W)
-   {
+   //while (i < S_W)
+   //{
       lines[i].correct_len = ft_find_intersections(game, i, lines);
       //printf("cor len: %d\n", correct_len);
       //lines[i].high = ((S_H / 2) * CELL_SIZE) / lines[i].correct_len;
@@ -285,10 +290,10 @@ void  ft_print_lines_data(t_line *lines, int num)
       if (lines[i].hit_hor_wall)
          lines[i].color -= 10000;
       //printf("hit hor: %d\n", lines[i].hit_hor_wall);
-      // if (i == 1019)
-       //   break;
-      i++;
-   }
+      // if (i == 640)
+      //    break;
+      //i++;
+   //}
    game->lines = lines;
    //ft_print_lines_data(lines, 129);
 }
