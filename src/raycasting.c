@@ -258,6 +258,7 @@ void  ft_print_lines_data(t_line *lines, int num)
   // int   hit_hor_wall;
 
 
+   game->first_ray_angle = game->player.p_angle - M_PI / 6;
    lines = (t_line *)malloc(S_W * sizeof(t_line));
    // printf("pi: %f\n", M_PI);
    // printf("angle: %f\n",game->player.p_angle);
