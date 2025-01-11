@@ -17,7 +17,7 @@
 # define CELL_SIZE 64
 # define MINI_CELL_SIZE 16
 # define STEP_SIZE 16
-# define TURN_ANGLE (2 * M_PI / 24)
+# define TURN_ANGLE (M_PI / 24)
 //# define TURN_ANGLE (M_PI / 4)
 // TURN_ANGLE = 15 degrees
 # define PLAYER_SIZE (MINI_CELL_SIZE / 2)

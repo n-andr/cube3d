@@ -1,10 +1,9 @@
 #include "../cube3d.h"
 
-float  ft_hor_step(t_game_info *game, t_ray  *hor)
+int  ft_hor_step(t_game_info *game, t_ray  *hor)
 {
    float   y_next_bord;
    int     hor_len;
-   float   final_angle;
 
    //look for horisontal intersection:
    printf("current hor->row = %d\n", hor->row);
@@ -22,17 +21,14 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
    printf("hor_y_step = %f\n", hor->y_step);
    printf("hor->angle %f\n", hor->angle);
    printf("game->player.p_angle %f\n", game->player.p_angle);
-   //final_angle = fabsf(hor->angle - game->player.p_angle);
-   final_angle = fabsf(game->first_ray_angle + game->delt_angle);
-  printf("FINAL ANGLE %f\n", final_angle);
-   if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
-      || (game->player.p_angle > 5 * M_PI / 4 && game->player.p_angle < 7 * M_PI / 4))
-      hor->x_step = hor->y_step * tan(final_angle);
-   else
-      hor->x_step = hor->y_step / tan(final_angle);
+   //if ((hor->angle > M_PI / 4 && hor->angle < 3 * M_PI / 4)
+   //   || (hor->angle > 5 * M_PI / 4 && hor->angle < 7 * M_PI / 4))
+   //   hor->x_step = fabs(hor->y_step * tan(hor->angle));
+   //else
+   hor->x_step = hor->y_step / fabs(tan(hor->angle));
    printf("hor_x_step = %f\n", hor->x_step);
    hor->ray_y = y_next_bord;
-   if (final_angle)
+   if (hor->angle)
       hor->ray_x = hor->ray_x + hor->ray_x_dir * hor->x_step;
    hor->col = (hor->ray_x + 0.1 * hor->ray_x_dir) / CELL_SIZE;
    hor_len = round(sqrt(hor->x_step * hor->x_step + hor->y_step * hor->y_step));
@@ -47,10 +43,9 @@ float  ft_hor_step(t_game_info *game, t_ray  *hor)
    return (hor_len);
 }
 
-float  ft_vert_step(t_game_info *game, t_ray *vert)
+int  ft_vert_step(t_game_info *game, t_ray *vert)
 {
    int vert_len;
-   float final_angle;
    float   x_next_bord;
 
    //look for horisontal intersection:
@@ -64,19 +59,18 @@ float  ft_vert_step(t_game_info *game, t_ray *vert)
    printf("vert->ray_x = %f\n", vert->ray_x);
    printf("x_next_bord = %f\n", x_next_bord);
    printf("vert_x_step = %f\n", vert->x_step);
-   //printf("vert: ray angle: %f\n", vert->angle);
-   //printf("player angle: %f\n", game->player.p_angle);
-   final_angle = fabs(vert->angle - game->player.p_angle);
-   if ((game->player.p_angle > M_PI / 4 && game->player.p_angle < 3 * M_PI / 4)
-      || (game->player.p_angle > 5 * M_PI / 4 && game->player.p_angle < 7 * M_PI / 4))
-      vert->y_step = vert->x_step / tan(final_angle);
-   else
-      vert->y_step = vert->x_step * tan(final_angle);
+   printf("vert: ray angle: %f\n", vert->angle);
+   printf("player angle: %f\n", game->player.p_angle);
+   //vert->angle = fabsf(game->first_ray_angle + vert->angle);
+   //if ((vert->angle > M_PI / 4 && vert->angle < 3 * M_PI / 4)
+   //   || (vert->angle > 5 * M_PI / 4 && vert->angle < 7 * M_PI / 4))
+   //   vert->y_step = fabs(vert->x_step / tan(vert->angle));
+   //else
+      vert->y_step = vert->x_step * fabs(tan(vert->angle));
    printf("y_step = %f\n", vert->y_step);
-  // printf("final angle: %f\n", final_angle);
    vert->ray_x = x_next_bord;
    printf("next vert->ray_x = %f\n", vert->ray_x);
-   if (final_angle)
+   if (vert->angle)
       vert->ray_y = vert->ray_y + vert->ray_y_dir * vert->y_step;
    vert->row = ((vert->ray_y + 0.1 * vert->ray_y_dir) / CELL_SIZE);
   printf("next vert->ray_y = %f\n", vert->ray_y);
@@ -271,10 +265,11 @@ void  ft_print_lines_data(t_line *lines, int num)
    // printf("p_cell_y: %d\n",game->player.y);
 
      i = 0;
-     i = 640;
+     //i = 640;
+   printf("game->first_ray_angle: %f\n", game->first_ray_angle);
    //game->player.x = game->player.x - 16; // move player for debugging
-   //while (i < S_W)
-   //{
+   while (i < S_W)
+   {
       lines[i].correct_len = ft_find_intersections(game, i, lines);
       //printf("cor len: %d\n", correct_len);
       //lines[i].high = ((S_H / 2) * CELL_SIZE) / lines[i].correct_len;
@@ -292,8 +287,8 @@ void  ft_print_lines_data(t_line *lines, int num)
       //printf("hit hor: %d\n", lines[i].hit_hor_wall);
       // if (i == 640)
       //    break;
-      //i++;
-   //}
+          i++;
+   }
    game->lines = lines;
    //ft_print_lines_data(lines, 129);
 }
