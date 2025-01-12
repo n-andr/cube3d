@@ -157,9 +157,9 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
    int     intersection;
 
    delta_angle = (game->player.fov_angle * i) / S_W;
-   hor.angle = game->first_ray_angle + delta_angle;
    printf("i: %d\n", i);
   // printf("delta_angle: %f\n", delta_angle);
+   hor.angle = game->first_ray_angle + delta_angle;
    vert.angle = hor.angle;
    vert.len = 0;
    hor.len = 0;

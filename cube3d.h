@@ -105,8 +105,8 @@ typedef struct s_game_info
 	char		**map;
 	int			rows;
 	int			columns;
-	int			img_width;
-	int			img_height;
+	int			map_width;
+	int			map_height;
 	int			colour;
 	float		delt_angle;
 	float		first_ray_angle;

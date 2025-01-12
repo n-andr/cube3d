@@ -35,10 +35,12 @@ void	init_game(t_game_info *game)
 	game->columns = 0;
 	game->player.p_position_row = 0;
 	game->player.p_position_col = 0;
-	game->img_width = 500;
-	game->img_height = 338;
+	game->map_width = 500;
+	game->map_height = 338;
 	game->mlx = mlx_init();
 	game->window = NULL;
+	game->drawing_data.addr = NULL;
+	game->drawing_data.img = NULL;
 	// game->window = mlx_new_window(game->mlx, 640, 480, "Hello world!");
 	game->textures.north = NULL;
 	game->textures.south = NULL;
@@ -46,18 +48,22 @@ void	init_game(t_game_info *game)
 	game->textures.east = NULL;
 	game->textures.floor = -1;
 	game->textures.ceiling = -1;
+	game->colour = 16777215;
+	game->delt_angle = M_PI / (3 * S_W);
+	game->player.fov_angle = M_PI / 3;
+	game->epsilon = 0.00001;
 }
 
 void	ft_set_values(t_game_info *game)
 {
-	game->colour = 16777215;
-	//game->player.p_angle = 5 * M_PI / 4; // made only for debugging
-	//game->first_ray_angle = game->player.p_angle - M_PI / 6;
+	//game->colour = 16777215;
+	////game->player.p_angle = 5 * M_PI / 4; // made only for debugging
+	////game->first_ray_angle = game->player.p_angle - M_PI / 6;
 	game->player.x = CELL_SIZE * game->player.p_position_col + CELL_SIZE / 2;
 	game->player.y = CELL_SIZE * game->player.p_position_row + CELL_SIZE / 2;
-	game->delt_angle = M_PI / (3 * S_W);
-	game->player.fov_angle = M_PI / 3;
-	game->epsilon = 0.00001;
+	//game->delt_angle = M_PI / (3 * S_W);
+	//game->player.fov_angle = M_PI / 3;
+	//game->epsilon = 0.00001;
 }
 
 int	main(int argc, char **argv)
@@ -75,7 +81,7 @@ int	main(int argc, char **argv)
 		write(1, "Error\nProgramm accepts only 1 argument\n", 39);
 		exit(EXIT_FAILURE);
 	}
-	ft_set_values(&game);
+	//ft_set_values(&game);
 	ft_raycasting(&game);
 	ft_game_draw(&game); // Nata
 	return (0);
