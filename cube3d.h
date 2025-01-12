@@ -76,6 +76,7 @@ typedef struct	s_ray
     int			row;
     int			col;
 	int			len;
+	int			correct_len;
 	float		angle;
 }	t_ray;
 

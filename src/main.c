@@ -51,7 +51,7 @@ void	init_game(t_game_info *game)
 void	ft_set_values(t_game_info *game)
 {
 	game->colour = 16777215;
-	game->player.p_angle = 5 * M_PI / 4; // made only for debugging
+	//game->player.p_angle = 5 * M_PI / 4; // made only for debugging
 	//game->first_ray_angle = game->player.p_angle - M_PI / 6;
 	game->player.x = CELL_SIZE * game->player.p_position_col + CELL_SIZE / 2;
 	game->player.y = CELL_SIZE * game->player.p_position_row + CELL_SIZE / 2;

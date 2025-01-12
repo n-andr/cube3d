@@ -24,6 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="%d %f configured">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cube3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cube3d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/raycasting.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/raycasting.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +73,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "fixing__ft__draw",
+    "git-widget-placeholder": "rotations__fix",
     "last_opened_file_path": "/home/tghnx1/Desktop/42/cube3d/build/cub3D",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
