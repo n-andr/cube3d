@@ -78,7 +78,7 @@ void	render_map(t_game_info *game)
 	while (game->map[y])
 	{
 		x = 0;
-		while (game->map[y][x])
+		while (game->map[y][x + 1])
 		{
 			if (game->map[y][x] == ' ')
 				draw_cell(x, y, 0x000000, game); // Black for nothing

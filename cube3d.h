@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/10 19:54:20 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:02:28 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 # define PLAYER_SIZE (MINI_CELL_SIZE / 2)
 # define S_W 1280
 # define S_H 720
+// input keys
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_ESC 65307
 
 # include <fcntl.h>
 # include <math.h>
