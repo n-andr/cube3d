@@ -150,7 +150,7 @@ void   ft_hor_vert_intersec_def(t_line *lines, int i)
 
 int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 {
-   //int   correct_len;
+   int   correct_len;
    t_ray   hor;
    t_ray   vert;
    float   delta_angle;
@@ -214,24 +214,28 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
   // printf("x: %d, y: %d \n", game->player.x,  game->player.y);
    hor.correct_len = ft_len_def(game, &hor);
    vert.correct_len = ft_len_def(game, &vert);
+   if (hor.correct_len < 0)
+      hor.correct_len = INT_MAX;
+   if (vert.correct_len < 0)
+      vert.correct_len = INT_MAX;
    if (vert.correct_len < hor.correct_len)
    {
       printf("vert intersection chosen: %d\n", vert.len);
       printf("hor.len: %d\n", hor.len);
-      //correct_len = ft_len_def(game, &hor); // debug
-     // printf("hor correct len: %d\n", correct_len);
-     // correct_len = ft_len_def(game, &vert);
-      //printf("vert correct len: %d\n", correct_len);
+      correct_len = ft_len_def(game, &hor); // debug
+      printf("hor correct len: %d\n", correct_len);
+      correct_len = ft_len_def(game, &vert);
+      printf("vert correct len: %d\n", correct_len);
       return (vert.correct_len);
    }
    else if (vert.correct_len > hor.correct_len)
    {
       printf("hor intersection chosen: %d\n", hor.len);
       printf("vert.len: %d\n", vert.len);
-      //correct_len = ft_len_def(game, &vert); // debug
-      //printf("vert correct len: %d\n", correct_len);
-      //correct_len = ft_len_def(game, &hor);
-      //printf("vert correct len: %d\n", correct_len);
+      correct_len = ft_len_def(game, &vert); // debug
+      printf("vert correct len: %d\n", correct_len);
+      correct_len = ft_len_def(game, &hor);
+      printf("vert correct len: %d\n", correct_len);
       lines[i].hit_hor_wall = 1;
       return (hor.correct_len);
    }
