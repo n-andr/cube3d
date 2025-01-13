@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/17 01:27:20 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/10 19:54:20 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # define CELL_SIZE 64
 # define MINI_CELL_SIZE 16
 # define STEP_SIZE 16
-# define TURN_ANGLE (2 * M_PI / 24)
+# define TURN_ANGLE (M_PI / 24)
+//# define TURN_ANGLE (M_PI / 4)
 // TURN_ANGLE = 15 degrees
 # define PLAYER_SIZE (MINI_CELL_SIZE / 2)
 # define S_W 1280
@@ -30,7 +31,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "mlx.h"
+# include "./mlx/mlx.h"
 # include "mlx/mlx.h"
 # include "src/get_next_line/get_next_line.h"
 # include "src/libft/libft.h"
@@ -66,32 +67,29 @@ typedef struct	s_player
 
 typedef struct	s_ray
 {
-	float	x_step;
-	float	y_step;
-	int		ray_x_dir;
-	int		ray_y_dir;
-	float	ray_x;
-	float	ray_y;
-	int		len;
-	float	angle;
+	float		x_step;
+	float		y_step;
+	int			ray_x_dir;
+	int			ray_y_dir;
+	float		ray_x;
+	float		ray_y;
+    int			row;
+    int			col;
+	int			len;
+	int			correct_len;
+	float		angle;
 }	t_ray;
 
-typedef struct s_game_info
+typedef struct	s_line
 {
-	char		**map;
-	int			rows;
-	int			columns;
-	int			img_width;
-	int			img_height;
-	int			colour;
-	float		delt_angle;
-	float		first_ray_angle;
-	float		epsilon;
-	void		*mlx;
-	void		*window;
-	t_textures	textures;
-	t_player	player;
-}	t_game_info;
+	int	x;
+	int y1;
+	int y2;
+	int color;
+	int	high;
+	int	correct_len;
+	int	hit_hor_wall;
+}	t_line;
 
 typedef struct s_data
 {
@@ -101,6 +99,25 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }	t_data;
+
+typedef struct s_game_info
+{
+	char		**map;
+	int			rows;
+	int			columns;
+	int			map_width;
+	int			map_height;
+	int			colour;
+	float		delt_angle;
+	float		first_ray_angle;
+	float		epsilon;
+	void		*mlx;
+	void		*window;
+	t_data		drawing_data;
+	t_textures	textures;
+	t_player	player;
+	t_line		*lines;
+}	t_game_info;
 
 typedef struct s_vars
 {
@@ -137,7 +154,7 @@ int		x_close(t_vars *data);
 // void	load_map_graphics(t_game_info *game);
 void	render_map(t_game_info *game);
 void	draw_cell(int x, int y, int color, t_game_info *game);
-void	draw_player(t_game_info *game, int color);
+void	ft_draw_vertikal(t_game_info *game, t_line lines);
 
 
 // //moves

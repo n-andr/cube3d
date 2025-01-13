@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/17 21:02:39 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:53:46 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x + cos(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y + sin(game->player.p_angle) * STEP_SIZE;
-	new_row = new_y / CELL_SIZE;
+	new_x = game->player.x + round(cos(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y + round(sin(game->player.p_angle) * STEP_SIZE);
+	new_row = (new_y - 1) / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
 	{
@@ -61,8 +61,8 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x - cos(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y - sin(game->player.p_angle) * STEP_SIZE;
+	new_x = game->player.x - round(cos(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y - round(sin(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
@@ -83,10 +83,10 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x + sin(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y - cos(game->player.p_angle) * STEP_SIZE;
+	new_x = game->player.x + round(sin(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y - round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
-	new_col = new_x / CELL_SIZE;
+	new_col = (new_x - 1) / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
@@ -105,8 +105,8 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 	int	new_col;
 	int	new_row;
 
-	new_x = game->player.x - sin(game->player.p_angle) * STEP_SIZE;
-	new_y = game->player.y + cos(game->player.p_angle) * STEP_SIZE;
+	new_x = game->player.x - round(sin(game->player.p_angle) * STEP_SIZE);
+	new_y = game->player.y + round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
 	if (game->map[new_row][new_col] != '1')
@@ -123,7 +123,7 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 void	move_p(t_game_info *game, int key)
 {
 	// find_p(game, game->map);
-	
+
 	if (key == 119)
 	{
 		move_forward(game, game->player.p_position_row, game->player.p_position_col);
@@ -140,10 +140,9 @@ void	move_p(t_game_info *game, int key)
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
-	render_map(game); // update visuals and minimap
+	//printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	//printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	//printf("angle: %f \n", game->player.p_angle); //debug
 
 }
 

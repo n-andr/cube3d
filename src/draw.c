@@ -1,80 +1,27 @@
 #include "../cube3d.h"
 
-void	ft_dot_draw(t_data *data, t_game_info	*game)
+void	ft_dot_draw(t_data data, t_line lines)
 {
     char	*dst;
 
-    dst = data->addr + (game->player.x * data->line_length
-            + game->player.y * (data->bits_per_pixel / 8));
-    *(unsigned int *)dst = game->colour;
+    	//printf("x: %d, y1: %d\n", lines.x, lines.y1);
+    dst = data.addr + (lines.y1 * data.line_length
+            + lines.x * (data.bits_per_pixel / 8));
+    *(unsigned int *)dst = lines.color;
 }
 
-//void	line_draw(t_data *img, int mat1, int mat2, t_game_info *game)
-//{
-//	int				k;
-//	int				i;
-//	t_coordinate	xy;
-//	int				y_comp;
-//
-//	if (mat1.x > mat2.x)
-//		return (matrix_line_draw(&(*img), mat2, mat1, colour));
-//	if (mat1.x == mat2.x)
-//		return (draw_vertikal(&(*img), mat1, mat2.y, colour));
-//	i = 1;
-//	xy.y = mat1.y;
-//	xy.x = mat1.x;
-//	k = (100 * (mat2.y - mat1.y) / (mat2.x - mat1.x));
-//	while (abs(xy.x - mat2.x) > 0)
-//	{
-//		y_comp = 2 * xy.y + 1;
-//		if (y_comp - xy.y > 0)
-//			draw_vertikal(&(*img), xy, (100 * mat1.y + k * i) / 100, colour);
-//		xy.y = (100 * mat1.y + k * i++) / 100;
-//		xy.x++;
-//	}
-//	my_mlx_pixel_put(&(*img), xy, colour);
-//	return ;
-//}
-//
-//void	draw_vertikal(t_data *img, t_coordinate xy, int y2, int colour)
-//{
-//	while (abs(xy.y - y2) > 0)
-//	{
-//		my_mlx_pixel_put(&(*img), xy, colour);
-//		if (xy.y < y2)
-//			xy.y++;
-//		else
-//			xy.y--;
-//	}
-//	my_mlx_pixel_put(&(*img), xy, colour);
-//	return ;
-//}
-
-/*
-
-void	ft_game_draw(t_game_info	*game)
+void	ft_draw_vertikal(t_game_info *game, t_line lines)
 {
-    void			*mlx_win;
-    t_data			img;
-    t_vars			data;
 
-    data.game = game;
-    mlx_win = mlx_new_window(game->mlx, S_W,
-            S_H, "Cube3D");
-    img.img = mlx_new_image(game->mlx, S_W, S_H);
-    img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-            &img.line_length, &img.endian);
-    ft_dot_draw(&img, game);
-    //ft_line_draw(&img, game);
-    mlx_put_image_to_window(game->mlx, mlx_win, img.img, 0, 0);
-    data.mlx = game->mlx;
-    data.win = mlx_win;
-    data.img = img.img;
-    mlx_key_hook(mlx_win, handle_input, &data);
-    mlx_hook(mlx_win, 17, 1L << 17, x_close, &data);
-    mlx_loop(game->mlx);
+	while (abs(lines.y1 - lines.y2) > 0)
+	{
+        //if (lines.high < S_H)
+        ft_dot_draw(game->drawing_data, lines);
+		lines.y1 = lines.y1 + 1;
+	}
+	ft_dot_draw(game->drawing_data, lines);
+	return ;
 }
-*/
 
 void	draw_cell(int x, int y, int color, t_game_info *game)
 {
@@ -164,6 +111,8 @@ void	render_map(t_game_info *game)
 */
 int	key_pressed(int key, t_game_info *game)
 {
+	int	i;
+
 	if (key == 119 || key == 115 \
 	|| key == 100 || key == 97)
 	{
@@ -177,13 +126,47 @@ int	key_pressed(int key, t_game_info *game)
 	{
 		close_game(game, 0);
 	}
+		ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
+	ft_raycasting(game);
+   	i = 0;
+    while (i < S_W)
+      {
+    	ft_draw_vertikal(game, game->lines[i]);
+        i++;
+      }
+	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+	render_map(game); // update visuals and minimap
 	return (0);
 }
 
 void	ft_game_draw(t_game_info *game)
 {
-	
-    game->window = mlx_new_window(game->mlx, game->columns * MINI_CELL_SIZE, game->rows * MINI_CELL_SIZE, "Cube3D");
+	//void			*mlx_win;
+    //t_data			img;
+    //t_vars			data;
+    int				i;
+
+    //data.game = game;
+    game->window = mlx_new_window(game->mlx, S_W,
+            S_H, "Cube3D");
+    game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
+    game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img, &game->drawing_data.bits_per_pixel,
+            &game->drawing_data.line_length, &game->drawing_data.endian);
+    i = 0;
+    while (i < S_W)
+      {
+    	ft_draw_vertikal(game, game->lines[i]);
+        i++;
+      }
+	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+    // data.mlx = game->mlx;
+    // data.win = game->window;
+    //data.img = game->drawing_data.img;
+    //mlx_key_hook(mlx_win, handle_input, &data);
+   // mlx_hook(mlx_win, 17, 1L << 17, x_close, &data);
+   // mlx_loop(game->mlx);
+
+    //game->window = mlx_new_window(game->mlx, game->columns * MINI_CELL_SIZE, game->rows * MINI_CELL_SIZE, "Cube3D");
 	// img.img = mlx_new_image(game->mlx, game.columns * CELL_SIZE, game.rows * CELL_SIZE);
 	// //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 	// 		&img.line_length, &img.endian);

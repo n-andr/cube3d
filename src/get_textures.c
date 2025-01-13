@@ -52,7 +52,7 @@ void assign_texture(t_game_info *game, char *line, void **texture, int file)
 	if (*texture != NULL)
 		handle_error(game, file, "Error\nSame texture listed more than once\n", line);
 	if (is_xmp(line) == true)
-			*texture = mlx_xpm_file_to_image(game->mlx, line, &game->img_width, &game->img_height); // check if it is correct way to assign texture
+			*texture = mlx_xpm_file_to_image(game->mlx, line, &game->map_width, &game->map_height); // check if it is correct way to assign texture
 	else
 		handle_error(game, file, "Error\nWrong texture format\n", line);
 }

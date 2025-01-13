@@ -53,9 +53,11 @@ int	p_check(t_game_info *game)
 		col = 0;
 		row ++;
 	}
-	printf("(start) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("(start) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("(start) angle: %f \n", game->player.p_angle); //debug
+	game->player.x = CELL_SIZE * game->player.p_position_col + CELL_SIZE / 2;
+	game->player.y = CELL_SIZE * game->player.p_position_row + CELL_SIZE / 2;
+	//printf("(start) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	//printf("(start) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	//printf("(start) angle: %f \n", game->player.p_angle); //debug
     // game->first_ray_angle = game->p_angle - M_PI/6;
     // game->p_cell_x = CELL_SIZE * game->p_position_col + CELL_SIZE / 2;
     // game->p_cell_y = CELL_SIZE * game->p_position_row + CELL_SIZE / 2;
