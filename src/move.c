@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/30 15:53:46 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:05:19 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,19 +124,19 @@ void	move_p(t_game_info *game, int key)
 {
 	// find_p(game, game->map);
 
-	if (key == 119)
+	if (key == KEY_W)
 	{
 		move_forward(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	else if (key == 115)
+	else if (key == KEY_S)
 	{
 		move_back(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	else if (key == 100)
+	else if (key == KEY_D)
 	{
 		move_right(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	else if (key == 97)
+	else if (key == KEY_A)
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
@@ -145,5 +145,3 @@ void	move_p(t_game_info *game, int key)
 	//printf("angle: %f \n", game->player.p_angle); //debug
 
 }
-
-
