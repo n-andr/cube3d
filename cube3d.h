@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/10 19:54:20 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:32:42 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int		x_close(t_vars *data);
 void	render_map(t_game_info *game);
 void	draw_cell(int x, int y, int color, t_game_info *game);
 void	ft_draw_vertikal(t_game_info *game, t_line lines);
+void	ft_floor_ceiling_colour(t_game_info *game);
 
 
 // //moves

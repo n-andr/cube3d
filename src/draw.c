@@ -15,8 +15,7 @@ void	ft_draw_vertikal(t_game_info *game, t_line lines)
 
 	while (abs(lines.y1 - lines.y2) > 0)
 	{
-        //if (lines.high < S_H)
-        ft_dot_draw(game->drawing_data, lines);
+		ft_dot_draw(game->drawing_data, lines);
 		lines.y1 = lines.y1 + 1;
 	}
 	ft_dot_draw(game->drawing_data, lines);
@@ -128,6 +127,7 @@ int	key_pressed(int key, t_game_info *game)
 	}
 		ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
 	ft_raycasting(game);
+	ft_floor_ceiling_colour(game);
    	i = 0;
     while (i < S_W)
       {
@@ -139,43 +139,50 @@ int	key_pressed(int key, t_game_info *game)
 	return (0);
 }
 
+void	ft_floor_ceiling_colour (t_game_info *game)
+{
+	int	i;
+	t_line	line;
+
+	i = 0;
+	while (i < S_W)
+	{
+		line.x = i;
+		line.y1 = 0;
+		line.y2 = S_H / 2;
+		line.color = game->textures.ceiling;
+		ft_draw_vertikal(game, line);
+		line.y1 = S_H / 2;
+		line.y2 = S_H;
+		line.color = game->textures.floor;
+		ft_draw_vertikal(game, line);
+		i++;
+	}
+}
+
 void	ft_game_draw(t_game_info *game)
 {
-	//void			*mlx_win;
-    //t_data			img;
-    //t_vars			data;
-    int				i;
+	int				i;
 
-    //data.game = game;
-    game->window = mlx_new_window(game->mlx, S_W,
-            S_H, "Cube3D");
-    game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
-    game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img, &game->drawing_data.bits_per_pixel,
-            &game->drawing_data.line_length, &game->drawing_data.endian);
-    i = 0;
-    while (i < S_W)
-      {
-    	ft_draw_vertikal(game, game->lines[i]);
-        i++;
-      }
+	game->window = mlx_new_window(game->mlx, S_W,
+		S_H, "Cube3D");
+	game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
+	game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
+		&game->drawing_data.bits_per_pixel,
+			&game->drawing_data.line_length, &game->drawing_data.endian);
+	ft_floor_ceiling_colour(game);
+	i = 0;
+	while (i < S_W)
+	{
+		ft_draw_vertikal(game, game->lines[i]);
+		i++;
+	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
-    // data.mlx = game->mlx;
-    // data.win = game->window;
-    //data.img = game->drawing_data.img;
-    //mlx_key_hook(mlx_win, handle_input, &data);
-   // mlx_hook(mlx_win, 17, 1L << 17, x_close, &data);
-   // mlx_loop(game->mlx);
-
-    //game->window = mlx_new_window(game->mlx, game->columns * MINI_CELL_SIZE, game->rows * MINI_CELL_SIZE, "Cube3D");
-	// img.img = mlx_new_image(game->mlx, game.columns * CELL_SIZE, game.rows * CELL_SIZE);
-	// //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-	// 		&img.line_length, &img.endian);
 
 	render_map(game);
-	printf("(before move) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("(before move) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("(before move) angle: %f \n", game->player.p_angle); //debug
-	// mlx_put_image_to_window(game->mlx, mlx_win, img.img, 0, 0);
+	// printf("(before move) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	// printf("(before move) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	// printf("(before move) angle: %f \n", game->player.p_angle); //debug
 
 	mlx_key_hook(game->window, key_pressed, game);
 	mlx_hook(game->window, 17, 1L << 17, x_close, &game);
