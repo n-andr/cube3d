@@ -41,11 +41,10 @@ void	init_game(t_game_info *game)
 	game->window = NULL;
 	game->drawing_data.addr = NULL;
 	game->drawing_data.img = NULL;
-	// game->window = mlx_new_window(game->mlx, 640, 480, "Hello world!");
-	game->textures.north = NULL;
-	game->textures.south = NULL;
-	game->textures.west = NULL;
-	game->textures.east = NULL;
+	game->textures.north_img = NULL;
+	game->textures.south_img = NULL;
+	game->textures.west_img = NULL;
+	game->textures.east_img = NULL;
 	game->textures.floor = -1;
 	game->textures.ceiling = -1;
 	game->colour = 16777215;
@@ -54,17 +53,24 @@ void	init_game(t_game_info *game)
 	game->epsilon = 0.00001;
 }
 
-void	ft_set_values(t_game_info *game)
-{
-	//game->colour = 16777215;
-	////game->player.p_angle = 5 * M_PI / 4; // made only for debugging
-	////game->first_ray_angle = game->player.p_angle - M_PI / 6;
-	game->player.x = CELL_SIZE * game->player.p_position_col + CELL_SIZE / 2;
-	game->player.y = CELL_SIZE * game->player.p_position_row + CELL_SIZE / 2;
-	//game->delt_angle = M_PI / (3 * S_W);
-	//game->player.fov_angle = M_PI / 3;
-	//game->epsilon = 0.00001;
+void test_texture_render(t_game_info *game) {
+	//game->window = mlx_new_window(game->mlx, S_W,
+	//	S_H, "Cube3D");
+	//game->textures.east_img = mlx_new_image(game->mlx, S_W, S_H);
+	//game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
+	//	&game->drawing_data.bits_per_pixel,
+	//		&game->drawing_data.line_length, &game->drawing_data.endian);
+
+	game->window = mlx_new_window(game->mlx, 640, 480, "Hello world!");
+
+	// Draw each texture at different positions for testing
+	mlx_put_image_to_window(game->mlx, game->window, game->textures.north_img, 400, 400);  // North texture
+	//mlx_put_image_to_window(mlx_ptr, win_ptr, texture->south_img, 200, 0); // South texture
+	//mlx_put_image_to_window(mlx_ptr, win_ptr, texture->west_img, 0, 200);  // West texture
+	//mlx_put_image_to_window(mlx_ptr, win_ptr, texture->east_img, 200, 200); // East texture
+	mlx_loop(game->mlx);
 }
+
 
 int	main(int argc, char **argv)
 {
@@ -81,9 +87,10 @@ int	main(int argc, char **argv)
 		write(1, "Error\nProgramm accepts only 1 argument\n", 39);
 		exit(EXIT_FAILURE);
 	}
-	//ft_set_values(&game);
 	ft_raycasting(&game);
 	ft_game_draw(&game); // Nata
+	printf("Width: %d, Height: %d\n", game.textures.width, game.textures.height);
+	//test_texture_render(&game);
 	return (0);
 }
 

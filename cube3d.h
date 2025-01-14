@@ -47,12 +47,21 @@ typedef struct s_textures
 {
 	//void	*player;
 	//void	*collectible;
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
+	void	*north_img;
+	void	*south_img;
+	void	*west_img;
+	void	*east_img;
 	int		floor;
 	int		ceiling;
+	char	*n_data;
+	char	*s_data;
+	char	*w_data;
+	char	*e_data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }	t_textures;
 
 typedef struct	s_player
@@ -121,9 +130,6 @@ typedef struct s_game_info
 
 typedef struct s_vars
 {
-	void			*mlx;
-	void			*img;
-	void			*win;
 	t_game_info		*game;
 }				t_vars;
 

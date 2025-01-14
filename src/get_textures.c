@@ -14,14 +14,14 @@
 
 bool	check_texture(t_game_info *game, int file)
 {
-	if (game->textures.north == NULL)
-		handle_error(game, file, "Error\nNo north texture\n", NULL);
-	if (game->textures.south == NULL)
-		handle_error(game, file, "Error\nNo south texture\n", NULL);
-	if (game->textures.west == NULL)
-		handle_error(game, file, "Error\nNo west texture\n", NULL);
-	if (game->textures.east == NULL)
-		handle_error(game, file, "Error\nNo east texture\n", NULL);
+	if (game->textures.north_img == NULL)
+		handle_error(game, file, "Error\nNo north_img texture\n", NULL);
+	if (game->textures.south_img == NULL)
+		handle_error(game, file, "Error\nNo south_img texture\n", NULL);
+	if (game->textures.west_img == NULL)
+		handle_error(game, file, "Error\nNo west_img texture\n", NULL);
+	if (game->textures.east_img == NULL)
+		handle_error(game, file, "Error\nNo east_img texture\n", NULL);
 	if (game->textures.floor == -1)
 		handle_error(game, file, "Error\nNo floor colour\n", NULL);
 	if (game->textures.ceiling == -1)
@@ -36,7 +36,7 @@ bool	is_xmp(char *line)
 	return (false);
 }
 
-void assign_texture(t_game_info *game, char *line, void **texture, int file)
+void assign_texture(t_game_info *game, char *line, void **img, int file)
 {
 	int i;
 
@@ -49,12 +49,16 @@ void assign_texture(t_game_info *game, char *line, void **texture, int file)
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
 	//printf("line: %s\n", line); //delete
-	if (*texture != NULL)
+	if (*img != NULL)
 		handle_error(game, file, "Error\nSame texture listed more than once\n", line);
 	if (is_xmp(line) == true)
-			*texture = mlx_xpm_file_to_image(game->mlx, line, &game->map_width, &game->map_height); // check if it is correct way to assign texture
+		*img = mlx_xpm_file_to_image(game->mlx, line,
+			&game->textures.width, &game->textures.height); // check if it is correct way to assign texture
 	else
 		handle_error(game, file, "Error\nWrong texture format\n", line);
+	printf("game->mlx: %p\n", game->mlx);
+	printf("image: %p\n", *img);
+	printf("line: %s\n", line);
 }
 
 //The resulting integer's binary representation is 0xTTRRGGBB,
@@ -137,6 +141,27 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 	//colour = mlx_get_color_value(game->mlx, rgb);
 	}
 
+void	ft_set_textures_params(t_game_info *game)
+{
+	game->textures.n_data = mlx_get_data_addr(game->textures.north_img,
+		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.endian);
+	game->textures.s_data = mlx_get_data_addr(game->textures.south_img,
+		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.endian);
+	game->textures.w_data = mlx_get_data_addr(game->textures.west_img,
+		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.endian);
+	game->textures.e_data = mlx_get_data_addr(game->textures.east_img,
+		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.endian);
+	if (!(game->textures.n_data) || !(game->textures.s_data) || !(game->textures.w_data) || !(game->textures.e_data))
+	{
+		printf("Error: Failed to retrieve data address for one or more textures\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
 void	get_textures(t_game_info *game, char *file_adress)
 {
 	char	*line;
@@ -155,13 +180,13 @@ void	get_textures(t_game_info *game, char *file_adress)
 	while (line)
 	{
 		if (line[0] == 'N' && line[1] == 'O')
-			assign_texture(game, line + 2, (void **)&game->textures.north, file);
+			assign_texture(game, line + 2, (void **)&game->textures.north_img, file);
 		else if (line[0] == 'S' && line[1] == 'O')
-			assign_texture(game, line + 2, (void **)&game->textures.south, file);
+			assign_texture(game, line + 2, (void **)&game->textures.south_img, file);
 		else if (line[0] == 'W' && line[1] == 'E')
-			assign_texture(game, line + 2, (void **)&game->textures.west, file);
+			assign_texture(game, line + 2, (void **)&game->textures.west_img, file);
 		else if (line[0] == 'E' && line[1] == 'A')
-			assign_texture(game, line + 2, (void **)&game->textures.east, file);
+			assign_texture(game, line + 2, (void **)&game->textures.east_img, file);
 		else if (line[0] == 'F')
 			assign_colour(game, line + 1, &game->textures.floor, file);
 		else if (line[0] == 'C')
@@ -171,5 +196,6 @@ void	get_textures(t_game_info *game, char *file_adress)
 	}
 	free(line);
 	check_texture(game, file);
+	ft_set_textures_params(game);
 	close(file);
 }

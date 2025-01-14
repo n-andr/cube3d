@@ -7,9 +7,9 @@
     <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
-    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
     <option name="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue" value="CppFormatterOtherPage" type="string" />
     <option name="/Default/Housekeeping/RefactoringsMru/RenameRefactoring/DoSearchForTextInStrings/@EntryValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
   </component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
@@ -23,10 +23,14 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="some printf valgrind errors removed">
+    <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="part of function ft_set_values has moved to init_game and part to p_check">
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/wall-texture.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/wall-texture.xpm" beforeDir="false" afterPath="$PROJECT_DIR$/assets/wall-texture.xpm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cube3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cube3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/characters_and_player_check.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/characters_and_player_check.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/draw.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/draw.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/free.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/free.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/get_textures.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_textures.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/raycasting.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/raycasting.c" afterDir="false" />
@@ -41,7 +45,13 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="textures" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -61,6 +71,7 @@
   <component name="ProjectId" id="2p5Q23WnTwRdl3tnc0leJddNNuv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
@@ -77,7 +88,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "rotations__fix",
+    "git-widget-placeholder": "textures-testing",
     "last_opened_file_path": "/home/tghnx1/Desktop/42/cube3d/build/cub3D",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -159,6 +170,7 @@
       <workItem from="1732544801332" duration="19737000" />
       <workItem from="1733842059374" duration="2252000" />
       <workItem from="1733844525904" duration="14489000" />
+      <workItem from="1736861904288" duration="11874000" />
     </task>
     <task id="LOCAL-00001" summary="Finished with finding the first wall horizontal intersection, counted the length of the ray, created structures for player and the intersection coordinates for properly drawing">
       <option name="closed" value="true" />
@@ -192,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736696156172</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="part of function ft_set_values has moved to init_game and part to p_check">
+      <option name="closed" value="true" />
+      <created>1736700941172</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1736700941172</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +223,8 @@
     <MESSAGE value="%d %f configured" />
     <MESSAGE value="wall's ugly stripes's been removed!!" />
     <MESSAGE value="some printf valgrind errors removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="some printf valgrind errors removed" />
+    <MESSAGE value="part of function ft_set_values has moved to init_game and part to p_check" />
+    <option name="LAST_COMMIT_MESSAGE" value="part of function ft_set_values has moved to init_game and part to p_check" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -53,14 +53,14 @@ void	free_array(char **array)
 
 void	free_textures(t_game_info *game)
 {
-	if (game->textures.north)
-		mlx_destroy_image(game->mlx, game->textures.north);
-	if (game->textures.south)
-		mlx_destroy_image(game->mlx, game->textures.south);
-	if (game->textures.east)
-		mlx_destroy_image(game->mlx, game->textures.east);
-	if (game->textures.west)
-		mlx_destroy_image(game->mlx, game->textures.west);
+	if (game->textures.north_img)
+		mlx_destroy_image(game->mlx, game->textures.north_img);
+	if (game->textures.south_img)
+		mlx_destroy_image(game->mlx, game->textures.south_img);
+	if (game->textures.east_img)
+		mlx_destroy_image(game->mlx, game->textures.east_img);
+	if (game->textures.west_img)
+		mlx_destroy_image(game->mlx, game->textures.west_img);
 }
 
 int	close_game(t_game_info *game, int exit_status)
