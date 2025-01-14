@@ -177,5 +177,7 @@ void	free_array(char **array);
 void	free_textures(t_game_info *game);
 int	close_game(t_game_info *game, int exit_status);
 
+//test
+void test_texture_render(t_game_info *game);
 
 #endif

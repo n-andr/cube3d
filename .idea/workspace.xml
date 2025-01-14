@@ -23,18 +23,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="part of function ft_set_values has moved to init_game and part to p_check">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+    <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="successfully put one texture to a screen.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/wall-texture.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/wall-texture.xpm" beforeDir="false" afterPath="$PROJECT_DIR$/assets/wall-texture.xpm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/wall-texture.xpm" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cube3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cube3d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/valid_map.cub" beforeDir="false" afterPath="$PROJECT_DIR$/map/valid_map.cub" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/draw.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/draw.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/free.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/free.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/get_textures.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_textures.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/raycasting.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/raycasting.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/window_manage.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/window_manage.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +42,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="textures" />
+        <entry key="$PROJECT_DIR$" value="textures-testing" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,7 +83,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "textures-testing",
+    "git-widget-placeholder": "textures",
     "last_opened_file_path": "/home/tghnx1/Desktop/42/cube3d/build/cub3D",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -140,9 +135,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Makefile Target.fclean" />
+        <item itemvalue="Makefile Target.all" />
+        <item itemvalue="C/C++ File.main.c" />
         <item itemvalue="C/C++ File.main.c" />
         <item itemvalue="Makefile Target.all" />
-        <item itemvalue="Makefile Target.fclean" />
       </list>
     </recent_temporary>
   </component>
@@ -170,7 +167,7 @@
       <workItem from="1732544801332" duration="19737000" />
       <workItem from="1733842059374" duration="2252000" />
       <workItem from="1733844525904" duration="14489000" />
-      <workItem from="1736861904288" duration="11874000" />
+      <workItem from="1736861904288" duration="13252000" />
     </task>
     <task id="LOCAL-00001" summary="Finished with finding the first wall horizontal intersection, counted the length of the ray, created structures for player and the intersection coordinates for properly drawing">
       <option name="closed" value="true" />
@@ -212,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736700941172</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="successfully put one texture to a screen.">
+      <option name="closed" value="true" />
+      <created>1736875034047</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1736875034047</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +229,8 @@
     <MESSAGE value="wall's ugly stripes's been removed!!" />
     <MESSAGE value="some printf valgrind errors removed" />
     <MESSAGE value="part of function ft_set_values has moved to init_game and part to p_check" />
-    <option name="LAST_COMMIT_MESSAGE" value="part of function ft_set_values has moved to init_game and part to p_check" />
+    <MESSAGE value="successfully put one texture to a screen." />
+    <option name="LAST_COMMIT_MESSAGE" value="successfully put one texture to a screen." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

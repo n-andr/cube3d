@@ -135,7 +135,7 @@ int	key_pressed(int key, t_game_info *game)
         i++;
       }
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->window, game->textures.north_img, 400, 400);
+	test_texture_render(game); // for testing outputs textures
 	render_map(game); // update visuals and minimap
 	return (0);
 }
@@ -180,7 +180,7 @@ void	ft_game_draw(t_game_info *game)
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
 	render_map(game);
-	mlx_put_image_to_window(game->mlx, game->window, game->textures.north_img, 400, 400);
+	test_texture_render(game);
 	// printf("(before move) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
 	// printf("(before move) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
 	// printf("(before move) angle: %f \n", game->player.p_angle); //debug
