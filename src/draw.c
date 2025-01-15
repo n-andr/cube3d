@@ -31,6 +31,8 @@ unsigned int ft_get_pixel_color(t_game_info	*game, t_line line, int x, int y)
 		pixel = game->textures.n_data + (y * game->textures.size_line) + (x * bytes_per_pixel);
 	else if (line.e_wall_side)
 		pixel = game->textures.e_data + (y * game->textures.size_line) + (x * bytes_per_pixel);
+	else
+		exit(EXIT_FAILURE);
 
 	// Combine bytes into a full color value depending on endianness.
 	color = *(unsigned int *)pixel;
