@@ -47,10 +47,8 @@ void	init_game(t_game_info *game)
 	game->textures.east_img = NULL;
 	game->textures.floor = -1;
 	game->textures.ceiling = -1;
-	game->colour = 16777215;
 	game->delt_angle = M_PI / (3 * S_W);
 	game->player.fov_angle = M_PI / 3;
-	game->epsilon = 0.00001;
 }
 
 void test_texture_render(t_game_info *game)

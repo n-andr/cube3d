@@ -148,6 +148,28 @@ void   ft_hor_vert_intersec_def(t_line *lines, int i)
   // printf("lines[i].hit_hor_wall : %d\n", lines[i].hit_hor_wall);
 }
 
+void    ft_wall_side_ident(t_ray    ray, t_line *line)
+{
+    if (ray.ray_y_dir == 1) // Moving south
+    {
+        if (line->hit_hor_wall)
+            line->s_wall_side = 1;
+        else if (ray.ray_x_dir == 1)  // Moving east
+            line->e_wall_side = 1;
+        else  // Moving west
+            line->w_wall_side = 1;
+    }
+    else if (ray.ray_y_dir == -1) // Moving north
+    {
+        if (line->hit_hor_wall)
+            line->n_wall_side = 1;
+        else if (ray.ray_x_dir == 1)  // Moving east
+            line->e_wall_side = 1;
+        else  // Moving west
+            line->w_wall_side = 1;
+    }
+}
+
 int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 {
    //int   correct_len;
@@ -177,6 +199,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
   // printf("fov angle: %f\n", game->player.fov_angle);
   // printf("delta angle: %f\n", delta_angle);
    //printf("current angle: %f\n", hor.angle);
+
    while (1)
       {
          hor.len += ft_hor_step(&hor);
@@ -226,6 +249,8 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
      // printf("hor correct len: %d\n", correct_len);
      // correct_len = ft_len_def(game, &vert);
       //printf("vert correct len: %d\n", correct_len);
+       lines[i].offset_x = (int)vert.ray_y % CELL_SIZE;
+       ft_wall_side_ident(vert, &lines[i]);
       return (vert.correct_len);
    }
    else if (vert.correct_len > hor.correct_len)
@@ -236,7 +261,9 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
     //  printf("vert correct len: %d\n", correct_len);
      // correct_len = ft_len_def(game, &hor);
      // printf("vert correct len: %d\n", correct_len);
+     lines[i].offset_x = (int)hor.ray_x % CELL_SIZE;
       lines[i].hit_hor_wall = 1;
+       ft_wall_side_ident(vert, &lines[i]);
       return (hor.correct_len);
    }
    else
@@ -244,28 +271,12 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
       //printf("ANGLE FOUND!!\n");
       //correct_len = ft_len_def(game, &hor);
       ft_hor_vert_intersec_def(lines, i);
+       ft_wall_side_ident(vert, &lines[i]);
       return (vert.correct_len);
    }
    //return (0);
 }
 
-
-void  ft_print_lines_data(t_line *lines, int num)
-{
-   int i;
-
-   i = 0;
-   while (i < num)
-   {
-      //printf("hight[%d]: %d\n", i, lines[i].high);
-      //printf("x[%d]: %d\n", i, lines[i].x);
-      //printf("y1[%d]: %d\n", i, lines[i].y1);
-      //printf("y2[%d]: %d\n", i, lines[i].y2);
-      //printf("hight[%d]: %d\n", i, lines[i].high);
-      printf("correct_len[%d]: %d\n", i, lines[i].correct_len);
-      i++;
-   }
-}
 
    void  ft_raycasting(t_game_info	*game)
 {
@@ -287,24 +298,28 @@ void  ft_print_lines_data(t_line *lines, int num)
    //game->player.x = game->player.x - 16; // move player for debugging
    while (i < S_W)
    {
+       lines[i].e_wall_side = 0;
+       lines[i].s_wall_side = 0;
+       lines[i].w_wall_side = 0;
+       lines[i].n_wall_side = 0;
       lines[i].correct_len = ft_find_intersections(game, i, lines);
       //printf("cor len: %d\n", correct_len);
       //lines[i].high = ((S_H / 2) * CELL_SIZE) / lines[i].correct_len;
       lines[i].high = S_H * CELL_SIZE / lines[i].correct_len;
       lines[i].x = i;
       lines[i].y1 = (S_H - lines[i].high) / 2;
-      if (lines[i].y1 < 0)
-           lines[i].y1 = 0;
+      //if (lines[i].y1 < 0)
+       //    lines[i].y1 = 0;
       lines[i].y2 = S_H - lines[i].y1;
-      if (lines[i].y2 > S_H)
-           lines[i].y2 = S_H;
-      lines[i].color = 16744703;
-      if (lines[i].hit_hor_wall)
-         lines[i].color -= 10000;
+      //if (lines[i].y2 > S_H)
+      //     lines[i].y2 = S_H;
+      //lines[i].color = ft_get_pixel_color(game, 0, 0);
+      //if (lines[i].hit_hor_wall)
+      //   lines[i].color -= 1000;
       //printf("hit hor: %d\n", lines[i].hit_hor_wall);
       // if (i == 640)
       //    break;
-          i++;
+      i++;
    }
    game->lines = lines;
    //ft_print_lines_data(lines, 129);

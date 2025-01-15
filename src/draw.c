@@ -1,24 +1,72 @@
 #include "../cube3d.h"
 
-void	ft_dot_draw(t_data data, t_line lines)
+void	ft_texture_coord_def(t_game_info *game, t_line line, int *x, int *y)
 {
-    char	*dst;
+	int		col;
+	int		wall_up_part;
 
-    	//printf("x: %d, y1: %d\n", lines.x, lines.y1);
-    dst = data.addr + (lines.y1 * data.line_length
-            + lines.x * (data.bits_per_pixel / 8));
-    *(unsigned int *)dst = lines.color;
+	col = line.x / CELL_SIZE;
+	*x = (game->textures.width * (line.x - col * CELL_SIZE)) / ((col + 1) * CELL_SIZE);
+	wall_up_part = line.y1 - line.y_top;
+	*y = wall_up_part * game->textures.height / line.high;
+	*x = line.offset_x *game->textures.width / CELL_SIZE;
 }
 
-void	ft_draw_vertikal(t_game_info *game, t_line lines)
+unsigned int ft_get_pixel_color(t_game_info	*game, t_line line, int x, int y)
 {
+	int bytes_per_pixel;
+	char *pixel;
+	unsigned int color;
 
-	while (abs(lines.y1 - lines.y2) > 0)
+	bytes_per_pixel = game->textures.bpp / 8;
+	/*printf("line.w_wall_side: %d\n", line.w_wall_side);
+	printf("line.e_wall_side: %d\n", line.e_wall_side);
+	printf("line.s_wall_side: %d\n", line.s_wall_side);
+	printf("line.n_wall_side: %d\n", line.n_wall_side);*/
+	if (line.w_wall_side)
+		pixel = game->textures.w_data + (y * game->textures.size_line) + (x * bytes_per_pixel);
+	else if (line.s_wall_side)
+		pixel = game->textures.s_data + (y * game->textures.size_line) + (x * bytes_per_pixel);
+	else if (line.n_wall_side)
+		pixel = game->textures.n_data + (y * game->textures.size_line) + (x * bytes_per_pixel);
+	else if (line.e_wall_side)
+		pixel = game->textures.e_data + (y * game->textures.size_line) + (x * bytes_per_pixel);
+
+	// Combine bytes into a full color value depending on endianness.
+	color = *(unsigned int *)pixel;
+	return color;
+}
+
+void	ft_dot_draw(t_game_info *game, t_line line, unsigned int color)
+{
+    char			*dst;
+	int				x;
+	int				y;
+
+    	//printf("x: %d, y1: %d\n", lines.x, lines.y1);
+	x = 0;
+	y = 0;
+    dst = game->drawing_data.addr + (line.y1 * game->drawing_data.line_length
+            + line.x * (game->drawing_data.bits_per_pixel / 8));
+	ft_texture_coord_def(game, line, &x, &y);
+	if (!color)
+		color = ft_get_pixel_color(game, line, x, y);
+    *(unsigned int *)dst = color;
+}
+
+void	ft_draw_vertikal(t_game_info *game, t_line line, unsigned int color)
+{
+	line.y_top = line.y1;
+	if (line.y1 < 0)
+		line.y1 = 0;
+	if (line.y2 > S_H)
+		line.y2 = S_H;
+	while (abs(line.y1 - line.y2) > 0)
 	{
-		ft_dot_draw(game->drawing_data, lines);
-		lines.y1 = lines.y1 + 1;
+		ft_dot_draw(game, line, color);
+		line.y1 = line.y1 + 1;
 	}
-	ft_dot_draw(game->drawing_data, lines);
+	//ft_dot_draw(game, line, color);
 	return ;
 }
 
@@ -131,7 +179,7 @@ int	key_pressed(int key, t_game_info *game)
    	i = 0;
     while (i < S_W)
       {
-    	ft_draw_vertikal(game, game->lines[i]);
+    	ft_draw_vertikal(game, game->lines[i], 0);
         i++;
       }
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
@@ -142,8 +190,9 @@ int	key_pressed(int key, t_game_info *game)
 
 void	ft_floor_ceiling_colour (t_game_info *game)
 {
-	int	i;
-	t_line	line;
+	int				i;
+	t_line			line;
+	unsigned int	color;
 
 	i = 0;
 	while (i < S_W)
@@ -151,12 +200,12 @@ void	ft_floor_ceiling_colour (t_game_info *game)
 		line.x = i;
 		line.y1 = 0;
 		line.y2 = S_H / 2;
-		line.color = game->textures.ceiling;
-		ft_draw_vertikal(game, line);
+		color = game->textures.ceiling;
+		ft_draw_vertikal(game, line, color);
 		line.y1 = S_H / 2;
 		line.y2 = S_H;
-		line.color = game->textures.floor;
-		ft_draw_vertikal(game, line);
+		color = game->textures.floor;
+		ft_draw_vertikal(game, line, color);
 		i++;
 	}
 }
@@ -175,7 +224,7 @@ void	ft_game_draw(t_game_info *game)
 	i = 0;
 	while (i < S_W)
 	{
-		ft_draw_vertikal(game, game->lines[i]);
+		ft_draw_vertikal(game, game->lines[i], 0);
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
