@@ -285,7 +285,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 
 
     game->first_ray_angle = game->player.p_angle - M_PI / 6;
-    lines = (t_line *)malloc(S_W * sizeof(t_line));
+    lines = (t_line *)calloc(S_W, sizeof(t_line));
     if (lines == NULL) {
         printf("malloc error\n");
         exit(EXIT_FAILURE);

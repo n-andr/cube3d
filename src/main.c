@@ -35,9 +35,20 @@ void	init_game(t_game_info *game)
 	game->columns = 0;
 	game->player.p_position_row = 0;
 	game->player.p_position_col = 0;
+	game->player.x = 0;
+	game->player.y = 0;
+	game->player.fov_angle = M_PI / 3;
+	game->player.p_angle = 0;
 	game->map_width = 500;
 	game->map_height = 338;
 	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+	{
+		printf("Error initializing mlx\n");
+		exit(EXIT_FAILURE);
+	}
+	game->textures.floor = -1;
+	game->textures.ceiling = -1;
 	game->window = NULL;
 	game->drawing_data.addr = NULL;
 	game->drawing_data.img = NULL;
@@ -45,10 +56,7 @@ void	init_game(t_game_info *game)
 	game->textures.south_img = NULL;
 	game->textures.west_img = NULL;
 	game->textures.east_img = NULL;
-	game->textures.floor = -1;
-	game->textures.ceiling = -1;
 	game->delt_angle = M_PI / (3 * S_W);
-	game->player.fov_angle = M_PI / 3;
 }
 
 void test_texture_render(t_game_info *game)
