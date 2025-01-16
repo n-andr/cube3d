@@ -49,14 +49,17 @@ void	init_game(t_game_info *game)
 	}
 	game->textures.floor = -1;
 	game->textures.ceiling = -1;
-	game->window = NULL;
-	game->drawing_data.addr = NULL;
-	game->drawing_data.img = NULL;
 	game->textures.north_img = NULL;
 	game->textures.south_img = NULL;
 	game->textures.west_img = NULL;
 	game->textures.east_img = NULL;
 	game->delt_angle = M_PI / (3 * S_W);
+	game->window = mlx_new_window(game->mlx, S_W,
+	S_H, "Cube3D");
+	game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
+	game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
+		&game->drawing_data.bits_per_pixel,
+			&game->drawing_data.line_length, &game->drawing_data.endian);
 }
 
 void test_texture_render(t_game_info *game)

@@ -187,6 +187,7 @@ int	key_pressed(int key, t_game_info *game)
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
 	//test_texture_render(game); // for testing outputs textures
 	render_map(game); // update visuals and minimap
+	free(game->lines);
 	return (0);
 }
 
@@ -216,12 +217,6 @@ void	ft_game_draw(t_game_info *game)
 {
 	int				i;
 
-	game->window = mlx_new_window(game->mlx, S_W,
-		S_H, "Cube3D");
-	game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
-	game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
-		&game->drawing_data.bits_per_pixel,
-			&game->drawing_data.line_length, &game->drawing_data.endian);
 	ft_floor_ceiling_colour(game);
 	i = 0;
 	while (i < S_W)
@@ -231,6 +226,7 @@ void	ft_game_draw(t_game_info *game)
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
 	render_map(game);
+	free(game->lines);
 	//test_texture_render(game);
 	// printf("(before move) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
 	// printf("(before move) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
