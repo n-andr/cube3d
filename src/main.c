@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/10 20:06:31 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:55:26 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ void	init_game(t_game_info *game)
 	game->delt_angle = M_PI / (3 * S_W);
 	game->player.fov_angle = M_PI / 3;
 	game->epsilon = 0.00001;
+	game->key_state.key_w = 0;
+	game->key_state.key_s = 0;
+	game->key_state.key_a = 0;
+	game->key_state.key_d = 0;
+	game->key_state.key_left = 0;
+	game->key_state.key_right = 0;
 }
 
 void	ft_set_values(t_game_info *game)

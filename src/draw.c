@@ -109,7 +109,7 @@ void	render_map(t_game_info *game)
 
 65307 - esc
 */
-int	key_pressed(int key, t_game_info *game)
+int	key_pressed(int key, t_game_info *game) // not used
 {
 	int	i;
 
@@ -134,6 +134,74 @@ int	key_pressed(int key, t_game_info *game)
     	ft_draw_vertikal(game, game->lines[i]);
         i++;
       }
+	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+	render_map(game); // update visuals and minimap
+	return (0);
+}
+
+int key_press(int key, t_game_info *game)
+{
+	//add multiple key press
+	if (key == KEY_W)
+		game->key_state.key_w = 1;
+	else if (key == KEY_S)
+		game->key_state.key_s = 1;
+	else if (key == KEY_D)
+		game->key_state.key_d = 1;
+	else if (key == KEY_A)
+		game->key_state.key_a = 1;
+	else if (key == KEY_LEFT)
+		game->key_state.key_left = 1;
+	else if (key == KEY_RIGHT)
+		game->key_state.key_right = 1;
+	else if (key == KEY_ESC)
+		close_game(game, 0);
+	return (0);
+}
+
+int	key_release(int key, t_game_info *game)
+{
+	//add multiple key release
+	if (key == KEY_A || key == KEY_D \
+	|| key == KEY_S || key == KEY_W)
+	{
+		game->key_state.key_w = 0;
+		game->key_state.key_s = 0;
+		game->key_state.key_a = 0;
+		game->key_state.key_d = 0;
+	}
+	else if (key == KEY_LEFT || key == KEY_RIGHT)
+	{
+		game->key_state.key_left = 0;
+		game->key_state.key_right = 0;
+	}
+	return (0);
+}
+
+int render_and_update(t_game_info *game)
+{
+	int	i;
+
+	if (game->key_state.key_w)
+		move_p(game, KEY_W);
+	if (game->key_state.key_s)
+		move_p(game, KEY_S);
+	if (game->key_state.key_d)
+		move_p(game, KEY_D);
+	if (game->key_state.key_a)
+		move_p(game, KEY_A);
+	if (game->key_state.key_left)
+		turn_p(game, KEY_LEFT);
+	if (game->key_state.key_right)
+		turn_p(game, KEY_RIGHT);
+	ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
+	ft_raycasting(game);
+	i = 0;
+	while (i < S_W)
+	{
+		ft_draw_vertikal(game, game->lines[i]);
+		i++;
+	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
 	render_map(game); // update visuals and minimap
 	return (0);
@@ -177,7 +245,14 @@ void	ft_game_draw(t_game_info *game)
 	printf("(before move) angle: %f \n", game->player.p_angle); //debug
 	// mlx_put_image_to_window(game->mlx, mlx_win, img.img, 0, 0);
 
-	mlx_key_hook(game->window, key_pressed, game);
+	// mlx_key_hook(game->window, key_pressed, game);
+	// mlx_hook(game->window, 17, 1L << 17, x_close, &game);
+	// mlx_loop(game->mlx);
+
+
+	mlx_hook(game->window, 2, 1L << 0, key_press, game);     // KeyPress event
+	mlx_hook(game->window, 3, 1L << 1, key_release, game);   // KeyRelease event
+	mlx_loop_hook(game->mlx, render_and_update, game);       // Main game loop
 	mlx_hook(game->window, 17, 1L << 17, x_close, &game);
 	mlx_loop(game->mlx);
 }

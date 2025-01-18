@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/13 16:02:28 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:54:14 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,17 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
+typedef struct s_key_state
+{
+	int		key_w;
+	int		key_s;
+	int		key_a;
+	int		key_d;
+	int		key_left;
+	int		key_right;
+	//int		key_esc;
+}	t_key_state;
+
 typedef struct s_game_info
 {
 	char		**map;
@@ -121,6 +132,7 @@ typedef struct s_game_info
 	float		epsilon;
 	void		*mlx;
 	void		*window;
+	t_key_state	key_state;
 	t_data		drawing_data;
 	t_textures	textures;
 	t_player	player;
