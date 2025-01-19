@@ -38,7 +38,11 @@ void	draw_cell(int x, int y, int color, t_game_info *game)
 		j = 0;
 		while (j < MINI_CELL_SIZE)
 		{
-			mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
+			//mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
+			char *dst = game->drawing_data.addr + 
+            	((start_y + i) * game->drawing_data.line_length + 
+            	(start_x + j) * (game->drawing_data.bits_per_pixel / 8));
+			*(unsigned int *)dst = color;
 			j++;
 		}
 		i++;
@@ -60,7 +64,11 @@ void	draw_player(t_game_info *game, int color)
 		j = 0;
 		while (j < PLAYER_SIZE)
 		{
-			mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
+			//mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
+			char *dst = game->drawing_data.addr + 
+           	 ((start_y + i) * game->drawing_data.line_length + 
+             (start_x + j) * (game->drawing_data.bits_per_pixel / 8));
+			*(unsigned int *)dst = color;
 			j++;
 		}
 		i++;
@@ -147,7 +155,7 @@ int	key_pressed(int key, t_game_info *game) // not used
 
 int key_press(int key, t_game_info *game)
 {
-	//add multiple key press
+	//add multiple key press?
 	if (key == KEY_W)
 		game->key_state.key_w = 1;
 	else if (key == KEY_S)
@@ -209,7 +217,7 @@ int render_and_update(t_game_info *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
-	//render_minimap(game); // update visuals and minimap
+	render_minimap(game); // update visuals and minimap
 	return (0);
 }
 
