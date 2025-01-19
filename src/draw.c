@@ -69,7 +69,7 @@ void	draw_player(t_game_info *game, int color)
 	//printf("mini: player center x: %d, player center y: %d\n", (game->player.x / (CELL_SIZE / MINI_CELL_SIZE)), (game->player.y / (CELL_SIZE / MINI_CELL_SIZE)));
 }
 
-void	render_map(t_game_info *game)
+void	render_minimap(t_game_info *game)
 {
 	int	x;
 	int	y;
@@ -95,6 +95,11 @@ void	render_map(t_game_info *game)
 	}
 	draw_player(game, 0x0000FF); // blue for player position
 }
+
+// void	update_minimap(t_game_info *game)
+// {
+// 	draw_player(game, 0x0000FF); // blue for player position
+// }
 
 // top-down view
 
@@ -135,7 +140,8 @@ int	key_pressed(int key, t_game_info *game) // not used
         i++;
       }
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
-	render_map(game); // update visuals and minimap
+	// update_mimimap(game); // update visuals and minimap
+	draw_player(game, 0x0000FF); // draw new player position on minimap
 	return (0);
 }
 
@@ -203,7 +209,7 @@ int render_and_update(t_game_info *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
-	render_map(game); // update visuals and minimap
+	//render_minimap(game); // update visuals and minimap
 	return (0);
 }
 
@@ -239,7 +245,7 @@ void	ft_game_draw(t_game_info *game)
 	// //img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 	// 		&img.line_length, &img.endian);
 
-	render_map(game);
+	render_minimap(game);
 	printf("(before move) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
 	printf("(before move) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
 	printf("(before move) angle: %f \n", game->player.p_angle); //debug

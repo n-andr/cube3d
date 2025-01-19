@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/18 22:54:14 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:55:56 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,9 @@ int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
-void	render_map(t_game_info *game);
+void	render_minimap(t_game_info *game);
 void	draw_cell(int x, int y, int color, t_game_info *game);
+void	draw_player(t_game_info *game, int color);
 void	ft_draw_vertikal(t_game_info *game, t_line lines);
 
 

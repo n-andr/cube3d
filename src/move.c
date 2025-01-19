@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/13 18:05:19 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:55:08 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 	new_y = game->player.y + round(sin(game->player.p_angle) * STEP_SIZE);
 	new_row = (new_y - 1) / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
+	draw_player(game, 0x000000); // clear player from minimap
 	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
@@ -65,6 +66,7 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 	new_y = game->player.y - round(sin(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
+	draw_player(game, 0x000000); // clear player from minimap
 	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
@@ -87,6 +89,7 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 	new_y = game->player.y - round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = (new_x - 1) / CELL_SIZE;
+	draw_player(game, 0x000000); // clear player from minimap
 	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
@@ -109,6 +112,7 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 	new_y = game->player.y + round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
+	draw_player(game, 0x000000); // clear player from minimap
 	if (game->map[new_row][new_col] != '1')
 	{
 		game->map[p_row][p_col] = '0';
@@ -120,7 +124,7 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 	}
 }
 
-void	move_p(t_game_info *game, int key)
+void	move_p(t_game_info *game, int key) // not used?
 {
 	// find_p(game, game->map);
 
