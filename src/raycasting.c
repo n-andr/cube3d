@@ -145,19 +145,19 @@ void   ft_hor_vert_intersec_def(t_line *lines, int i)
 {
    if (i && lines)
       lines[i].hit_hor_wall = lines[i - 1].hit_hor_wall;
-   printf("lines[i].hit_hor_wall : %d\n", lines[i].hit_hor_wall);
+   //printf("lines[i].hit_hor_wall : %d\n", lines[i].hit_hor_wall);
 }
 
 int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 {
-   int   correct_len;
+  // int   correct_len;
    t_ray   hor;
    t_ray   vert;
    float   delta_angle;
    int     intersection;
 
    delta_angle = (game->player.fov_angle * i) / S_W;
-   printf("i: %d\n", i);
+   //printf("i: %d\n", i);
   // printf("delta_angle: %f\n", delta_angle);
    hor.angle = game->first_ray_angle + delta_angle;
    vert.angle = hor.angle;
@@ -194,7 +194,7 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
    while (1)
      {
       vert.len += ft_vert_step(&vert);
-      printf("i: %d\n", i);
+      //printf("i: %d\n", i);
       intersection = ft_check_intersection(game, &vert);
         if (intersection)
         {
@@ -220,28 +220,28 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
       vert.correct_len = INT_MAX;
    if (vert.correct_len < hor.correct_len)
    {
-      printf("vert intersection chosen: %d\n", vert.len);
-      printf("hor.len: %d\n", hor.len);
-      correct_len = ft_len_def(game, &hor); // debug
-      printf("hor correct len: %d\n", correct_len);
-      correct_len = ft_len_def(game, &vert);
-      printf("vert correct len: %d\n", correct_len);
+    //   printf("vert intersection chosen: %d\n", vert.len);
+    //   printf("hor.len: %d\n", hor.len);
+     // correct_len = ft_len_def(game, &hor); // debug
+    //   printf("hor correct len: %d\n", correct_len);
+    //  correct_len = ft_len_def(game, &vert);
+    //   printf("vert correct len: %d\n", correct_len);
       return (vert.correct_len);
    }
    else if (vert.correct_len > hor.correct_len)
    {
-      printf("hor intersection chosen: %d\n", hor.len);
-      printf("vert.len: %d\n", vert.len);
-      correct_len = ft_len_def(game, &vert); // debug
-      printf("vert correct len: %d\n", correct_len);
-      correct_len = ft_len_def(game, &hor);
-      printf("vert correct len: %d\n", correct_len);
+    //   printf("hor intersection chosen: %d\n", hor.len);
+    //   printf("vert.len: %d\n", vert.len);
+    //  correct_len = ft_len_def(game, &vert); // debug
+    //   printf("vert correct len: %d\n", correct_len);
+    //  correct_len = ft_len_def(game, &hor);
+    //   printf("vert correct len: %d\n", correct_len);
       lines[i].hit_hor_wall = 1;
       return (hor.correct_len);
    }
    else
    {
-      printf("ANGLE FOUND!!\n");
+    //   printf("ANGLE FOUND!!\n");
       //correct_len = ft_len_def(game, &hor);
       ft_hor_vert_intersec_def(lines, i);
       return (vert.correct_len);
@@ -250,22 +250,22 @@ int   ft_find_intersections(t_game_info  *game, int i, t_line *lines)
 }
 
 
-void  ft_print_lines_data(t_line *lines, int num)
-{
-   int i;
+// void  ft_print_lines_data(t_line *lines, int num)
+// {
+//    int i;
 
-   i = 0;
-   while (i < num)
-   {
-      //printf("hight[%d]: %d\n", i, lines[i].high);
-      //printf("x[%d]: %d\n", i, lines[i].x);
-      //printf("y1[%d]: %d\n", i, lines[i].y1);
-      //printf("y2[%d]: %d\n", i, lines[i].y2);
-      //printf("hight[%d]: %d\n", i, lines[i].high);
-      printf("correct_len[%d]: %d\n", i, lines[i].correct_len);
-      i++;
-   }
-}
+//    i = 0;
+//    while (i < num)
+//    {
+//       //printf("hight[%d]: %d\n", i, lines[i].high);
+//       //printf("x[%d]: %d\n", i, lines[i].x);
+//       //printf("y1[%d]: %d\n", i, lines[i].y1);
+//       //printf("y2[%d]: %d\n", i, lines[i].y2);
+//       //printf("hight[%d]: %d\n", i, lines[i].high);
+//     //   printf("correct_len[%d]: %d\n", i, lines[i].correct_len);
+//       i++;
+//    }
+// }
 
    void  ft_raycasting(t_game_info	*game)
 {

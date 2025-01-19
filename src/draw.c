@@ -56,13 +56,13 @@ void	draw_player(t_game_info *game, int color)
 	int	start_x;
 	int	start_y;
 
-	start_x = (game->player.x / (CELL_SIZE / MINI_CELL_SIZE)) - (PLAYER_SIZE / 2);
-	start_y = (game->player.y / (CELL_SIZE / MINI_CELL_SIZE)) - (PLAYER_SIZE / 2);
+	start_x = (game->player.x / (CELL_SIZE / MINI_CELL_SIZE)) - (MINI_PLAYER_SIZE / 2);
+	start_y = (game->player.y / (CELL_SIZE / MINI_CELL_SIZE)) - (MINI_PLAYER_SIZE / 2);
 	i = 0;
-	while (i < PLAYER_SIZE)
+	while (i < MINI_PLAYER_SIZE)
 	{
 		j = 0;
-		while (j < PLAYER_SIZE)
+		while (j < MINI_PLAYER_SIZE)
 		{
 			//mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
 			char *dst = game->drawing_data.addr + 
@@ -122,36 +122,36 @@ void	render_minimap(t_game_info *game)
 
 65307 - esc
 */
-int	key_pressed(int key, t_game_info *game) // not used
-{
-	int	i;
+// int	key_pressed(int key, t_game_info *game) // not used
+// {
+// 	int	i;
 
-	if (key == 119 || key == 115 \
-	|| key == 100 || key == 97)
-	{
-		move_p(game, key);
-	}
-	else if (key == 65361 || key == 65363)
-	{
-		turn_p(game, key);
-	}
-	else if (key == 65307)
-	{
-		close_game(game, 0);
-	}
-		ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
-	ft_raycasting(game);
-   	i = 0;
-    while (i < S_W)
-      {
-    	ft_draw_vertikal(game, game->lines[i]);
-        i++;
-      }
-	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
-	// update_mimimap(game); // update visuals and minimap
-	draw_player(game, 0x0000FF); // draw new player position on minimap
-	return (0);
-}
+// 	if (key == 119 || key == 115
+// 	  || key == 100 || key == 97)
+// 	{
+// 		move_p(game, key);
+// 	}
+// 	else if (key == 65361 || key == 65363)
+// 	{
+// 		turn_p(game, key);
+// 	}
+// 	else if (key == 65307)
+// 	{
+// 		close_game(game, 0);
+// 	}
+// 		ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
+// 	ft_raycasting(game);
+//    	i = 0;
+//     while (i < S_W)
+//       {
+//     	ft_draw_vertikal(game, game->lines[i]);
+//         i++;
+//       }
+// 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+// 	// update_mimimap(game); // update visuals and minimap
+// 	draw_player(game, 0x0000FF); // draw new player position on minimap
+// 	return (0);
+// }
 
 int key_press(int key, t_game_info *game)
 {
@@ -254,6 +254,7 @@ void	ft_game_draw(t_game_info *game)
 	// 		&img.line_length, &img.endian);
 
 	render_minimap(game);
+	printf("colums: %d, rows: %d\n", game->columns, game->rows);
 	printf("(before move) p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
 	printf("(before move) x: %d, y: %d \n", game->player.x,  game->player.y); //debug
 	printf("(before move) angle: %f \n", game->player.p_angle); //debug

@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/19 19:09:11 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:07:34 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,78 @@ key == 97 - A
 based on ASCII lowercase
 */
 
+// void	move_forward(t_game_info *game, int p_row, int p_col)
+// {
+// 	int	new_x;
+// 	int	new_y;
+// 	int	new_col;
+// 	int	new_row;
+
+// 	new_x = game->player.x + round(cos(game->player.p_angle) * STEP_SIZE);
+// 	new_y = game->player.y + round(sin(game->player.p_angle) * STEP_SIZE);
+// 	new_row = (new_y - 1) / CELL_SIZE;
+// 	new_col = new_x / CELL_SIZE;
+// 	//draw_player(game, 0x000000); // clear player from minimap
+// 	if (game->map[new_row][new_col] != '1')
+// 	{
+// 		game->map[p_row][p_col] = '0';
+// 		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
+// 		game->player.x = new_x;
+// 		game->player.y = new_y;
+// 		game->player.p_position_row = new_row;
+// 		game->player.p_position_col = new_col;
+// 	}
+// }
+
+
+// collision detection
+// check if the new position is valid
+// column = x / CELL_SIZE
+// row = y / CELL_SIZE
+
+// check if every corner of the player is in a valid position
+bool	is_valid_move(t_game_info *game, int new_x, int new_y)
+{
+	int	corner_x;
+	int	corner_y;
+	int	new_col;
+	int	new_row;
+	
+	corner_x = new_x - (PLAYER_SIZE / 2);
+	corner_y = new_y - (PLAYER_SIZE / 2);
+	new_col = corner_x / CELL_SIZE;
+	new_row = (corner_y) / CELL_SIZE;
+	if (new_row < 0 || new_row >= game->rows ||
+	    new_col < 0 || new_col >= game->columns ||
+		game->map[new_row][new_col] == '1')
+		return (false);
+	corner_x = new_x + (PLAYER_SIZE / 2);
+	corner_y = new_y - (PLAYER_SIZE / 2);
+	new_col = corner_x / CELL_SIZE;
+	new_row = corner_y / CELL_SIZE;
+	if (new_row < 0 || new_row >= game->rows ||
+	    new_col < 0 || new_col >= game->columns ||
+		game->map[new_row][new_col] == '1')
+		return (false);
+	corner_x = new_x + (PLAYER_SIZE / 2);
+	corner_y = new_y + (PLAYER_SIZE / 2);
+	new_col = corner_x / CELL_SIZE;
+	new_row = corner_y / CELL_SIZE;
+	if (new_row < 0 || new_row >= game->rows ||
+	    new_col < 0 || new_col >= game->columns ||
+		game->map[new_row][new_col] == '1')
+		return (false);
+	corner_x = new_x - (PLAYER_SIZE / 2);
+	corner_y = new_y + (PLAYER_SIZE / 2);
+	new_col = corner_x / CELL_SIZE;
+	new_row = corner_y / CELL_SIZE;
+	if (new_row < 0 || new_row >= game->rows ||
+	    new_col < 0 || new_col >= game->columns ||
+		game->map[new_row][new_col] == '1')
+		return (false);
+	return (true);
+}
+
 void	move_forward(t_game_info *game, int p_row, int p_col)
 {
 	int	new_x;
@@ -41,18 +113,25 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 
 	new_x = game->player.x + round(cos(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y + round(sin(game->player.p_angle) * STEP_SIZE);
-	new_row = (new_y - 1) / CELL_SIZE;
-	new_col = new_x / CELL_SIZE;
-	//draw_player(game, 0x000000); // clear player from minimap
-	if (game->map[new_row][new_col] != '1')
+
+	// Determine the grid cells the player would occupy with the new position
+	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
+
+	// Check if the new position is valid
+	if (is_valid_move(game, new_x, new_y))
 	{
-		game->map[p_row][p_col] = '0';
-		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
+		// Update the map and player position
+		game->map[p_row][p_col] = '0'; // Clear the old position
+		game->map[new_row][new_col] = 'N'; // Optional: update map with player's direction
 		game->player.x = new_x;
 		game->player.y = new_y;
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
+	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_back(t_game_info *game, int p_row, int p_col)
@@ -64,10 +143,11 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 
 	new_x = game->player.x - round(cos(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y - round(sin(game->player.p_angle) * STEP_SIZE);
-	new_row = new_y / CELL_SIZE;
-	new_col = new_x / CELL_SIZE;
-	//draw_player(game, 0x000000); // clear player from minimap
-	if (game->map[new_row][new_col] != '1')
+	// new_row = new_y / CELL_SIZE;
+	// new_col = new_x / CELL_SIZE;
+	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	if (is_valid_move(game, new_x, new_y))
 	{
 		game->map[p_row][p_col] = '0';
 		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
@@ -76,6 +156,9 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
+	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_left(t_game_info *game, int p_row, int p_col)
@@ -87,10 +170,11 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 
 	new_x = game->player.x + round(sin(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y - round(cos(game->player.p_angle) * STEP_SIZE);
-	new_row = new_y / CELL_SIZE;
-	new_col = (new_x - 1) / CELL_SIZE;
-	//draw_player(game, 0x000000); // clear player from minimap
-	if (game->map[new_row][new_col] != '1')
+	// new_row = new_y / CELL_SIZE;
+	// new_col = (new_x - 1) / CELL_SIZE;
+	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	if (is_valid_move(game, new_x, new_y))
 	{
 		game->map[p_row][p_col] = '0';
 		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
@@ -99,6 +183,9 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
+	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_right(t_game_info *game, int p_row, int p_col)
@@ -110,10 +197,11 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 
 	new_x = game->player.x - round(sin(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y + round(cos(game->player.p_angle) * STEP_SIZE);
-	new_row = new_y / CELL_SIZE;
-	new_col = new_x / CELL_SIZE;
-	//draw_player(game, 0x000000); // clear player from minimap
-	if (game->map[new_row][new_col] != '1')
+	// new_row = new_y / CELL_SIZE;
+	// new_col = new_x / CELL_SIZE;
+	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	new_col = (new_x + (PLAYER_SIZE / 2)) / CELL_SIZE;
+	if (is_valid_move(game, new_x, new_y))
 	{
 		game->map[p_row][p_col] = '0';
 		game->map[new_row][new_col] = 'N'; // Optional: update the map with player's direction
@@ -122,7 +210,11 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
+	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	printf("angle: %f \n", game->player.p_angle); //debug
 }
+
 
 void	move_p(t_game_info *game, int key) // not used?
 {
