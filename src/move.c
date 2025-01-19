@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/19 23:07:34 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 00:02:13 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,11 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 	new_x = game->player.x + round(cos(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y + round(sin(game->player.p_angle) * STEP_SIZE);
 
+	new_row = new_y / CELL_SIZE;
+	new_col = new_x / CELL_SIZE;
 	// Determine the grid cells the player would occupy with the new position
-	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
-	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	// new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	// new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
 
 	// Check if the new position is valid
 	if (is_valid_move(game, new_x, new_y))
@@ -143,10 +145,10 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 
 	new_x = game->player.x - round(cos(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y - round(sin(game->player.p_angle) * STEP_SIZE);
-	// new_row = new_y / CELL_SIZE;
-	// new_col = new_x / CELL_SIZE;
-	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
-	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	new_row = new_y / CELL_SIZE;
+	new_col = new_x / CELL_SIZE;
+	// new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	// new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
 	if (is_valid_move(game, new_x, new_y))
 	{
 		game->map[p_row][p_col] = '0';
@@ -172,8 +174,10 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 	new_y = game->player.y - round(cos(game->player.p_angle) * STEP_SIZE);
 	// new_row = new_y / CELL_SIZE;
 	// new_col = (new_x - 1) / CELL_SIZE;
-	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
-	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	new_row = new_y / CELL_SIZE;
+	new_col = new_x / CELL_SIZE;
+	// new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	// new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
 	if (is_valid_move(game, new_x, new_y))
 	{
 		game->map[p_row][p_col] = '0';
@@ -197,10 +201,10 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 
 	new_x = game->player.x - round(sin(game->player.p_angle) * STEP_SIZE);
 	new_y = game->player.y + round(cos(game->player.p_angle) * STEP_SIZE);
-	// new_row = new_y / CELL_SIZE;
-	// new_col = new_x / CELL_SIZE;
-	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
-	new_col = (new_x + (PLAYER_SIZE / 2)) / CELL_SIZE;
+	new_row = new_y / CELL_SIZE;
+	new_col = new_x / CELL_SIZE;
+	// new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
+	// new_col = (new_x + (PLAYER_SIZE / 2)) / CELL_SIZE;
 	if (is_valid_move(game, new_x, new_y))
 	{
 		game->map[p_row][p_col] = '0';

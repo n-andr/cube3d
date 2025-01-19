@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/19 23:25:44 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:59:47 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 // # define IMG_HEIGHT 32
 # define CELL_SIZE 64
 # define MINI_CELL_SIZE (CELL_SIZE / 8)
-# define STEP_SIZE 8
-# define TURN_ANGLE (M_PI / 24)
+# define STEP_SIZE 4
+# define TURN_ANGLE (M_PI / 48)
 //# define TURN_ANGLE (M_PI / 4)
 // TURN_ANGLE = 15 degrees
 # define PLAYER_SIZE (CELL_SIZE / 16)
-# define MINI_PLAYER_SIZE (MINI_CELL_SIZE / 2)
+# define MINI_PLAYER_SIZE (MINI_CELL_SIZE)
 # define S_W 1280
 # define S_H 720
 // input keys
