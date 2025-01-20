@@ -1,18 +1,18 @@
 
 
-NO ./assets/wall-texture.xpm
-SO ./assets/wall-texture.xpm
+NO ./assets/lava.xpm
+SO ./assets/glass.xpm
 
 
 
 
-WE           ./assets/wall-texture.xpm
+WE           ./assets/bricks.xpm
 
 
 
-EA ./assets/wall-texture.xpm
-F           220,100,9
-C 225,30,0
+EA ./assets/sand.xpm
+C           130,200,229
+F 255,237,41
 
 
 

@@ -56,12 +56,21 @@ typedef struct s_textures
 {
 	//void	*player;
 	//void	*collectible;
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
+	void	*north_img;
+	void	*south_img;
+	void	*west_img;
+	void	*east_img;
 	int		floor;
 	int		ceiling;
+	char	*n_data;
+	char	*s_data;
+	char	*w_data;
+	char	*e_data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }	t_textures;
 
 typedef struct	s_player
@@ -91,23 +100,28 @@ typedef struct	s_ray
 
 typedef struct	s_line
 {
-	int	x;
-	int y1;
-	int y2;
-	int color;
-	int	high;
-	int	correct_len;
-	int	hit_hor_wall;
+	int				x;
+	int				y1;
+	int				y2;
+	int				offset_x;
+	int				y_top;
+	int				high;
+	int				correct_len;
+	int				hit_hor_wall;
+	int				s_wall_side;
+	int				n_wall_side;
+	int				w_wall_side;
+	int				e_wall_side;
 }	t_line;
 
-typedef struct s_data
+typedef struct s_draw_data
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_data;
+}	t_draw_data;
 
 typedef struct s_key_state
 {
@@ -127,10 +141,8 @@ typedef struct s_game_info
 	int			columns;
 	int			map_width;
 	int			map_height;
-	int			colour;
 	float		delt_angle;
 	float		first_ray_angle;
-	float		epsilon;
 	void		*mlx;
 	void		*window;
 	t_key_state	key_state;
@@ -142,9 +154,6 @@ typedef struct s_game_info
 
 typedef struct s_vars
 {
-	void			*mlx;
-	void			*img;
-	void			*win;
 	t_game_info		*game;
 }				t_vars;
 
@@ -173,10 +182,11 @@ int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
+void			draw_cell(int x, int y, int color, t_game_info *game);
+void			ft_draw_vertikal(t_game_info *game, t_line lines, unsigned int color);
+void			ft_floor_ceiling_colour(t_game_info *game);
+unsigned int	ft_get_pixel_color(t_game_info     *game, t_line line, int x, int y);
 void	render_minimap(t_game_info *game);
-void	draw_cell(int x, int y, int color, t_game_info *game);
-void	draw_player(t_game_info *game, int color);
-void	ft_draw_vertikal(t_game_info *game, t_line lines);
 
 
 // //moves
@@ -192,5 +202,7 @@ void	free_array(char **array);
 void	free_textures(t_game_info *game);
 int	close_game(t_game_info *game, int exit_status);
 
+//test
+void test_texture_render(t_game_info *game);
 
 #endif

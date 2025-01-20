@@ -23,14 +23,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="some printf valgrind errors removed">
+    <list default="true" id="1ee8ef02-bdc6-4888-8667-2940d0bd4d49" name="Changes" comment="some valgrind errors have been improved">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cube3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cube3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/characters_and_player_check.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/characters_and_player_check.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/get_textures.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/get_textures.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/draw.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/draw.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/raycasting.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/raycasting.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/window_manage.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/window_manage.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +38,13 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="textures-testing" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -61,33 +64,34 @@
   <component name="ProjectId" id="2p5Q23WnTwRdl3tnc0leJddNNuv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C/C++ File.Makefile.executor": "Debug",
-    "C/C++ File.cub3D.executor": "Run",
-    "C/C++ File.main.c.executor": "Debug",
-    "Makefile Target.all.executor": "Run",
-    "Makefile Target.fclean.executor": "Run",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "rotations__fix",
-    "last_opened_file_path": "/home/tghnx1/Desktop/42/cube3d/build/cub3D",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.fileTypes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.Makefile.executor&quot;: &quot;Debug&quot;,
+    &quot;C/C++ File.cub3D.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.main.c.executor&quot;: &quot;Debug&quot;,
+    &quot;Makefile Target.all.executor&quot;: &quot;Run&quot;,
+    &quot;Makefile Target.fclean.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;textures&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tghnx1/Desktop/42/cube3d/build/cub3D&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -129,9 +133,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Makefile Target.fclean" />
+        <item itemvalue="Makefile Target.all" />
+        <item itemvalue="C/C++ File.main.c" />
         <item itemvalue="C/C++ File.main.c" />
         <item itemvalue="Makefile Target.all" />
-        <item itemvalue="Makefile Target.fclean" />
       </list>
     </recent_temporary>
   </component>
@@ -159,6 +165,7 @@
       <workItem from="1732544801332" duration="19737000" />
       <workItem from="1733842059374" duration="2252000" />
       <workItem from="1733844525904" duration="14489000" />
+      <workItem from="1736861904288" duration="35274000" />
     </task>
     <task id="LOCAL-00001" summary="Finished with finding the first wall horizontal intersection, counted the length of the ray, created structures for player and the intersection coordinates for properly drawing">
       <option name="closed" value="true" />
@@ -192,7 +199,55 @@
       <option name="project" value="LOCAL" />
       <updated>1736696156172</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="part of function ft_set_values has moved to init_game and part to p_check">
+      <option name="closed" value="true" />
+      <created>1736700941172</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1736700941172</updated>
+    </task>
+    <task id="LOCAL-00006" summary="successfully put one texture to a screen.">
+      <option name="closed" value="true" />
+      <created>1736875034047</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1736875034047</updated>
+    </task>
+    <task id="LOCAL-00007" summary="successfully put four textures to the screen.">
+      <option name="closed" value="true" />
+      <created>1736876761941</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1736876761941</updated>
+    </task>
+    <task id="LOCAL-00008" summary="attached textures depending on the wall side (east, west, north, south)">
+      <option name="closed" value="true" />
+      <created>1736965307390</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1736965307390</updated>
+    </task>
+    <task id="LOCAL-00009" summary="extra squares added">
+      <option name="closed" value="true" />
+      <created>1736965928277</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1736965928277</updated>
+    </task>
+    <task id="LOCAL-00010" summary="some valgrind errors have been improved">
+      <option name="closed" value="true" />
+      <created>1737037089473</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1737037089473</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +258,13 @@
     <MESSAGE value="%d %f configured" />
     <MESSAGE value="wall's ugly stripes's been removed!!" />
     <MESSAGE value="some printf valgrind errors removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="some printf valgrind errors removed" />
+    <MESSAGE value="part of function ft_set_values has moved to init_game and part to p_check" />
+    <MESSAGE value="successfully put one texture to a screen." />
+    <MESSAGE value="successfully put four textures to the screen." />
+    <MESSAGE value="attached textures depending on the wall side (east, west, north, south)" />
+    <MESSAGE value="extra squares added" />
+    <MESSAGE value="some valgrind errors have been improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="some valgrind errors have been improved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
