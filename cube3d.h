@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/19 23:59:47 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:04:58 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ typedef struct s_game_info
 	void		*mlx;
 	void		*window;
 	t_key_state	key_state;
-	t_data		drawing_data;
+	t_draw_data	drawing_data;
 	t_textures	textures;
 	t_player	player;
 	t_line		*lines;

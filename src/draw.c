@@ -5,11 +5,17 @@ void	ft_texture_coord_def(t_game_info *game, t_line line, int *x, int *y)
 	int	col;
 	int	wall_up_part;
 
+// printf("line.x: %d, address: %p\n", line.x, (void*)&line.x);
+// printf("line.y1: %d, address: %p\n", line.y1, (void*)&line.y1);
+// printf("line.y_top: %d, address: %p\n", line.y_top, (void*)&line.y_top);
+// printf("line.high: %d, address: %p\n", line.high, (void*)&line.high);
+// printf("line.offset_x: %d, address: %p\n", line.offset_x, (void*)&line.offset_x);
 	col = line.x / CELL_SIZE;
 	*x = (game->textures.width * (line.x - col * CELL_SIZE)) / ((col + 1)
 			* CELL_SIZE);
 	wall_up_part = line.y1 - line.y_top;
-	*y = wall_up_part * game->textures.height / line.high;
+	if (line.high)
+		*y = wall_up_part * game->textures.height / line.high;
 	*x = line.offset_x * game->textures.width / CELL_SIZE;
 }
 
@@ -155,54 +161,6 @@ void	render_minimap(t_game_info *game)
 	draw_player(game, 0x0000FF);
 }
 
-// void	update_minimap(t_game_info *game)
-// {
-// 	draw_player(game, 0x0000FF); // blue for player position
-// }
-
-// top-down view
-
-/*
-119 - W
-115 - S
-100 - D
-97 - A
-
-65361 - left arrow
-65363 - right arrow
-
-65307 - esc
-*/
-// int	key_pressed(int key, t_game_info *game) // not used
-// {
-// 	int	i;
-
-// 	if (key == 119 || key == 115
-// 	  || key == 100 || key == 97)
-// 	{
-// 		move_p(game, key);
-// 	}
-// 	else if (key == 65361 || key == 65363)
-// 	{
-// 		turn_p(game, key);
-// 	}
-// 	else if (key == 65307)
-// 	{
-// 		close_game(game, 0);
-// 	}
-// 		ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
-// 	ft_raycasting(game);
-//    	i = 0;
-//     while (i < S_W)
-//       {
-//     	ft_draw_vertikal(game, game->lines[i]);
-//         i++;
-//       }
-// 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
-// 	// update_mimimap(game); // update visuals and minimap
-// 	draw_player(game, 0x0000FF); // draw new player position on minimap
-// 	return (0);
-// }
 
 int key_press(int key, t_game_info *game)
 {
@@ -260,16 +218,16 @@ int render_and_update(t_game_info *game)
 	if (game->key_state.key_right)
 		turn_p(game, KEY_RIGHT);
 	ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
+	ft_floor_ceiling_colour(game);
 	ft_raycasting(game);
 	i = 0;
 	while (i < S_W)
 	{
-		ft_draw_vertikal(game, game->lines[i]);
+		ft_draw_vertikal(game, game->lines[i], 0);
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
 	render_minimap(game); // update visuals and minimap
-	ft_floor_ceiling_colour(game);
 	free(game->lines);
 	return (0);
 }
@@ -309,7 +267,7 @@ void	ft_game_draw(t_game_info *game)
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0,
 		0);
-	render_map(game);
+	render_minimap(game);
 	free(game->lines);
 	mlx_hook(game->window, 2, 1L << 0, key_press, game);     // KeyPress event
 	mlx_hook(game->window, 3, 1L << 1, key_release, game);   // KeyRelease event

@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 20:10:07 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:40:09 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	free_textures(t_game_info *game)
 int	close_game(t_game_info *game, int exit_status)
 {
 	free_array(game->map); //free map array
+	if (game->drawing_data.img)
+		mlx_destroy_image(game->mlx, game->drawing_data.img);
 	free_textures(game); //free images
 	if (game->mlx != NULL && game->window != NULL)
 		mlx_destroy_window(game->mlx, game->window);
