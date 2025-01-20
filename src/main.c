@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 15:07:31 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:07:46 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ void	init_game(t_game_info *game)
 	game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
 			&game->drawing_data.bits_per_pixel, &game->drawing_data.line_length,
 			&game->drawing_data.endian);
+	game->textures.gun_img = mlx_xpm_file_to_image(game->mlx, "./assets/2000p.xpm",
+			&game->textures.gun_width, &game->textures.gun_height);
+	if (game->textures.gun_img == NULL)
+		handle_error(game, 1, "Error\nNo gun texture\n", NULL);
+	game->textures.gun_data = mlx_get_data_addr(game->textures.gun_img,
+		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.endian);
+	game->textures.x_gun = S_W / 2 - game->textures.gun_width / 2;
+	game->textures.y_gun = S_H - game->textures.gun_height;
+
 }
 
 void	test_texture_render(t_game_info *game)
@@ -95,7 +105,8 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	ft_raycasting(&game);
-	printf("kek\n");
+	mlx_put_image_to_window(game.mlx, game.window, game.textures.gun_img,
+		game.textures.x_gun, game.textures.y_gun);
 	ft_game_draw(&game); // Nata
 	return (0);
 }

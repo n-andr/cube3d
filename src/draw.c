@@ -199,14 +199,32 @@ int	key_release(int key, t_game_info *game)
 	return (0);
 }
 
+void	ft_gun_move(t_game_info *game)
+{
+	int	move_border;
+
+	move_border = S_H / 2 + 200;
+	if (game->textures.y_gun > move_border)
+		game->textures.y_gun = game->textures.y_gun - 5;
+	else
+		game->textures.y_gun = game->textures.y_gun + 5;
+
+}
+
 int render_and_update(t_game_info *game)
 {
 	int	i;
 
 	if (game->key_state.key_w)
+	{
+		ft_gun_move(game);
 		move_p(game, KEY_W);
+	}
 	if (game->key_state.key_s)
+	{
+		ft_gun_move(game);
 		move_p(game, KEY_S);
+	}
 	if (game->key_state.key_d)
 		move_p(game, KEY_D);
 	if (game->key_state.key_a)
@@ -225,6 +243,8 @@ int render_and_update(t_game_info *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->textures.gun_img,
+		game->textures.x_gun, game->textures.y_gun);
 	render_minimap(game); // update visuals and minimap
 	free(game->lines);
 	return (0);

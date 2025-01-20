@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/16 00:04:45 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:59:26 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void assign_texture(t_game_info *game, char *line, void **img, int file)
 			&game->textures.width, &game->textures.height); // check if it is correct way to assign texture
 	else
 		handle_error(game, file, "Error\nWrong texture format\n", line);
-	printf("game->mlx: %p\n", game->mlx);
-	printf("image: %p\n", *img);
+	//printf("game->mlx: %p\n", game->mlx);
+	//printf("image: %p\n", *img);
 	printf("line: %s\n", line);
 }
 

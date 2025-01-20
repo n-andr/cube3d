@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 16:14:13 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:32:48 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define PLAYER_SIZE (CELL_SIZE / 16)
 # define MINI_PLAYER_SIZE (MINI_CELL_SIZE)
 # define S_W 1920
-# define S_H 1080
+# define S_H 1020
 // input keys
 # define KEY_W 119
 # define KEY_S 115
@@ -60,14 +60,20 @@ typedef struct s_textures
 	void	*south_img;
 	void	*west_img;
 	void	*east_img;
+	void	*gun_img;
 	int		floor;
 	int		ceiling;
 	char	*n_data;
 	char	*s_data;
 	char	*w_data;
 	char	*e_data;
+	void	*gun_data;
+	int		x_gun;
+	int		y_gun;
 	int		width;
 	int		height;
+	int		gun_width;
+	int		gun_height;
 	int		bpp;
 	int		size_line;
 	int		endian;
