@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2024/12/16 23:03:52 by nandreev         ###   ########.fr        #
+#    Updated: 2025/01/20 17:48:43 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -Werror -fPIC
 
 SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/scene_elements.c\
 		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c\
-		src/raycasting.c src/draw.c src/window_manage.c src/map_border.c src/move.c src/turn.c
+		src/raycasting.c src/draw.c src/window_manage.c src/map_border.c src/move.c src/turn.c\
+		src/mouse.c
 
 OBJS := $(SOURCES:.c=.o)
 LIBFT_LIB = src/libft/

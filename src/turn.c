@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 01:44:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/13 16:53:54 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:58:17 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	turn_right(t_game_info *game)
 		game->player.p_angle -= 2 * M_PI;
 }
 
-void	turn_p(t_game_info *game, int key)
+void	turn_p(t_game_info *game, int key) // delete?
 {
 	if (key == KEY_LEFT)
 	{
