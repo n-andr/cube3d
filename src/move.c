@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 00:14:09 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:37:26 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
+	// printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	// printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	// printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_back(t_game_info *game, int p_row, int p_col)
@@ -121,9 +121,9 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
+	// printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	// printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	// printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_left(t_game_info *game, int p_row, int p_col)
@@ -150,9 +150,9 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
+	// printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	// printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	// printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_right(t_game_info *game, int p_row, int p_col)
@@ -177,9 +177,9 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
+	// printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	// printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	// printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 
