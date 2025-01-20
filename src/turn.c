@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turn.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 01:44:12 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/17 21:03:07 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:53:54 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 void	turn_left(t_game_info *game)
 {
-	printf("turn left\n");
+	printf("turn left\n"); //debug
 	game->player.p_angle -= TURN_ANGLE;
 
 	if (game->player.p_angle < 0)
@@ -35,7 +35,7 @@ void	turn_left(t_game_info *game)
 
 void	turn_right(t_game_info *game)
 {
-	printf("turn right\n");
+	printf("turn right\n"); //debug
 	game->player.p_angle += TURN_ANGLE;
 
 	if (game->player.p_angle >= 2 * M_PI)
@@ -44,15 +44,15 @@ void	turn_right(t_game_info *game)
 
 void	turn_p(t_game_info *game, int key)
 {
-	if (key == 65361)
+	if (key == KEY_LEFT)
 	{
 		turn_left(game);
 	}
-	else if (key == 65363)
+	else if (key == KEY_RIGHT)
 	{
 		turn_right(game);
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
+	// printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	// printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	// printf("angle: %f \n", game->player.p_angle); //debug
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/10 19:54:20 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:59:47 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 // # define IMG_WIDTH 32
 // # define IMG_HEIGHT 32
 # define CELL_SIZE 64
-# define MINI_CELL_SIZE 16
-# define STEP_SIZE 16
-# define TURN_ANGLE (M_PI / 24)
+# define MINI_CELL_SIZE (CELL_SIZE / 8)
+# define STEP_SIZE 4
+# define TURN_ANGLE (M_PI / 48)
 //# define TURN_ANGLE (M_PI / 4)
 // TURN_ANGLE = 15 degrees
-# define PLAYER_SIZE (MINI_CELL_SIZE / 2)
+# define PLAYER_SIZE (CELL_SIZE / 16)
+# define MINI_PLAYER_SIZE (MINI_CELL_SIZE)
 # define S_W 1280
 # define S_H 720
+// input keys
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_ESC 65307
 
 # include <fcntl.h>
 # include <math.h>
@@ -100,6 +109,17 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
+typedef struct s_key_state
+{
+	int		key_w;
+	int		key_s;
+	int		key_a;
+	int		key_d;
+	int		key_left;
+	int		key_right;
+	//int		key_esc;
+}	t_key_state;
+
 typedef struct s_game_info
 {
 	char		**map;
@@ -113,6 +133,7 @@ typedef struct s_game_info
 	float		epsilon;
 	void		*mlx;
 	void		*window;
+	t_key_state	key_state;
 	t_data		drawing_data;
 	t_textures	textures;
 	t_player	player;
@@ -152,8 +173,9 @@ int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
-void	render_map(t_game_info *game);
+void	render_minimap(t_game_info *game);
 void	draw_cell(int x, int y, int color, t_game_info *game);
+void	draw_player(t_game_info *game, int color);
 void	ft_draw_vertikal(t_game_info *game, t_line lines);
 
 
