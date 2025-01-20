@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 00:14:09 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:15:53 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	is_valid_move(t_game_info *game, int new_x, int new_y)
 {
 	int	new_col;
 	int	new_row;
-	
+
 	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
 	new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
 	if (new_row < 0 || new_row >= game->rows || new_col < 0
@@ -61,7 +61,7 @@ bool	is_valid_move(t_game_info *game, int new_x, int new_y)
 		return (false);
 	new_col = (new_x - (PLAYER_SIZE / 2)) / CELL_SIZE;
 	new_row = (new_y + (PLAYER_SIZE / 2)) / CELL_SIZE;
-	if (new_row < 0 || new_row >= game->rows || new_col < 0 
+	if (new_row < 0 || new_row >= game->rows || new_col < 0
 		|| new_col >= game->columns || game->map[new_row][new_col] == '1')
 		return (false);
 	return (true);
@@ -94,9 +94,6 @@ void	move_forward(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_back(t_game_info *game, int p_row, int p_col)
@@ -121,9 +118,6 @@ void	move_back(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_left(t_game_info *game, int p_row, int p_col)
@@ -150,9 +144,6 @@ void	move_left(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 void	move_right(t_game_info *game, int p_row, int p_col)
@@ -166,8 +157,6 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 	new_y = game->player.y + round(cos(game->player.p_angle) * STEP_SIZE);
 	new_row = new_y / CELL_SIZE;
 	new_col = new_x / CELL_SIZE;
-	// new_row = (new_y - (PLAYER_SIZE / 2)) / CELL_SIZE;
-	// new_col = (new_x + (PLAYER_SIZE / 2)) / CELL_SIZE;
 	if (is_valid_move(game, new_x, new_y))
 	{
 		game->map[p_row][p_col] = '0';
@@ -185,7 +174,6 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 
 void	move_p(t_game_info *game, int key) // not used?
 {
-	// find_p(game, game->map);
 
 	if (key == KEY_W)
 	{
@@ -203,8 +191,4 @@ void	move_p(t_game_info *game, int key) // not used?
 	{
 		move_left(game, game->player.p_position_row, game->player.p_position_col);
 	}
-	//printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	//printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	//printf("angle: %f \n", game->player.p_angle); //debug
-
 }

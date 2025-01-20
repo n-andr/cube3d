@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 15:04:58 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:14:13 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 // TURN_ANGLE = 15 degrees
 # define PLAYER_SIZE (CELL_SIZE / 16)
 # define MINI_PLAYER_SIZE (MINI_CELL_SIZE)
-# define S_W 1280
-# define S_H 720
+# define S_W 1920
+# define S_H 1080
 // input keys
 # define KEY_W 119
 # define KEY_S 115
@@ -35,7 +35,7 @@
 
 # include <fcntl.h>
 # include <math.h>
-#include <limits.h>
+# include <limits.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
