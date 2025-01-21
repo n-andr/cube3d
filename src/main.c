@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/21 18:33:20 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:10:21 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	ft_raycasting(&game);
-	mlx_put_image_to_window(game.mlx, game.window, game.textures.gun_img,
-		game.textures.x_gun, game.textures.y_gun);
+	// mlx_put_image_to_window(game.mlx, game.window, game.textures.gun_img,
+	// 	game.textures.x_gun, game.textures.y_gun);
 	ft_game_draw(&game); // Nata
 	return (0);
 }

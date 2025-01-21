@@ -187,6 +187,17 @@ int	ft_find_intersections(t_game_info *game, int i, t_line *lines)
 	}
 }
 
+void	ft_line_def(t_line *line)
+{
+	line->e_wall_side = 0;
+	line->s_wall_side = 0;
+	line->w_wall_side = 0;
+	line->n_wall_side = 0;
+	line->high = 0;
+	line->correct_len = 0;
+	line->hit_hor_wall = 0;
+}
+
 void	ft_raycasting(t_game_info *game)
 {
 	int		i;
@@ -202,10 +213,8 @@ void	ft_raycasting(t_game_info *game)
 	i = 0;
 	while (i < S_W)
 	{
-		lines[i].e_wall_side = 0;
-		lines[i].s_wall_side = 0;
-		lines[i].w_wall_side = 0;
-		lines[i].n_wall_side = 0;
+		ft_line_def(&lines[i]);
+		lines[i].y_top = 0;
 		lines[i].correct_len = ft_find_intersections(game, i, lines);
 		lines[i].high = S_H * CELL_SIZE / lines[i].correct_len;
 		lines[i].x = i;

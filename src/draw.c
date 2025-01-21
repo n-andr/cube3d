@@ -273,6 +273,9 @@ void	ft_floor_ceiling_colour(t_game_info *game)
 	unsigned int	color;
 
 	i = 0;
+	color = 0;
+	ft_line_def(&line);
+	
 	while (i < S_W)
 	{
 		line.x = i;

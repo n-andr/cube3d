@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/21 18:30:33 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:24:23 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ bool	is_closed(t_game_info *game);
 
 //math
 void    ft_raycasting(t_game_info	*game);
+void	ft_line_def(t_line *line);
 
 // graphics
 void	ft_game_draw(t_game_info	*game);
