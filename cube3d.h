@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 18:32:48 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:30:33 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ typedef struct s_game_info
 	float		first_ray_angle;
 	void		*mlx;
 	void		*window;
+	int			step;
 	t_key_state	key_state;
 	t_draw_data	drawing_data;
 	t_textures	textures;

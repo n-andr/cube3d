@@ -14,7 +14,10 @@ void	ft_texture_coord_def(t_game_info *game, t_line line, int *x, int *y)
 	wall_up_part = line.y1 - line.y_top;
 	if (line.high)
 		*y = wall_up_part * game->textures.height / line.high;
-	*x = line.offset_x * game->textures.width / CELL_SIZE;
+	if (line.w_wall_side == 1 || line.s_wall_side)
+		*x = CELL_SIZE - line.offset_x * game->textures.width / CELL_SIZE;
+	else
+		*x = line.offset_x * game->textures.width / CELL_SIZE;
 }
 
 unsigned int	ft_get_pixel_color(t_game_info *game, t_line line, int x, int y)
@@ -201,14 +204,25 @@ int	key_release(int key, t_game_info *game)
 
 void	ft_gun_move(t_game_info *game)
 {
-	int	move_border;
 
-	move_border = S_H / 2 + 200;
-	if (game->textures.y_gun > move_border)
+	if (game->step < 5)
+	{
 		game->textures.y_gun = game->textures.y_gun - 5;
-	else
+		game->step = game->step + 1;
+	}
+	else if (game->step >= 5 && game->step < 10)
+	{
 		game->textures.y_gun = game->textures.y_gun + 5;
+		game->step = game->step + 1;
+	}
+	else
+		game->step = 0;
 
+}
+
+void	ft_ceiling_color_change(t_game_info * game)
+{
+	game->textures.ceiling = game->textures.ceiling + 10000;
 }
 
 int render_and_update(t_game_info *game)
@@ -217,11 +231,13 @@ int render_and_update(t_game_info *game)
 
 	if (game->key_state.key_w)
 	{
+		ft_ceiling_color_change(game);
 		ft_gun_move(game);
 		move_p(game, KEY_W);
 	}
 	if (game->key_state.key_s)
 	{
+		ft_ceiling_color_change(game);
 		ft_gun_move(game);
 		move_p(game, KEY_S);
 	}

@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 19:07:46 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:33:20 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	is_cub(char *map_adress)
 
 void	init_game(t_game_info *game)
 {
+	game->step = 0;
 	game->map = NULL;
 	game->rows = 0;
 	game->columns = 0;
@@ -73,7 +74,7 @@ void	init_game(t_game_info *game)
 		&game->textures.bpp, &game->textures.size_line,
 			&game->textures.endian);
 	game->textures.x_gun = S_W / 2 - game->textures.gun_width / 2;
-	game->textures.y_gun = S_H - game->textures.gun_height;
+	game->textures.y_gun = S_H - game->textures.gun_height + 30;
 
 }
 
