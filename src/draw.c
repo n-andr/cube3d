@@ -2,7 +2,6 @@
 
 void	ft_texture_coord_def(t_game_info *game, t_line line, int *x, int *y)
 {
-	int	col;
 	int	wall_up_part;
 
 // printf("line.x: %d, address: %p\n", line.x, (void*)&line.x);
@@ -10,7 +9,6 @@ void	ft_texture_coord_def(t_game_info *game, t_line line, int *x, int *y)
 // printf("line.y_top: %d, address: %p\n", line.y_top, (void*)&line.y_top);
 // printf("line.high: %d, address: %p\n", line.high, (void*)&line.high);
 // printf("line.offset_x: %d, address: %p\n", line.offset_x, (void*)&line.offset_x);
-	col = line.x / CELL_SIZE;
 	wall_up_part = line.y1 - line.y_top;
 	if (line.high)
 		*y = wall_up_part * game->textures.height / line.high;
@@ -275,7 +273,7 @@ void	ft_floor_ceiling_colour(t_game_info *game)
 	i = 0;
 	color = 0;
 	ft_line_def(&line);
-	
+
 	while (i < S_W)
 	{
 		line.x = i;

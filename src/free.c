@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 15:40:09 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:04:18 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ void	free_array(char **array)
 	int i;
 
 	i = 0;
-	while (array[i])
+	if (array)
 	{
-		free (array[i]);
-		i ++;
+		while (array[i])
+		{
+			free (array[i]);
+			i ++;
+		}
+		free (array);
 	}
-	free (array);
 }
 
 void	free_textures(t_game_info *game)

@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/21 18:30:46 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:58:34 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,5 @@ void	get_textures(t_game_info *game, char *file_adress)
 	}
 	free(line);
 	check_texture(game, file);
-	ft_set_textures_params(game);
 	close(file);
 }

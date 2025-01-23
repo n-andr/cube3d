@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/21 20:24:23 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:19:13 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CUBE3D_H
 // # define IMG_WIDTH 32
 // # define IMG_HEIGHT 32
-# define CELL_SIZE 64
+# define CELL_SIZE 128
 # define MINI_CELL_SIZE (CELL_SIZE / 8)
-# define STEP_SIZE 4
+# define STEP_SIZE CELL_SIZE / 16
 # define TURN_ANGLE (M_PI / 48)
 //# define TURN_ANGLE (M_PI / 4)
 // TURN_ANGLE = 15 degrees
@@ -189,6 +189,7 @@ void	ft_line_def(t_line *line);
 void	ft_game_draw(t_game_info	*game);
 int		handle_input(int keysym, t_vars *data);
 int		x_close(t_vars *data);
+void	ft_set_textures_params(t_game_info *game);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
 void			draw_cell(int x, int y, int color, t_game_info *game);
