@@ -100,72 +100,73 @@ void	ft_hor_vert_intersec_def(t_line *lines, int i)
 
 void	ft_wall_side_ident(t_ray ray, t_line *line)
 {
-	if (ray.ray_y_dir == 1) // Moving south
+	if (ray.ray_y_dir == 1)
 	{
 		if (line->hit_hor_wall)
 			line->s_wall_side = 1;
-		else if (ray.ray_x_dir == 1) // Moving east
+		else if (ray.ray_x_dir == 1)
 			line->e_wall_side = 1;
-		else // Moving west
+		else
 			line->w_wall_side = 1;
 	}
-	else if (ray.ray_y_dir == -1) // Moving north
+	else if (ray.ray_y_dir == -1)
 	{
 		if (line->hit_hor_wall)
 			line->n_wall_side = 1;
-		else if (ray.ray_x_dir == 1) // Moving east
+		else if (ray.ray_x_dir == 1)
 			line->e_wall_side = 1;
-		else // Moving west
+		else
 			line->w_wall_side = 1;
 	}
 }
 
-int	ft_find_intersections(t_game_info *game, int i, t_line *lines)
+void	ft_rays_def(t_ray *hor, t_ray *vert,
+			t_game_info *game, float delta_angle)
 {
-	t_ray	hor;
-	t_ray	vert;
-	float	delta_angle;
-	int		intersection;
+	hor->angle = game->first_ray_angle + delta_angle;
+	vert->angle = hor->angle;
+	vert->len = 0;
+	hor->len = 0;
+	hor->ray_x = game->player.x;
+	hor->ray_y = game->player.y;
+	vert->ray_x = game->player.x;
+	vert->ray_y = game->player.y;
+	vert->col = game->player.p_position_col;
+	vert->row = game->player.p_position_row;
+	hor->col = game->player.p_position_col;
+	hor->row = game->player.p_position_row;
+}
 
-	delta_angle = (game->player.fov_angle * i) / S_W;
-	hor.angle = game->first_ray_angle + delta_angle;
-	vert.angle = hor.angle;
-	vert.len = 0;
-	hor.len = 0;
-	hor.ray_x = game->player.x;
-	hor.ray_y = game->player.y;
-	vert.ray_x = game->player.x;
-	vert.ray_y = game->player.y;
-	vert.col = game->player.p_position_col;
-	vert.row = game->player.p_position_row;
-	hor.col = game->player.p_position_col;
-	hor.row = game->player.p_position_row;
-	ft_ray_dir_def(&hor, &vert);
+void	ft_hor_vert_steps(t_ray *hor, t_ray *vert, t_game_info *game)
+{
+	int	intersection;
+
 	while (1)
 	{
-		hor.len += ft_hor_step(&hor);
-		intersection = ft_check_intersection(game, &hor);
+		hor->len += ft_hor_step(hor);
+		intersection = ft_check_intersection(game, hor);
 		if (intersection)
 			break ;
 	}
-	if (intersection == -1 || hor.len < 0)
-		hor.len = INT_MAX;
+	if (intersection == -1 || hor->len < 0)
+		hor->len = INT_MAX;
 	while (1)
 	{
-		vert.len += ft_vert_step(&vert);
-		intersection = ft_check_intersection(game, &vert);
+		vert->len += ft_vert_step(vert);
+		intersection = ft_check_intersection(game, vert);
 		if (intersection)
 			break ;
 	}
-	if (intersection == -1 || vert.len < 0)
-		vert.len = INT_MAX;
-	lines[i].hit_hor_wall = 0;
-	hor.correct_len = ft_len_def(game, &hor);
-	vert.correct_len = ft_len_def(game, &vert);
-	if (hor.correct_len < 0)
-		hor.correct_len = INT_MAX;
-	if (vert.correct_len < 0)
-		vert.correct_len = INT_MAX;
+	if (intersection == -1 || vert->len < 0)
+		vert->len = INT_MAX;
+	if (hor->correct_len < 0)
+		hor->correct_len = INT_MAX;
+	if (vert->correct_len < 0)
+		vert->correct_len = INT_MAX;
+}
+
+int	ft_choose_len(t_ray hor, t_ray vert, t_line *lines, int i)
+{
 	if (vert.correct_len < hor.correct_len)
 	{
 		lines[i].offset_x = (int)vert.ray_y % CELL_SIZE;
@@ -185,6 +186,27 @@ int	ft_find_intersections(t_game_info *game, int i, t_line *lines)
 		ft_wall_side_ident(vert, &lines[i]);
 		return (vert.correct_len);
 	}
+}
+
+int	ft_find_intersections(t_game_info *game, int i, t_line *lines)
+{
+	t_ray	hor;
+	t_ray	vert;
+	float	delta_angle;
+
+
+	delta_angle = (game->player.fov_angle * i) / S_W;
+	ft_rays_def(&hor, &vert, game, delta_angle);
+	ft_ray_dir_def(&hor, &vert);
+	ft_hor_vert_steps(&hor, &vert, game);
+	lines[i].hit_hor_wall = 0;
+	hor.correct_len = ft_len_def(game, &hor);
+	vert.correct_len = ft_len_def(game, &vert);
+	if (hor.correct_len < 0)
+		hor.correct_len = INT_MAX;
+	if (vert.correct_len < 0)
+		vert.correct_len = INT_MAX;
+	return (ft_choose_len(hor, vert, lines, i));
 }
 
 void	ft_line_def(t_line *line)
