@@ -61,6 +61,7 @@ void	init_game(t_game_info *game)
 	game->key_state.key_d = 0;
 	game->key_state.key_left = 0;
 	game->key_state.key_right = 0;
+	game->key_state.mouse_turn = 0;
 	game->window = mlx_new_window(game->mlx, S_W, S_H, "Cube3D");
 	game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
 	game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
@@ -106,8 +107,6 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	ft_raycasting(&game);
-	// mlx_put_image_to_window(game.mlx, game.window, game.textures.gun_img,
-	// 	game.textures.x_gun, game.textures.y_gun);
 	ft_game_draw(&game); // Nata
 	return (0);
 }

@@ -137,6 +137,7 @@ typedef struct s_key_state
 	int		key_d;
 	int		key_left;
 	int		key_right;
+	int		mouse_turn; // mouse move -1 left, 1 right, 0 none
 	//int		key_esc;
 }	t_key_state;
 
@@ -200,6 +201,10 @@ void	render_minimap(t_game_info *game);
 // //moves
 void	move_p(t_game_info *game, int key);
 void	turn_p(t_game_info *game, int key);
+void	turn_right(t_game_info *game);
+void	turn_left(t_game_info *game);
+int	mouse_move(int x, int y, t_game_info *game);
+
 
 
 //free

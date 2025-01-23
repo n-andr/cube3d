@@ -166,9 +166,9 @@ void	move_right(t_game_info *game, int p_row, int p_col)
 		game->player.p_position_row = new_row;
 		game->player.p_position_col = new_col;
 	}
-	printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	printf("angle: %f \n", game->player.p_angle); //debug
+	// printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
+	// printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
+	// printf("angle: %f \n", game->player.p_angle); //debug
 }
 
 
