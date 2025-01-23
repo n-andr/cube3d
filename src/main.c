@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 16:18:15 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:23:04 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	is_cub(char *map_adress)
 	}
 }
 
-void	ft_init_game_1(t_game_info *game)
+void	ft_init_graphics(t_game_info *game)
 {
 	game->mlx = mlx_init();
 	if (game->mlx == NULL)
@@ -50,7 +50,7 @@ void	ft_init_game_1(t_game_info *game)
 			&game->textures.endian);
 }
 
-void	ft_init_game_3(t_game_info *game)
+void	ft_init_game_2(t_game_info *game)
 {
 	ft_set_textures_params(game);
 	game->key_state.key_w = 0;
@@ -69,7 +69,7 @@ void	ft_init_game_3(t_game_info *game)
 	game->step = 0;
 }
 
-void	ft_init_game_2(t_game_info *game)
+void	ft_init_game_1(t_game_info *game)
 {
 	game->map = NULL;
 	game->rows = 0;
@@ -95,10 +95,10 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		is_cub(argv[1]);
+		ft_init_graphics(&game);
 		ft_init_game_1(&game);
-		ft_init_game_2(&game);
 		read_map(argv[1], &game);
-		ft_init_game_3(&game);
+		ft_init_game_2(&game);
 	}
 	else
 	{
@@ -106,7 +106,7 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	ft_raycasting(&game);
-	ft_game_draw(&game); // Nata
+	ft_game_draw(&game);
 	return (0);
 }
 
