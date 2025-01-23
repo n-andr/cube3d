@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 19:25:10 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:25:06 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	mouse_move(int x, int y, t_game_info *game)
 
 	window_width = S_W;
 	third_width = window_width / 3;
-	if (x < 0 || y <  0)
+	if (x < 0 || y < 0)
 	{
 		game->key_state.mouse_turn = 0;
 		return (0);

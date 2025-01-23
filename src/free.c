@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 16:43:24 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:29:41 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,9 @@ void	handle_error(t_game_info *game, int file, char *message, char *str)
 	close_game(game, EXIT_FAILURE);
 }
 
-// void	free_map(t_game_info *game)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (game->map[i])
-// 	{
-// 		free (game->map[i]);
-// 		i ++;
-// 	}
-// 	free (game->map);
-// }
-
-
 void	free_array(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (array)
@@ -68,10 +54,10 @@ void	free_textures(t_game_info *game)
 
 int	close_game(t_game_info *game, int exit_status)
 {
-	free_array(game->map); //free map array
+	free_array(game->map);
 	if (game->drawing_data.img)
 		mlx_destroy_image(game->mlx, game->drawing_data.img);
-	free_textures(game); //free images
+	free_textures(game);
 	if (game->mlx != NULL && game->window != NULL)
 		mlx_destroy_window(game->mlx, game->window);
 	if (game->mlx != NULL)

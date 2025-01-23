@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:28:05 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 16:15:53 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:24:54 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 // if not valid do nothing
 
 
-/*The left and right arrow keys of the keyboard must allow you to look left and right in the maze.
-◦ The W, A, S, and D keys must allow you to move the point of view through the maze.
+/*
+The left and right
+arrow keys of the keyboard
+must allow you to lookleft and right in the maze.
+The W, A, S, and D keys must allow you to move the point of view through the maze.
 */
+
 
 /*
 key == 119 - W
