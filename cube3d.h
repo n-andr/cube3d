@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 18:55:17 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:24:23 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 // TURN_ANGLE = 15 degrees
 # define PLAYER_SIZE (CELL_SIZE / 16)
 # define MINI_PLAYER_SIZE (MINI_CELL_SIZE)
-# define S_W 1280
-# define S_H 720
+# define S_W 1920
+# define S_H 1020
 // input keys
 # define KEY_W 119
 # define KEY_S 115
@@ -35,7 +35,7 @@
 
 # include <fcntl.h>
 # include <math.h>
-#include <limits.h>
+# include <limits.h>
 # include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -60,14 +60,20 @@ typedef struct s_textures
 	void	*south_img;
 	void	*west_img;
 	void	*east_img;
+	void	*gun_img;
 	int		floor;
 	int		ceiling;
 	char	*n_data;
 	char	*s_data;
 	char	*w_data;
 	char	*e_data;
+	void	*gun_data;
+	int		x_gun;
+	int		y_gun;
 	int		width;
 	int		height;
+	int		gun_width;
+	int		gun_height;
 	int		bpp;
 	int		size_line;
 	int		endian;
@@ -146,6 +152,7 @@ typedef struct s_game_info
 	float		first_ray_angle;
 	void		*mlx;
 	void		*window;
+	int			step;
 	t_key_state	key_state;
 	t_draw_data	drawing_data;
 	t_textures	textures;
@@ -176,6 +183,7 @@ bool	is_closed(t_game_info *game);
 
 //math
 void    ft_raycasting(t_game_info	*game);
+void	ft_line_def(t_line *line);
 
 // graphics
 void	ft_game_draw(t_game_info	*game);

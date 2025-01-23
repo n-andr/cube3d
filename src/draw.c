@@ -11,12 +11,13 @@ void	ft_texture_coord_def(t_game_info *game, t_line line, int *x, int *y)
 // printf("line.high: %d, address: %p\n", line.high, (void*)&line.high);
 // printf("line.offset_x: %d, address: %p\n", line.offset_x, (void*)&line.offset_x);
 	col = line.x / CELL_SIZE;
-	*x = (game->textures.width * (line.x - col * CELL_SIZE)) / ((col + 1)
-			* CELL_SIZE);
 	wall_up_part = line.y1 - line.y_top;
 	if (line.high)
 		*y = wall_up_part * game->textures.height / line.high;
-	*x = line.offset_x * game->textures.width / CELL_SIZE;
+	if (line.w_wall_side == 1 || line.s_wall_side)
+		*x = CELL_SIZE - line.offset_x * game->textures.width / CELL_SIZE;
+	else
+		*x = line.offset_x * game->textures.width / CELL_SIZE;
 }
 
 unsigned int	ft_get_pixel_color(t_game_info *game, t_line line, int x, int y)
@@ -49,7 +50,7 @@ unsigned int	ft_get_pixel_color(t_game_info *game, t_line line, int x, int y)
 	return (color);
 }
 
-void	ft_dot_draw(t_game_info *game, t_line line, unsigned int color)
+void	 ft_dot_draw(t_game_info *game, t_line line, unsigned int color)
 {
 	char	*dst;
 	int		x;
@@ -98,8 +99,8 @@ void	draw_cell(int x, int y, int color, t_game_info *game)
 		while (j < MINI_CELL_SIZE)
 		{
 			//mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
-			char *dst = game->drawing_data.addr + 
-            	((start_y + i) * game->drawing_data.line_length + 
+			char *dst = game->drawing_data.addr +
+            	((start_y + i) * game->drawing_data.line_length +
             	(start_x + j) * (game->drawing_data.bits_per_pixel / 8));
 			*(unsigned int *)dst = color;
 			j++;
@@ -124,8 +125,8 @@ void	draw_player(t_game_info *game, int color)
 		while (j < MINI_PLAYER_SIZE)
 		{
 			//mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
-			char *dst = game->drawing_data.addr + 
-           	 ((start_y + i) * game->drawing_data.line_length + 
+			char *dst = game->drawing_data.addr +
+           	 ((start_y + i) * game->drawing_data.line_length +
              (start_x + j) * (game->drawing_data.bits_per_pixel / 8));
 			*(unsigned int *)dst = color;
 			j++;
@@ -201,14 +202,45 @@ int	key_release(int key, t_game_info *game)
 	return (0);
 }
 
+void	ft_gun_move(t_game_info *game)
+{
+
+	if (game->step < 5)
+	{
+		game->textures.y_gun = game->textures.y_gun - 5;
+		game->step = game->step + 1;
+	}
+	else if (game->step >= 5 && game->step < 10)
+	{
+		game->textures.y_gun = game->textures.y_gun + 5;
+		game->step = game->step + 1;
+	}
+	else
+		game->step = 0;
+
+}
+
+void	ft_ceiling_color_change(t_game_info * game)
+{
+	game->textures.ceiling = game->textures.ceiling + 10000;
+}
+
 int render_and_update(t_game_info *game)
 {
 	int	i;
 
 	if (game->key_state.key_w)
+	{
+		ft_ceiling_color_change(game);
+		ft_gun_move(game);
 		move_p(game, KEY_W);
+	}
 	if (game->key_state.key_s)
+	{
+		ft_ceiling_color_change(game);
+		ft_gun_move(game);
 		move_p(game, KEY_S);
+	}
 	if (game->key_state.key_d)
 		move_p(game, KEY_D);
 	if (game->key_state.key_a)
@@ -227,6 +259,8 @@ int render_and_update(t_game_info *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->textures.gun_img,
+		game->textures.x_gun, game->textures.y_gun);
 	render_minimap(game); // update visuals and minimap
 	free(game->lines);
 	return (0);
@@ -239,6 +273,9 @@ void	ft_floor_ceiling_colour(t_game_info *game)
 	unsigned int	color;
 
 	i = 0;
+	color = 0;
+	ft_line_def(&line);
+	
 	while (i < S_W)
 	{
 		line.x = i;

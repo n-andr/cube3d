@@ -1,16 +1,16 @@
 
 
-NO ./assets/lava.xpm
-SO ./assets/glass.xpm
+NO ./assets/holywanderer.xpm
+SO ./assets/techno.xpm
 
 
 
 
-WE           ./assets/bricks.xpm
+WE           ./assets/matreshka.xpm
 
 
 
-EA ./assets/sand.xpm
+EA ./assets/date.xpm
 C           130,200,229
 F 255,237,41
 
