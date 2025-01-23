@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 16:38:13 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:08:54 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ void	is_cub(char *map_adress)
 
 void	ft_init_graphics(t_game_info *game)
 {
-	game->mlx = mlx_init();
-	if (game->mlx == NULL)
-	{
-		printf("Error initializing mlx\n");
-		exit(EXIT_FAILURE);
-	}
 	game->window = mlx_new_window(game->mlx, S_W, S_H, "Cube3D");
 	game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
 	game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
@@ -86,7 +80,13 @@ void	ft_init_game_1(t_game_info *game)
 	game->textures.south_img = NULL;
 	game->textures.west_img = NULL;
 	game->textures.east_img = NULL;
-	game->mlx = NULL;
+	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+	{
+		printf("Error initializing mlx\n");
+		exit(EXIT_FAILURE);
+	}
+	game->window = NULL;
 	game->drawing_data.img = NULL;
 }
 

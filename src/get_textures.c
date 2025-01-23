@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 16:43:41 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:07:56 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	colour_to_int(char *line, t_game_info *game, int file)
 		|| digits_only_str(rgb[2]) == false)
 	{
 		free_array(rgb);
-		handle_error(game, file, "Error\nWrong colour format", NULL); //free line here somehow
+		handle_error(game, file, "Error\nWrong colour format\n", NULL); //free line here somehow
 		return (-1);
 	}
 	r = ft_atoi(rgb[0]);
