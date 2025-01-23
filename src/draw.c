@@ -1,14 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 18:24:39 by mkokorev          #+#    #+#             */
+/*   Updated: 2025/01/23 19:42:29 by mkokorev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cube3d.h"
 
 void	ft_texture_coord_def(t_game_info *game, t_line line, int *x, int *y)
 {
 	int	wall_up_part;
 
-// printf("line.x: %d, address: %p\n", line.x, (void*)&line.x);
-// printf("line.y1: %d, address: %p\n", line.y1, (void*)&line.y1);
-// printf("line.y_top: %d, address: %p\n", line.y_top, (void*)&line.y_top);
-// printf("line.high: %d, address: %p\n", line.high, (void*)&line.high);
-// printf("line.offset_x: %d, address: %p\n", line.offset_x, (void*)&line.offset_x);
 	wall_up_part = line.y1 - line.y_top;
 	if (line.high)
 		*y = wall_up_part * game->textures.height / line.high;
@@ -25,10 +32,6 @@ unsigned int	ft_get_pixel_color(t_game_info *game, t_line line, int x, int y)
 	unsigned int	color;
 
 	bytes_per_pixel = game->textures.bpp / 8;
-	/*printf("line.w_wall_side: %d\n", line.w_wall_side);
-	printf("line.e_wall_side: %d\n", line.e_wall_side);
-	printf("line.s_wall_side: %d\n", line.s_wall_side);
-	printf("line.n_wall_side: %d\n", line.n_wall_side);*/
 	if (line.w_wall_side)
 		pixel = game->textures.w_data + (y * game->textures.size_line) + (x
 				* bytes_per_pixel);
@@ -43,18 +46,16 @@ unsigned int	ft_get_pixel_color(t_game_info *game, t_line line, int x, int y)
 				* bytes_per_pixel);
 	else
 		exit(EXIT_FAILURE);
-	// Combine bytes into a full color value depending on endianness.
 	color = *(unsigned int *)pixel;
 	return (color);
 }
 
-void	 ft_dot_draw(t_game_info *game, t_line line, unsigned int color)
+void	ft_dot_draw(t_game_info *game, t_line line, unsigned int color)
 {
 	char	*dst;
 	int		x;
 	int		y;
 
-	// printf("x: %d, y1: %d\n", lines.x, lines.y1);
 	x = 0;
 	y = 0;
 	dst = game->drawing_data.addr + (line.y1 * game->drawing_data.line_length
@@ -77,60 +78,7 @@ void	ft_draw_vertikal(t_game_info *game, t_line line, unsigned int color)
 		ft_dot_draw(game, line, color);
 		line.y1 = line.y1 + 1;
 	}
-	// ft_dot_draw(game, line, color);
 	return ;
-}
-
-void	draw_cell(int x, int y, int color, t_game_info *game)
-{
-	int	i;
-	int	j;
-	int	start_x;
-	int	start_y;
-
-	start_x = x * MINI_CELL_SIZE;
-	start_y = y * MINI_CELL_SIZE;
-	i = 0;
-	while (i < MINI_CELL_SIZE)
-	{
-		j = 0;
-		while (j < MINI_CELL_SIZE)
-		{
-			//mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
-			char *dst = game->drawing_data.addr +
-            	((start_y + i) * game->drawing_data.line_length +
-            	(start_x + j) * (game->drawing_data.bits_per_pixel / 8));
-			*(unsigned int *)dst = color;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	draw_player(t_game_info *game, int color)
-{
-	int	i;
-	int	j;
-	int	start_x;
-	int	start_y;
-
-	start_x = (game->player.x / (CELL_SIZE / MINI_CELL_SIZE)) - (MINI_PLAYER_SIZE / 2);
-	start_y = (game->player.y / (CELL_SIZE / MINI_CELL_SIZE)) - (MINI_PLAYER_SIZE / 2);
-	i = 0;
-	while (i < MINI_PLAYER_SIZE)
-	{
-		j = 0;
-		while (j < MINI_PLAYER_SIZE)
-		{
-			//mlx_pixel_put(game->mlx, game->window, start_x + j, start_y + i, color);
-			char *dst = game->drawing_data.addr +
-           	 ((start_y + i) * game->drawing_data.line_length +
-             (start_x + j) * (game->drawing_data.bits_per_pixel / 8));
-			*(unsigned int *)dst = color;
-			j++;
-		}
-		i++;
-	}
 }
 
 void	render_minimap(t_game_info *game)
@@ -163,7 +111,6 @@ void	render_minimap(t_game_info *game)
 
 int key_press(int key, t_game_info *game)
 {
-	//add multiple key press?
 	if (key == KEY_W)
 		game->key_state.key_w = 1;
 	else if (key == KEY_S)
@@ -183,7 +130,6 @@ int key_press(int key, t_game_info *game)
 
 int	key_release(int key, t_game_info *game)
 {
-	//add multiple key release
 	if (key == KEY_A || key == KEY_D \
 	|| key == KEY_S || key == KEY_W)
 	{
@@ -216,11 +162,6 @@ void	ft_gun_move(t_game_info *game)
 	else
 		game->step = 0;
 
-}
-
-void	ft_ceiling_color_change(t_game_info * game)
-{
-	game->textures.ceiling = game->textures.ceiling + 10000;
 }
 
 int render_and_update(t_game_info *game)
@@ -256,58 +197,11 @@ int render_and_update(t_game_info *game)
 		ft_draw_vertikal(game, game->lines[i], 0);
 		i++;
 	}
-	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window,
+		game->drawing_data.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->window, game->textures.gun_img,
 		game->textures.x_gun, game->textures.y_gun);
-	render_minimap(game); // update visuals and minimap
-	free(game->lines);
-	return (0);
-}
-
-void	ft_floor_ceiling_colour(t_game_info *game)
-{
-	int				i;
-	t_line			line;
-	unsigned int	color;
-
-	i = 0;
-	color = 0;
-	ft_line_def(&line);
-
-	while (i < S_W)
-	{
-		line.x = i;
-		line.y1 = 0;
-		line.y2 = S_H / 2;
-		color = game->textures.ceiling;
-		ft_draw_vertikal(game, line, color);
-		line.y1 = S_H / 2;
-		line.y2 = S_H;
-		color = game->textures.floor;
-		ft_draw_vertikal(game, line, color);
-		i++;
-	}
-}
-
-void	ft_game_draw(t_game_info *game)
-{
-	int	i;
-
-	ft_floor_ceiling_colour(game);
-	i = 0;
-	while (i < S_W)
-	{
-		ft_draw_vertikal(game, game->lines[i], 0);
-		i++;
-	}
-	mlx_put_image_to_window(game->mlx, game->window, game->drawing_data.img, 0,
-		0);
 	render_minimap(game);
 	free(game->lines);
-	mlx_hook(game->window, 2, 1L << 0, key_press, game);     // KeyPress event
-	mlx_hook(game->window, 3, 1L << 1, key_release, game);   // KeyRelease event
-	mlx_hook(game->window, 6, 1L << 6, mouse_move, game);	 // MouseMove event
-	mlx_loop_hook(game->mlx, render_and_update, game);       // Main game loop
-	mlx_hook(game->window, 17, 1L << 17, x_close, &game);
-	mlx_loop(game->mlx);
+	return (0);
 }

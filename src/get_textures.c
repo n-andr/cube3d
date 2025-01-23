@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 17:07:56 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:29:24 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@ bool	check_texture(t_game_info *game, int file)
 
 bool	is_xmp(char *line)
 {
-	if (line[ft_strlen(line) - 4] == '.' && line[ft_strlen(line) - 3] == 'x' && line[ft_strlen(line) - 2] == 'p' && line[ft_strlen(line) - 1] == 'm')
+	if (line[ft_strlen(line) - 4] == '.' && line[ft_strlen(line) - 3]
+		== 'x' && line[ft_strlen(line) - 2]
+		== 'p' && line[ft_strlen(line) - 1] == 'm')
 		return (true);
 	return (false);
 }
 
-void assign_texture(t_game_info *game, char *line, void **img, int file)
+void	assign_texture(t_game_info *game, char *line, void **img, int file)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] == ' ')
@@ -48,12 +50,12 @@ void assign_texture(t_game_info *game, char *line, void **img, int file)
 	line = line + i;
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
-	//printf("line: %s\n", line); //delete
 	if (*img != NULL)
-		handle_error(game, file, "Error\nSame texture listed more than once\n", line);
+		handle_error(game, file,
+			"Error\nSame texture listed more than once\n", line);
 	if (is_xmp(line) == true)
 		*img = mlx_xpm_file_to_image(game->mlx, line,
-			&game->textures.width, &game->textures.height); // check if it is correct way to assign texture
+				&game->textures.width, &game->textures.height);
 	else
 		handle_error(game, file, "Error\nWrong texture format\n", line);
 }
@@ -65,15 +67,15 @@ void assign_texture(t_game_info *game, char *line, void **img, int file)
 
 int	rgb_to_int(int r, int g, int b)
 {
-	int t;
+	int	t;
 
 	t = 255;
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-bool 	digits_only_str(char *str)
+bool	digits_only_str(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -81,31 +83,31 @@ bool 	digits_only_str(char *str)
 		if (ft_isdigit((int)str[i]) != 0)
 			i ++;
 		else
-			return(false);
+			return (false);
 	}
 	return (true);
 }
 
 int	colour_to_int(char *line, t_game_info *game, int file)
 {
-	int r;
-	int g;
-	int b;
-	char **rgb;
+	int		r;
+	int		g;
+	int		b;
+	char	**rgb;
 
 	r = 0;
 	g = 0;
 	b = 0;
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
-	//printf("line: %s\n", line); //delete
 	rgb = ft_split(line, ',');
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL || rgb[3] != NULL
 		|| digits_only_str(rgb[0]) == false || digits_only_str(rgb[1]) == false
 		|| digits_only_str(rgb[2]) == false)
 	{
 		free_array(rgb);
-		handle_error(game, file, "Error\nWrong colour format\n", NULL); //free line here somehow
+		handle_error(game, file,
+			"Error\nWrong colour format\n", NULL);
 		return (-1);
 	}
 	r = ft_atoi(rgb[0]);
@@ -119,8 +121,8 @@ int	colour_to_int(char *line, t_game_info *game, int file)
 
 void assign_colour(t_game_info *game, char *line, int *colour, int file)
 {
-	int i;
-	int rgb;
+	int	i;
+	int	rgb;
 
 	i = 0;
 	while (line[i] == ' ')
@@ -129,32 +131,31 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 	}
 	line = line + i;
 	if (*colour != -1)
-		handle_error(game, file, "Error\nSame colour listed more than once\n", line);
+		handle_error(game, file,
+			"Error\nSame colour listed more than once\n", line);
 	rgb = colour_to_int(line, game, file);
 	*colour = rgb;
-	//printf("colour: %d\n", *colour); //delete
-	//printf("colour hex: %x\n", *colour); //delete
-	// should colour be assigned using mlx function or int value is enough?
-	//colour = mlx_get_color_value(game->mlx, rgb);
-	}
+}
 
 void	ft_set_textures_params(t_game_info *game)
 {
 	game->textures.n_data = mlx_get_data_addr(game->textures.north_img,
-		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.bpp, &game->textures.size_line,
 			&game->textures.endian);
 	game->textures.s_data = mlx_get_data_addr(game->textures.south_img,
-		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.bpp, &game->textures.size_line,
 			&game->textures.endian);
 	game->textures.w_data = mlx_get_data_addr(game->textures.west_img,
-		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.bpp, &game->textures.size_line,
 			&game->textures.endian);
 	game->textures.e_data = mlx_get_data_addr(game->textures.east_img,
-		&game->textures.bpp, &game->textures.size_line,
+			&game->textures.bpp, &game->textures.size_line,
 			&game->textures.endian);
-	if (!(game->textures.n_data) || !(game->textures.s_data) || !(game->textures.w_data) || !(game->textures.e_data))
+	if (!(game->textures.n_data) || !(game->textures.s_data)
+		|| !(game->textures.w_data) || !(game->textures.e_data))
 	{
-		printf("Error: Failed to retrieve data address for one or more textures\n");
+		printf("Error: Failed to retrieve data address ");
+		printf("for one or more textures\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -177,13 +178,17 @@ void	get_textures(t_game_info *game, char *file_adress)
 	while (line)
 	{
 		if (line[0] == 'N' && line[1] == 'O')
-			assign_texture(game, line + 2, (void **)&game->textures.north_img, file);
+			assign_texture(game, line + 2,
+				(void **)&game->textures.north_img, file);
 		else if (line[0] == 'S' && line[1] == 'O')
-			assign_texture(game, line + 2, (void **)&game->textures.south_img, file);
+			assign_texture(game, line + 2,
+				(void **)&game->textures.south_img, file);
 		else if (line[0] == 'W' && line[1] == 'E')
-			assign_texture(game, line + 2, (void **)&game->textures.west_img, file);
+			assign_texture(game, line + 2,
+				(void **)&game->textures.west_img, file);
 		else if (line[0] == 'E' && line[1] == 'A')
-			assign_texture(game, line + 2, (void **)&game->textures.east_img, file);
+			assign_texture(game, line + 2,
+				(void **)&game->textures.east_img, file);
 		else if (line[0] == 'F')
 			assign_colour(game, line + 1, &game->textures.floor, file);
 		else if (line[0] == 'C')

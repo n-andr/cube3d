@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 17:08:54 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:25:55 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		is_cub(argv[1]);
-		//ft_init_graphics(&game);
 		ft_init_game_1(&game);
 		read_map(argv[1], &game);
 		ft_init_graphics(&game);

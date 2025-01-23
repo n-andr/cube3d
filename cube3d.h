@@ -6,25 +6,20 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 16:19:13 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:39:27 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
-// # define IMG_WIDTH 32
-// # define IMG_HEIGHT 32
 # define CELL_SIZE 128
-# define MINI_CELL_SIZE (CELL_SIZE / 8)
-# define STEP_SIZE CELL_SIZE / 16
-# define TURN_ANGLE (M_PI / 48)
-//# define TURN_ANGLE (M_PI / 4)
-// TURN_ANGLE = 15 degrees
-# define PLAYER_SIZE (CELL_SIZE / 16)
-# define MINI_PLAYER_SIZE (MINI_CELL_SIZE)
+# define MINI_CELL_SIZE 16
+# define STEP_SIZE 8
+# define TURN_ANGLE 0.065
+# define PLAYER_SIZE 8
+# define MINI_PLAYER_SIZE 16
 # define S_W 1920
 # define S_H 1020
-// input keys
 # define KEY_W 119
 # define KEY_S 115
 # define KEY_A 97
@@ -54,8 +49,6 @@
 
 typedef struct s_textures
 {
-	//void	*player;
-	//void	*collectible;
 	void	*north_img;
 	void	*south_img;
 	void	*west_img;
@@ -79,7 +72,7 @@ typedef struct s_textures
 	int		endian;
 }	t_textures;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	int			x;
 	int			y;
@@ -89,7 +82,7 @@ typedef struct	s_player
 	float		fov_angle;
 }	t_player;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	float		x_step;
 	float		y_step;
@@ -97,14 +90,14 @@ typedef struct	s_ray
 	int			ray_y_dir;
 	float		ray_x;
 	float		ray_y;
-    int			row;
-    int			col;
+	int			row;
+	int			col;
 	int			len;
 	int			correct_len;
 	float		angle;
 }	t_ray;
 
-typedef struct	s_line
+typedef struct s_line
 {
 	int				x;
 	int				y1;
@@ -137,8 +130,7 @@ typedef struct s_key_state
 	int		key_d;
 	int		key_left;
 	int		key_right;
-	int		mouse_turn; // mouse move -1 left, 1 right, 0 none
-	//int		key_esc;
+	int		mouse_turn;
 }	t_key_state;
 
 typedef struct s_game_info
@@ -165,58 +157,77 @@ typedef struct s_vars
 	t_game_info		*game;
 }				t_vars;
 
-int		read_map(char *map, t_game_info *game);
-void	check_map(t_game_info *game);
-void	separate_textures_and_map(t_game_info *game, int file, char *file_adress);
-void	get_textures(t_game_info *game, char *file_adress);
+int				read_map(char *map, t_game_info *game);
+void			check_map(t_game_info *game);
+void			separate_textures_and_map(t_game_info *game,
+					int file, char *file_adress);
+void			get_textures(t_game_info *game, char *file_adress);
 
 //int		has_valid_path(t_game_info *game);
 //void	find_p(t_game_info *game, char **map);
 //int		key_pressed(int key, t_game_info *game);
 
 //elements check
-void	characters_check(t_game_info *game);
-void	player_position_check(t_game_info *game);
-int		p_check(t_game_info *game);
-bool	map_is_one_piece(t_game_info *game);
-bool	is_closed(t_game_info *game);
+void			characters_check(t_game_info *game);
+void			player_position_check(t_game_info *game);
+int				p_check(t_game_info *game);
+bool			map_is_one_piece(t_game_info *game);
+bool			is_closed(t_game_info *game);
 
 //math
-void    ft_raycasting(t_game_info	*game);
-void	ft_line_def(t_line *line);
+void			ft_raycasting(t_game_info	*game);
+void			ft_line_def(t_line *line);
+void			ft_ray_dir_def(t_ray *hor, t_ray *vert);
+int				ft_len_def(t_game_info *game, t_ray *ray);
+void			ft_rays_def(t_ray *hor, t_ray *vert,
+					t_game_info *game, float delta_angle);
+void			ft_line_def(t_line *line);
+void			ft_hor_vert_intersec_def(t_line *lines, int i);
+int				ft_find_intersections(t_game_info *game, int i, t_line *lines);
+int				ft_check_intersection(t_game_info *game, t_ray *ray);
+void			ft_hor_vert_steps(t_ray *hor, t_ray *vert, t_game_info *game);
+int				ft_hor_step(t_ray *hor);
+int				ft_vert_step(t_ray *vert);
+int				ft_choose_len(t_ray hor, t_ray vert, t_line *lines, int i);
+
 
 // graphics
-void	ft_game_draw(t_game_info	*game);
-int		handle_input(int keysym, t_vars *data);
-int		x_close(t_vars *data);
-void	ft_set_textures_params(t_game_info *game);
+void			ft_game_draw(t_game_info	*game);
+int				handle_input(int keysym, t_vars *data);
+int				x_close(t_vars *data);
+void			ft_set_textures_params(t_game_info *game);
 // void	open_img(t_game_info *game);
 // void	load_map_graphics(t_game_info *game);
 void			draw_cell(int x, int y, int color, t_game_info *game);
-void			ft_draw_vertikal(t_game_info *game, t_line lines, unsigned int color);
+void			ft_draw_vertikal(t_game_info *game,
+					t_line lines, unsigned int color);
 void			ft_floor_ceiling_colour(t_game_info *game);
-unsigned int	ft_get_pixel_color(t_game_info     *game, t_line line, int x, int y);
-void	render_minimap(t_game_info *game);
+unsigned int	ft_get_pixel_color(t_game_info *game,
+					t_line line, int x, int y);
+void			render_minimap(t_game_info *game);
+void			draw_player(t_game_info *game, int color);
+void			ft_ceiling_color_change(t_game_info *game);
 
 
 // //moves
-void	move_p(t_game_info *game, int key);
-void	turn_p(t_game_info *game, int key);
-void	turn_right(t_game_info *game);
-void	turn_left(t_game_info *game);
-int	mouse_move(int x, int y, t_game_info *game);
+void			move_p(t_game_info *game, int key);
+void			turn_p(t_game_info *game, int key);
+void			turn_right(t_game_info *game);
+void			turn_left(t_game_info *game);
+int				mouse_move(int x, int y, t_game_info *game);
+int				key_press(int key, t_game_info *game);
+int				key_release(int key, t_game_info *game);
+int				render_and_update(t_game_info *game);
 
 
 
 //free
-void	handle_error(t_game_info *game, int file, char *message, char *str);
+void			handle_error(t_game_info *game, int file,
+					char *message, char *str);
 // void	free_map(t_game_info *game);
 // void	free_check_map(char **map);
-void	free_array(char **array);
-void	free_textures(t_game_info *game);
-int	close_game(t_game_info *game, int exit_status);
-
-//test
-void test_texture_render(t_game_info *game);
+void			free_array(char **array);
+void			free_textures(t_game_info *game);
+int				close_game(t_game_info *game, int exit_status);
 
 #endif

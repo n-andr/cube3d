@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turn.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 01:44:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 19:38:44 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/23 19:21:11 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 
 void	turn_left(t_game_info *game)
 {
-	//printf("turn left\n"); //debug
 	game->player.p_angle -= TURN_ANGLE;
 
 	if (game->player.p_angle < 0)
@@ -35,14 +34,13 @@ void	turn_left(t_game_info *game)
 
 void	turn_right(t_game_info *game)
 {
-	//printf("turn right\n"); //debug
 	game->player.p_angle += TURN_ANGLE;
 
 	if (game->player.p_angle >= 2 * M_PI)
 		game->player.p_angle -= 2 * M_PI;
 }
 
-void	turn_p(t_game_info *game, int key) // delete?
+void	turn_p(t_game_info *game, int key)
 {
 	if (key == KEY_LEFT)
 	{
@@ -52,7 +50,4 @@ void	turn_p(t_game_info *game, int key) // delete?
 	{
 		turn_right(game);
 	}
-	// printf("p_position_row: %d, p_position_col: %d \n", game->player.p_position_row,  game->player.p_position_col); //debug
-	// printf("x: %d, y: %d \n", game->player.x,  game->player.y); //debug
-	// printf("angle: %f \n", game->player.p_angle); //debug
 }
