@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 16:23:04 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:38:13 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_init_game_1(t_game_info *game)
 	game->textures.south_img = NULL;
 	game->textures.west_img = NULL;
 	game->textures.east_img = NULL;
+	game->mlx = NULL;
+	game->drawing_data.img = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -95,9 +97,10 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		is_cub(argv[1]);
-		ft_init_graphics(&game);
+		//ft_init_graphics(&game);
 		ft_init_game_1(&game);
 		read_map(argv[1], &game);
+		ft_init_graphics(&game);
 		ft_init_game_2(&game);
 	}
 	else
