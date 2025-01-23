@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/16 00:04:45 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:39:52 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void assign_texture(t_game_info *game, char *line, void **img, int file)
 			&game->textures.width, &game->textures.height); // check if it is correct way to assign texture
 	else
 		handle_error(game, file, "Error\nWrong texture format\n", line);
-	printf("game->mlx: %p\n", game->mlx);
-	printf("image: %p\n", *img);
-	printf("line: %s\n", line);
+	// printf("game->mlx: %p\n", game->mlx);
+	// printf("image: %p\n", *img);
+	// printf("line: %s\n", line);
 }
 
 //The resulting integer's binary representation is 0xTTRRGGBB,
@@ -108,7 +108,7 @@ int	colour_to_int(char *line, t_game_info *game, int file)
 		|| digits_only_str(rgb[2]) == false)
 	{
 		free_array(rgb);
-		handle_error(game, file, "Wrong colour format", line);
+		handle_error(game, file, "Error\nWrong colour format", line);
 		return (-1);
 	}
 	r = ft_atoi(rgb[0]);

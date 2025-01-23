@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 01:44:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/13 16:53:54 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:38:44 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 void	turn_left(t_game_info *game)
 {
-	printf("turn left\n"); //debug
+	//printf("turn left\n"); //debug
 	game->player.p_angle -= TURN_ANGLE;
 
 	if (game->player.p_angle < 0)
@@ -35,14 +35,14 @@ void	turn_left(t_game_info *game)
 
 void	turn_right(t_game_info *game)
 {
-	printf("turn right\n"); //debug
+	//printf("turn right\n"); //debug
 	game->player.p_angle += TURN_ANGLE;
 
 	if (game->player.p_angle >= 2 * M_PI)
 		game->player.p_angle -= 2 * M_PI;
 }
 
-void	turn_p(t_game_info *game, int key)
+void	turn_p(t_game_info *game, int key) // delete?
 {
 	if (key == KEY_LEFT)
 	{

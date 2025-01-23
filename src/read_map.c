@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:28 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 18:13:01 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:38:08 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ int	read_map(char *map_adress, t_game_info *game)
 	close(file);
 	check_map(game);
 	// debug
-	printf("final map:\n");
-	for (int i = 0; i < game->rows; i++)
-	{
-		printf("%s\n", game->map[i]);
-	}
+	// printf("final map:\n");
+	// for (int i = 0; i < game->rows; i++)
+	// {
+	// 	printf("%s\n", game->map[i]);
+	// }
 	// end debug
 	return (1);
 }

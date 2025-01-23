@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2024/12/03 19:18:01 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:38:31 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	save_map(t_game_info *game, char *file_adress)
 	close(file);
 	handle_new_line(game);
 	// debug
-	printf("save map function result:\n");
-	for (int i = 0; i < game->rows; i++)
-	{
-		printf("%s\n", game->map[i]);
-	}
+	// printf("save map function result:\n");
+	// for (int i = 0; i < game->rows; i++)
+	// {
+	// 	printf("%s\n", game->map[i]);
+	// }
 	// end debug
 }
 

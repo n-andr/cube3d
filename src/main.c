@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/20 15:07:31 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:50:15 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_game(t_game_info *game)
 	game->key_state.key_d = 0;
 	game->key_state.key_left = 0;
 	game->key_state.key_right = 0;
+	game->key_state.mouse_turn = 0;
 	game->window = mlx_new_window(game->mlx, S_W, S_H, "Cube3D");
 	game->drawing_data.img = mlx_new_image(game->mlx, S_W, S_H);
 	game->drawing_data.addr = mlx_get_data_addr(game->drawing_data.img,
@@ -95,7 +96,7 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	ft_raycasting(&game);
-	printf("kek\n");
+	//printf("kek\n");
 	ft_game_draw(&game); // Nata
 	return (0);
 }

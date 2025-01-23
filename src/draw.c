@@ -213,10 +213,10 @@ int render_and_update(t_game_info *game)
 		move_p(game, KEY_D);
 	if (game->key_state.key_a)
 		move_p(game, KEY_A);
-	if (game->key_state.key_left)
-		turn_p(game, KEY_LEFT);
-	if (game->key_state.key_right)
-		turn_p(game, KEY_RIGHT);
+	if (game->key_state.key_left || game->key_state.mouse_turn == -1)
+		turn_left(game);
+	if (game->key_state.key_right || game->key_state.mouse_turn == 1)
+		turn_right(game);
 	ft_memset(game->drawing_data.addr, 0, S_W * S_H * sizeof(int));
 	ft_floor_ceiling_colour(game);
 	ft_raycasting(game);
@@ -271,6 +271,7 @@ void	ft_game_draw(t_game_info *game)
 	free(game->lines);
 	mlx_hook(game->window, 2, 1L << 0, key_press, game);     // KeyPress event
 	mlx_hook(game->window, 3, 1L << 1, key_release, game);   // KeyRelease event
+	mlx_hook(game->window, 6, 1L << 6, mouse_move, game);	 // MouseMove event
 	mlx_loop_hook(game->mlx, render_and_update, game);       // Main game loop
 	mlx_hook(game->window, 17, 1L << 17, x_close, &game);
 	mlx_loop(game->mlx);
