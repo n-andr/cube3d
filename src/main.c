@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:25:55 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/24 01:51:20 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_init_graphics(t_game_info *game)
 			"./assets/2000p.xpm",
 			&game->textures.gun_width, &game->textures.gun_height);
 	if (game->textures.gun_img == NULL)
-		handle_error(game, 1, "Error\nNo gun texture\n", NULL);
+		handle_error(game, -1, "Error\nNo gun texture\n", NULL);
 	game->textures.gun_data = mlx_get_data_addr(game->textures.gun_img,
 			&game->textures.bpp, &game->textures.size_line,
 			&game->textures.endian);
@@ -111,7 +111,3 @@ int	main(int argc, char **argv)
 	ft_game_draw(&game);
 	return (0);
 }
-
-// mlx_hook - for different events (mouse movements, close the window etc)
-// mlx_key_hook - only for keyboard events
-// need to handle cntr c to have no leaks???
