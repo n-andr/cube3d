@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:18:09 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:29:41 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/23 22:34:20 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	free_textures(t_game_info *game)
 		mlx_destroy_image(game->mlx, game->textures.east_img);
 	if (game->textures.west_img)
 		mlx_destroy_image(game->mlx, game->textures.west_img);
+	if (game->window && game->textures.gun_img)
+		mlx_destroy_image(game->mlx, game->textures.gun_img);
 }
 
 int	close_game(t_game_info *game, int exit_status)

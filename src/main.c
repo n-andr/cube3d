@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:25:55 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/24 01:43:09 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,3 @@ int	main(int argc, char **argv)
 	ft_game_draw(&game);
 	return (0);
 }
-
-// mlx_hook - for different events (mouse movements, close the window etc)
-// mlx_key_hook - only for keyboard events
-// need to handle cntr c to have no leaks???

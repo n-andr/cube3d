@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:29:24 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/24 01:37:20 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ void	assign_texture(t_game_info *game, char *line, void **img, int file)
 {
 	int	i;
 
-	i = 0;
+	i = 2;
 	while (line[i] == ' ')
 	{
 		i++;
 	}
-	line = line + i;
+	// line = line + i;
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
 	if (*img != NULL)
 		handle_error(game, file,
 			"Error\nSame texture listed more than once\n", line);
-	if (is_xmp(line) == true)
-		*img = mlx_xpm_file_to_image(game->mlx, line,
+	if (is_xmp(line + i) == true)
+		*img = mlx_xpm_file_to_image(game->mlx, line + i,
 				&game->textures.width, &game->textures.height);
 	else
 		handle_error(game, file, "Error\nWrong texture format\n", line);
@@ -88,7 +88,7 @@ bool	digits_only_str(char *str)
 	return (true);
 }
 
-int	colour_to_int(char *line, t_game_info *game, int file)
+int	colour_to_int(char *line, int i, t_game_info *game, int file)
 {
 	int		r;
 	int		g;
@@ -98,14 +98,16 @@ int	colour_to_int(char *line, t_game_info *game, int file)
 	r = 0;
 	g = 0;
 	b = 0;
+	
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
-	rgb = ft_split(line, ',');
+	rgb = ft_split(line + i, ',');
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL || rgb[3] != NULL
 		|| digits_only_str(rgb[0]) == false || digits_only_str(rgb[1]) == false
 		|| digits_only_str(rgb[2]) == false)
 	{
 		free_array(rgb);
+		free(line);
 		handle_error(game, file,
 			"Error\nWrong colour format\n", NULL);
 		return (-1);
@@ -124,16 +126,19 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 	int	i;
 	int	rgb;
 
-	i = 0;
+	i = 1;
 	while (line[i] == ' ')
 	{
 		i++;
 	}
-	line = line + i;
 	if (*colour != -1)
+	{
+		free(line);
 		handle_error(game, file,
-			"Error\nSame colour listed more than once\n", line);
-	rgb = colour_to_int(line, game, file);
+			"Error\nSame colour listed more than once\n", NULL);
+	}
+	// line = line + i;
+	rgb = colour_to_int(line, i, game, file);
 	*colour = rgb;
 }
 
@@ -178,21 +183,21 @@ void	get_textures(t_game_info *game, char *file_adress)
 	while (line)
 	{
 		if (line[0] == 'N' && line[1] == 'O')
-			assign_texture(game, line + 2,
+			assign_texture(game, line,
 				(void **)&game->textures.north_img, file);
 		else if (line[0] == 'S' && line[1] == 'O')
-			assign_texture(game, line + 2,
+			assign_texture(game, line,
 				(void **)&game->textures.south_img, file);
 		else if (line[0] == 'W' && line[1] == 'E')
-			assign_texture(game, line + 2,
+			assign_texture(game, line,
 				(void **)&game->textures.west_img, file);
 		else if (line[0] == 'E' && line[1] == 'A')
-			assign_texture(game, line + 2,
+			assign_texture(game, line,
 				(void **)&game->textures.east_img, file);
 		else if (line[0] == 'F')
-			assign_colour(game, line + 1, &game->textures.floor, file);
+			assign_colour(game, line, &game->textures.floor, file);
 		else if (line[0] == 'C')
-			assign_colour(game, line + 1, &game->textures.ceiling, file);
+			assign_colour(game, line, &game->textures.ceiling, file);
 		free(line);
 		line = get_next_line (file);
 	}
