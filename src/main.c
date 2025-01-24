@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:23:12 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/24 01:43:09 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/24 01:51:20 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_init_graphics(t_game_info *game)
 			"./assets/2000p.xpm",
 			&game->textures.gun_width, &game->textures.gun_height);
 	if (game->textures.gun_img == NULL)
-		handle_error(game, 1, "Error\nNo gun texture\n", NULL);
+		handle_error(game, -1, "Error\nNo gun texture\n", NULL);
 	game->textures.gun_data = mlx_get_data_addr(game->textures.gun_img,
 			&game->textures.bpp, &game->textures.size_line,
 			&game->textures.endian);

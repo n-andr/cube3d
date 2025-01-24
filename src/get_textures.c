@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:32:21 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/24 01:37:20 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/24 02:01:50 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	assign_texture(t_game_info *game, char *line, void **img, int file)
 	{
 		i++;
 	}
-	// line = line + i;
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
 	if (*img != NULL)
@@ -98,7 +97,6 @@ int	colour_to_int(char *line, int i, t_game_info *game, int file)
 	r = 0;
 	g = 0;
 	b = 0;
-	
 	if (line[ft_strlen(line) - 1] == '\n')
 		line[ft_strlen(line) - 1] = '\0';
 	rgb = ft_split(line + i, ',');
@@ -107,17 +105,14 @@ int	colour_to_int(char *line, int i, t_game_info *game, int file)
 		|| digits_only_str(rgb[2]) == false)
 	{
 		free_array(rgb);
-		free(line);
-		handle_error(game, file,
-			"Error\nWrong colour format\n", NULL);
-		return (-1);
+		handle_error(game, file, "Error\nWrong colour format\n", line);
 	}
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	free_array(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (-1);
+		handle_error(game, file, "Error\nWrong colour format\n", line);
 	return (rgb_to_int(r, g, b));
 }
 
@@ -133,11 +128,9 @@ void assign_colour(t_game_info *game, char *line, int *colour, int file)
 	}
 	if (*colour != -1)
 	{
-		free(line);
 		handle_error(game, file,
-			"Error\nSame colour listed more than once\n", NULL);
+			"Error\nSame colour listed more than once\n", line);
 	}
-	// line = line + i;
 	rgb = colour_to_int(line, i, game, file);
 	*colour = rgb;
 }
