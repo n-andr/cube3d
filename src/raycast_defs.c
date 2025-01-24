@@ -6,7 +6,7 @@
 /*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:27:12 by mkokorev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:30:17 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:38:44 by mkokorev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,27 @@ void	ft_rays_def(t_ray *hor, t_ray *vert,
 			t_game_info *game, float delta_angle)
 {
 	hor->angle = game->first_ray_angle + delta_angle;
-	vert->angle = hor->angle;
-	vert->len = 0;
 	hor->len = 0;
+	hor->correct_len = 0;
 	hor->ray_x = game->player.x;
 	hor->ray_y = game->player.y;
-	vert->ray_x = game->player.x;
-	vert->ray_y = game->player.y;
-	vert->col = game->player.p_position_col;
-	vert->row = game->player.p_position_row;
 	hor->col = game->player.p_position_col;
 	hor->row = game->player.p_position_row;
+	hor->ray_x_dir = 0;
+	hor->ray_y_dir = 0;
+	hor->x_step = 0;
+	hor->y_step = 0;
+	vert->angle = hor->angle;
+	vert->len = hor->len;
+	vert->ray_x = hor->ray_x;
+	vert->ray_y = hor->ray_y;
+	vert->col = hor->col;
+	vert->row = hor->row;
+	vert->correct_len = hor->correct_len;
+	vert->ray_x_dir = hor->ray_x_dir;
+	vert->ray_y_dir = hor->ray_y_dir;
+	vert->x_step = hor->x_step;
+	vert->y_step = hor->y_step;
 }
 
 void	ft_line_def(t_line *line)
