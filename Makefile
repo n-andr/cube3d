@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+         #
+#    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/24 16:28:20 by nandreev          #+#    #+#              #
-#    Updated: 2025/01/23 19:38:15 by mkokorev         ###   ########.fr        #
+#    Updated: 2025/01/24 19:54:58 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fPIC
 
-SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/scene_elements.c\
+SOURCES = src/main.c src/free.c src/read_map.c src/check_map.c src/characters_and_player_check.c src/get_textures.c src/get_colour.c src/scene_elements.c\
 		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c\
 		src/raycasting.c src/draw.c src/window_manage.c src/map_border.c src/move.c src/turn.c\
-		src/mouse.c src/raycast_defs.c src/intersections.c src/draw_world.c\
+		src/mouse.c src/raycast_defs.c src/intersections.c src/draw_world.c src/minimap.c\
 
 OBJS := $(SOURCES:.c=.o)
 LIBFT_LIB = src/libft/

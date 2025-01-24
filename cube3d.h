@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:39:27 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:28:19 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,11 +157,16 @@ typedef struct s_vars
 	t_game_info		*game;
 }				t_vars;
 
+//parsing
 int				read_map(char *map, t_game_info *game);
 void			check_map(t_game_info *game);
 void			separate_textures_and_map(t_game_info *game,
 					int file, char *file_adress);
 void			get_textures(t_game_info *game, char *file_adress);
+void			assign_colour(t_game_info *game, char *line, int *colour, int file);
+bool			check_texture_and_col(t_game_info *game, int file);
+
+
 
 //int		has_valid_path(t_game_info *game);
 //void	find_p(t_game_info *game, char **map);

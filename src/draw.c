@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:24:39 by mkokorev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:42:29 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:46:15 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,32 +81,7 @@ void	ft_draw_vertikal(t_game_info *game, t_line line, unsigned int color)
 	return ;
 }
 
-void	render_minimap(t_game_info *game)
-{
-	int	x;
-	int	y;
 
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x + 1])
-		{
-			if (game->map[y][x] == ' ')
-				draw_cell(x, y, 0x000000, game);
-			else if (game->map[y][x] == '1')
-				draw_cell(x, y, 0x696969, game);
-			else if (game->map[y][x] == '0')
-				draw_cell(x, y, 0xFFFFFF, game);
-			else if (game->map[y][x] == 'N' || game->map[y][x] == 'S'
-				|| game->map[y][x] == 'E' || game->map[y][x] == 'W')
-				draw_cell(x, y, 0xFFFFFF, game);
-			x++;
-		}
-		y++;
-	}
-	draw_player(game, 0x0000FF);
-}
 
 
 int key_press(int key, t_game_info *game)
