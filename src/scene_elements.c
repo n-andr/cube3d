@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkokorev <mkokorev@student.42berlin.d>     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:28:50 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/23 19:22:48 by mkokorev         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:03:42 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ char	*skipp_textures(char *line, int file)
 	return (line);
 }
 
-void	save_map(t_game_info *game, char *file_adress)
+void	save_map(t_game_info *game, char *file_adress, int i)
 {
-	int		i;
 	char	*line;
 	int		file;
 
@@ -60,7 +59,6 @@ void	save_map(t_game_info *game, char *file_adress)
 	game->map = malloc(sizeof(char *) * (game->rows + 1));
 	if (game->map == NULL)
 		handle_error(game, file, "Error\nMemory allocation failed\n", NULL);
-	i = 0;
 	line = get_next_line(file);
 	line = skipp_textures(line, file);
 	while (line)
@@ -96,7 +94,6 @@ void	separate_textures_and_map(t_game_info *game,
 		line = get_next_line(file);
 	}
 	close(file);
-	save_map(game, file_adress);
+	save_map(game, file_adress, 0);
 	get_textures(game, file_adress);
-
 }

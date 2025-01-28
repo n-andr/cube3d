@@ -6,11 +6,11 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:50:18 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/24 19:51:28 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:14:10 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cube3d.h"
 
 void	draw_player(t_game_info *game, int color)
 {

@@ -6,11 +6,11 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:36:06 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/24 19:36:07 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:12:48 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cube3d.h"
 
 //The resulting integer's binary representation is 0xTTRRGGBB,
 //where TT is the transparency, RR is the red channel,

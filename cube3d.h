@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:21:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/01/24 19:28:19 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/01/28 03:13:47 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ typedef struct s_vars
 //parsing
 int				read_map(char *map, t_game_info *game);
 void			check_map(t_game_info *game);
+bool	first_last_row_col(char **map);
+bool	check_eight_neighbours(char **map, int i, int j);
 void			separate_textures_and_map(t_game_info *game,
 					int file, char *file_adress);
 void			get_textures(t_game_info *game, char *file_adress);
@@ -212,7 +214,7 @@ unsigned int	ft_get_pixel_color(t_game_info *game,
 void			render_minimap(t_game_info *game);
 void			draw_player(t_game_info *game, int color);
 void			ft_ceiling_color_change(t_game_info *game);
-
+void	ft_gun_move(t_game_info *game);
 
 // //moves
 void			move_p(t_game_info *game, int key);
@@ -223,7 +225,10 @@ int				mouse_move(int x, int y, t_game_info *game);
 int				key_press(int key, t_game_info *game);
 int				key_release(int key, t_game_info *game);
 int				render_and_update(t_game_info *game);
-
+void			move_right(t_game_info *game, int p_row, int p_col);
+void			move_left(t_game_info *game, int p_row, int p_col);
+void			move_back(t_game_info *game, int p_row, int p_col);
+void			move_forward(t_game_info *game, int p_row, int p_col);
 
 
 //free
